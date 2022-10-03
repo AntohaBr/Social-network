@@ -4,9 +4,8 @@ import styles from "./Users.module.css";
 import axios from "axios";
 import userPhoto from '../../assets/images/user.jpg'
 
-export class Users extends React.Component <UsersContainerType> {
-    constructor(props: UsersContainerType) {
-        super(props)
+class Users extends React.Component <UsersContainerType> {
+    componentDidMount() {
         axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
             this.props.setUsers(response.data.item)
         })
@@ -25,20 +24,21 @@ export class Users extends React.Component <UsersContainerType> {
 <div>
     {u.followed ? <button onClick={() => {
         this.props.follow(u.id)
-    }}>Unfollow</button> : <button onClick={() => {
+    }}>UnFollow</button> : <button onClick={() => {
         this.props.unFollow(u.id)
-    }}>Follow</button>}
+    }}>Follow</button>
+    }
 </div>
                 </span>
                             <span>
                      <span>
                          <div>{u.name}</div>
                          <div>{u.status}</div>
-                    </span>
-                    <span>
+                        </span>
+                        <span>
                         <div>{'u.location.counter'}</div>
                         <div>{'u.location.city'}</div>
-                    </span>
+                        </span>
                         </span>
                         </div>
                     )
@@ -48,3 +48,5 @@ export class Users extends React.Component <UsersContainerType> {
 
     }
 }
+
+export default Users

@@ -1,4 +1,3 @@
-
 import {
     addPostActionCreator, profileReducer,
     updateNewPostTextActionCreator
@@ -35,7 +34,7 @@ export type MessagePageType = {
 }
 
 export type UsersPageType = {
-    users:Array<UserType>
+    users: Array<UserType>
 }
 
 export type RootStateType = {
@@ -92,7 +91,7 @@ export let store: StoreType = {
             users: [
                 {
                     id: 1,
-                    photos:'',
+                    photos: '',
                     followed: false,
                     name: 'Anton',
                     status: 'I am a boss',
@@ -100,7 +99,7 @@ export let store: StoreType = {
                 },
                 {
                     id: 2,
-                    photos:'',
+                    photos: '',
                     followed: true,
                     name: 'Max',
                     status: 'I am a boss too',
@@ -108,7 +107,7 @@ export let store: StoreType = {
                 },
                 {
                     id: 3,
-                    photos:'',
+                    photos: '',
                     followed: false,
                     name: 'Alex',
                     status: 'I am a boss too ',

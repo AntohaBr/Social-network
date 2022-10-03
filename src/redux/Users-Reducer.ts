@@ -1,30 +1,30 @@
 const initialState = {
     users: []
 }
-        // {
-        //     id: 1,
-        //     photoUrl: 'https://nekto.me/images/897000/158/photos/p_a53bcde6f8.jpg',
-        //     followed: false,
-        //     name: 'Anton',
-        //     status: 'I am a boss',
-        //     location: {city: 'Gomel', counter: 'Belarus'}
-        // },
-        // {
-        //     id: 2,
-        //     photoUrl: 'https://nekto.me/images/897000/158/photos/p_a53bcde6f8.jpg',
-        //     followed: true,
-        //     name: 'Max',
-        //     status: 'I am a boss too',
-        //     location: {city: 'LA', counter: 'USA'}
-        // },
-        // {
-        //     id: 3,
-        //     photoUrl: 'https://nekto.me/images/897000/158/photos/p_a53bcde6f8.jpg',
-        //     followed: false,
-        //     name: 'Alex',
-        //     status: 'I am a boss too ',
-        //     location: {city: 'Berlin', counter: 'Germany'}
-        // },
+// {
+//     id: 1,
+//     photoUrl: 'https://nekto.me/images/897000/158/photos/p_a53bcde6f8.jpg',
+//     followed: false,
+//     name: 'Anton',
+//     status: 'I am a boss',
+//     location: {city: 'Gomel', counter: 'Belarus'}
+// },
+// {
+//     id: 2,
+//     photoUrl: 'https://nekto.me/images/897000/158/photos/p_a53bcde6f8.jpg',
+//     followed: true,
+//     name: 'Max',
+//     status: 'I am a boss too',
+//     location: {city: 'LA', counter: 'USA'}
+// },
+// {
+//     id: 3,
+//     photoUrl: 'https://nekto.me/images/897000/158/photos/p_a53bcde6f8.jpg',
+//     followed: false,
+//     name: 'Alex',
+//     status: 'I am a boss too ',
+//     location: {city: 'Berlin', counter: 'Germany'}
+// },
 //     ]
 // }
 
