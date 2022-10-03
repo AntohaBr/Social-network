@@ -1,3 +1,4 @@
+
 import {
     addPostActionCreator, profileReducer,
     updateNewPostTextActionCreator
@@ -91,25 +92,25 @@ export let store: StoreType = {
             users: [
                 {
                     id: 1,
-                    photoUrl:'',
+                    photos:'',
                     followed: false,
-                    fullName: 'Anton',
+                    name: 'Anton',
                     status: 'I am a boss',
                     location: {city: 'Gomel', counter: 'Belarus'}
                 },
                 {
                     id: 2,
-                    photoUrl:'',
+                    photos:'',
                     followed: true,
-                    fullName: 'Max',
+                    name: 'Max',
                     status: 'I am a boss too',
                     location: {city: 'LA', counter: 'USA'}
                 },
                 {
                     id: 3,
-                    photoUrl:'',
+                    photos:'',
                     followed: false,
-                    fullName: 'Alex',
+                    name: 'Alex',
                     status: 'I am a boss too ',
                     location: {city: 'Berlin', counter: 'Germany'}
                 }
