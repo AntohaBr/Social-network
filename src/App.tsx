@@ -2,13 +2,13 @@ import React from 'react';
 import './App.css';
 import Header from "./components/header/Header";
 import Navbar from "./components/navbar/Navbar";
-import Profile from "./components/profile/Profile";
 import {BrowserRouter, Route,Switch } from "react-router-dom";
 import News from "./components/news/News";
 import Music from "./components/music/Music";
 import Settings from "./components/settings/Settings";
 import {DialogsContainer} from "./components/dialogs/DialogsContainer";
 import UsersContainer from "./components/users/UsersContainer";
+import ProfileContainer from "./components/profile/ProfileContainer";
 
 
 const App = () => {
@@ -20,7 +20,7 @@ const App = () => {
                 {/*<div className='app-wrapper-content'>*/}
                 <Switch>
                     <Route path="/dialogs" render={()=><DialogsContainer/>}/>
-                    <Route path="/profile" render={()=><Profile/>}/>
+                    <Route path="/profile" render={()=><ProfileContainer/>}/>
                     <Route path="/users" render={()=><UsersContainer/>}/>
                     <Route path="/news" render={()=><News/>}/>
                     <Route path="/music" render={()=><Music/>}/>

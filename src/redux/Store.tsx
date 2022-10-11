@@ -25,6 +25,7 @@ export type MessagesType = {
 export type ProfilePageType = {
     posts: Array<PostType>
     newPostsText: string
+    profile: null
 }
 
 export type MessagePageType = {
@@ -45,6 +46,7 @@ export type RootStateType = {
     profilePage: ProfilePageType
     messagePage: MessagePageType
     usersPage: UsersPageType
+
 }
 
 export type StateTypes = ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostTextActionCreator>
