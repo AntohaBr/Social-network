@@ -1,59 +1,43 @@
-const initialState = {
-    users: []
-}
-// {
-//     id: 1,
-//     photoUrl: 'https://nekto.me/images/897000/158/photos/p_a53bcde6f8.jpg',
-//     followed: false,
-//     name: 'Anton',
-//     status: 'I am a boss',
-//     location: {city: 'Gomel', counter: 'Belarus'}
-// },
-// {
-//     id: 2,
-//     photoUrl: 'https://nekto.me/images/897000/158/photos/p_a53bcde6f8.jpg',
-//     followed: true,
-//     name: 'Max',
-//     status: 'I am a boss too',
-//     location: {city: 'LA', counter: 'USA'}
-// },
-// {
-//     id: 3,
-//     photoUrl: 'https://nekto.me/images/897000/158/photos/p_a53bcde6f8.jpg',
-//     followed: false,
-//     name: 'Alex',
-//     status: 'I am a boss too ',
-//     location: {city: 'Berlin', counter: 'Germany'}
-// },
-//     ]
-// }
-
-const FOLLOW = 'FOLLOW';
-const UNFOLLOW = 'UNFOLLOW';
+const FOLLOW = 'FOLLOW'
+const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 
-type LocationType = {
-    city: string
-    counter: string
+const initialState = {
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1
 }
 
+
+export type PhotosType = {
+    small: string
+    large: string
+}
 export type UserType = {
     id: number
-    photos: any
-    followed: boolean
     name: string
     status: string
-    location: LocationType
+    photos: PhotosType
+    followed: boolean
 }
 
+
 export type initialStateType = {
-    users: Array<UserType>
+    users: UserType[]
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 type UsersReducerActionType =
     ReturnType<typeof followAC>
     | ReturnType<typeof unFollowAC>
     | ReturnType<typeof setUsersAC>
+    | ReturnType<typeof setCurrentPageAC>
+    | ReturnType<typeof setTotalUsersCount>
 
 export const usersReducer = (state: initialStateType = initialState, action: UsersReducerActionType): initialStateType => {
     switch (action.type) {
@@ -62,7 +46,11 @@ export const usersReducer = (state: initialStateType = initialState, action: Use
         case UNFOLLOW:
             return {...state, users: state.users.map(u => u.id === action.userId ? {...u, followed: false} : u)}
         case SET_USERS:
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: action.users}
+        case SET_CURRENT_PAGE:
+            return {...state, currentPage: action.currentPage}
+        case SET_TOTAL_USERS_COUNT:
+            return {...state, totalUsersCount: action.totalUsersCount}
         default:
             return state;
 
@@ -82,8 +70,19 @@ type UnFollowACType = {
 
 type SetUsersACType = {
     type: typeof SET_USERS
-    users: Array<UserType>
+    users: UserType[]
 }
+
+type SetCurrentPageACType = {
+    type: typeof SET_CURRENT_PAGE
+    currentPage: number
+}
+
+type SetTotalUsersCountType = {
+    type: typeof SET_TOTAL_USERS_COUNT
+    totalUsersCount: number
+}
+
 
 export const followAC = (userId: number): FollowACType => {
     return {
@@ -99,9 +98,23 @@ export const unFollowAC = (userId: number): UnFollowACType => {
     } as const
 }
 
-export const setUsersAC = (users: Array<UserType>): SetUsersACType => {
+export const setUsersAC = (users: UserType[]): SetUsersACType => {
     return {
         type: SET_USERS,
         users: users
+    } as const
+}
+
+export const setCurrentPageAC = (pageNumber: number): SetCurrentPageACType => {
+    return {
+        type: SET_CURRENT_PAGE,
+        currentPage: pageNumber
+    } as const
+}
+
+export const setTotalUsersCount = (totalCount: number): SetTotalUsersCountType => {
+    return {
+        type: SET_TOTAL_USERS_COUNT,
+        totalUsersCount: totalCount
     } as const
 }

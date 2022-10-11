@@ -29,7 +29,6 @@ type UpdateNewPostTextActionType={
     newText: string
 }
 
-// type ProfileReducerActionType = AddPostActionType | UpdateNewPostTextActionType
 
 export const profileReducer = ( state: ProfileReducerType = initialState, action:ActionTypes): ProfileReducerType => {
     switch (action.type) {
