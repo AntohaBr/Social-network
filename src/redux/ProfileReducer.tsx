@@ -42,7 +42,7 @@ type UpdateNewPostTextActionType = {
 
 type SetUserProfileType = {
     type:typeof SET_USER_PROFILE,
-    profile:null
+    profile:any
 }
 
 
@@ -83,7 +83,7 @@ export const updateNewPostTextActionCreator = (newText: string): UpdateNewPostTe
     } as const
 }
 
-export const setUserProfile = (profile: null): SetUserProfileType => {
+export const setUserProfile = (profile: any): SetUserProfileType => {
     return {
         type: SET_USER_PROFILE,
         profile: profile
