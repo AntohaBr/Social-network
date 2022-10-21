@@ -1,4 +1,6 @@
 import {PostType} from "./Store";
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
 
 const initialState = {
     posts: [
@@ -14,7 +16,28 @@ const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 
 
-export type PhotosType = {
+
+export type ProfileType = {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: ContactsType
+    photos: PhotosType
+}
+
+type ContactsType = {
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
+}
+
+type PhotosType = {
     small: string
     large: string
 }
@@ -88,4 +111,10 @@ export const setUserProfile = (profile: any): SetUserProfileType => {
         type: SET_USER_PROFILE,
         profile: profile
     } as const
+}
+
+export const getUserProfile = (userId: number) => (dispatch:Dispatch) =>{
+    usersAPI.getProfile(userId).then (responce => {
+        dispatch(setUserProfile(responce.data))
+    })
 }
