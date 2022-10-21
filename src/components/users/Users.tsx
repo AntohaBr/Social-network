@@ -1,17 +1,18 @@
 import React from 'react';
 import styles from "./Users.module.css";
 import userPhoto from "../../assets/images/user.jpg";
-import {UserType} from "../../redux/Users-Reducer";
 import {NavLink} from "react-router-dom";
+import {UserType} from "../../redux/Users-Reducer";
 
 type UsersType = {
     totalUsersCount: number
     pageSize: number
     currentPage: number
     onPageChanged: (pageNumber: number) => void
-    users:UserType[]
-    follow:(userId: number)=>void
-    unFollow: (userId: number)=>void
+    users: UserType[]
+    followingInProgress: []
+    follow: (id: number) => void
+    unFollow: (id: number) => void
 }
 
 
@@ -26,8 +27,9 @@ export const Users = (props: UsersType) => {
                 <div>
                     {pages.map(p => {
                         return (
-                            <span className ={props.currentPage === p && styles.selectedPage} onClick={() => {
-                            props.onPageChanged(p)}}>{p}</span>
+                            <span className={props.currentPage === p && styles.selectedPage} onClick={() => {
+                                props.onPageChanged(p)
+                            }}>{p}</span>
                         )
                     })}
                 </div>
@@ -40,12 +42,13 @@ export const Users = (props: UsersType) => {
     </NavLink>
 </div>
 <div>
-    {u.followed ? <button onClick={() => {
-        props.follow(u.id)
-    }}>UnFollow</button> : <button onClick={() => {
-        props.unFollow(u.id)
-    }}>Follow</button>
-    }
+    {u.followed ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+props.unFollow(u.id)
+
+    }}>UnFollow</button>
+        : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+        props.follow(u.id)}}>
+            Follow</button>}
 </div>
                 </span>
                             <span>
@@ -66,3 +69,5 @@ export const Users = (props: UsersType) => {
 
     }
 }
+
+

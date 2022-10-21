@@ -1,16 +1,16 @@
 const SET_USER_DATA = 'SET_USER_DATA'
 
 const initialState = {
-    usersId: null,
-    email: null,
+    usersId: '',
+    email: 'null',
     login: null,
     isAuth: false
 }
 
 export type DataType = {
-    usersId: null
-    email: null
-    login: null
+    id: number
+    email: string
+    login: string
     isAuth:boolean
 }
 
