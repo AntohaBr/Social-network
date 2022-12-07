@@ -1,47 +1,33 @@
-const SET_USER_DATA = 'SET_USER_DATA'
+import {AuthMeDataType} from "../api/api";
+
 
 const initialState = {
-    usersId: '',
-    email: 'null',
-    login: null,
+    id: 1,
+    email: '' as string,
+    login: '' as string,
     isAuth: false
 }
 
-export type DataType = {
-    id: number
-    email: string
-    login: string
-    isAuth:boolean
-}
+
+type initialStateType = typeof initialState
 
 type AuthReducerActionType =
-    ReturnType<typeof setAuthUserData>
+    ReturnType<typeof setAuthUserDataAC>
 
 
-export const authReducer = (state: DataType = initialState, action: AuthReducerActionType): DataType => {
+export const authReducer = (state: initialStateType = initialState, action: AuthReducerActionType): initialStateType => {
     switch (action.type) {
-        case SET_USER_DATA:
+        case 'SET_USER_DATA':
             return {
                 ...state,
                 ...action.data,
                 isAuth: true
             }
         default:
-            return state;
-
+            return state
     }
 }
 
 
-type SetUserType = {
-    type: typeof SET_USER_DATA
-    data: DataType
-}
-
-export const setAuthUserData = (data: DataType): SetUserType => {
-    return {
-        type: SET_USER_DATA,
-        data: data
-    } as const
-}
+export const setAuthUserDataAC = (data: AuthMeDataType) => ({type: 'SET_USER_DATA', data} as const)
 

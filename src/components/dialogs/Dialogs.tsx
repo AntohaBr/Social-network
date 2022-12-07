@@ -5,22 +5,19 @@ import DialogItem from "./dialogItem/DialogsItem";
 import {DialogsType} from "./DialogsContainer";
 
 
-type DialogsPropsType = DialogsType
-
-
-export const dialogs = (props: DialogsPropsType) => {
+export const dialogs = (props: DialogsType) => {
     const state = props.messagePage
-    const dialogsElement = state.dialogs.map(d => <DialogItem name={d.name} key={d.id} id={d.id}/>);
-    const messagesElement = state.messages.map(m => <Message messages={m.message} key={m.id}/>);
-    const newMessageBody = state.newMessageBody;
-    const onSendMessageClick = () => {
-        props.sendMessage()
-    }
+    const dialogsElement = state.dialogs.map(d => <DialogItem name={d.name} key={d.id} id={d.id}/>)
+    const messagesElement = state.messages.map(m => <Message messages={m.message} key={m.id}/>)
+    const newMessageBody = state.newMessageBody
+
+    const onSendMessageClick = () => {props.sendMessage()}
 
     const onNewMessageChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
         const body = event.currentTarget.value;
         props.updateNewMessageBody(body)
     }
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItem}>
@@ -39,8 +36,7 @@ export const dialogs = (props: DialogsPropsType) => {
                     </div>
                 </div>
             </div>
-
         </div>
-    );
+    )
 }
 

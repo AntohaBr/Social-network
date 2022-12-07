@@ -1,7 +1,6 @@
 import React from 'react';
 import {RootStateType} from "../../redux/Store";
-import {
-    InitialStateType,
+import {InitialStateType,
     sendMessageActionCreator,
     updateNewMessageBodyActionCreator
 } from "../../redux/MessageReducer";

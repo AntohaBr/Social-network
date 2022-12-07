@@ -11,11 +11,6 @@ const initialState = {
     profile: null
 }
 
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const SET_USER_PROFILE = 'SET_USER_PROFILE'
-
-
 
 export type ProfileType = {
     userId: number
@@ -43,8 +38,6 @@ type PhotosType = {
 }
 
 
-
-
 const profilePage = {
     posts: [] as PostType[],
     newPostsText: '',
@@ -53,22 +46,6 @@ const profilePage = {
 
 type ProfileReducerType = typeof profilePage
 
-type AddPostActionType = {
-    type: typeof ADD_POST,
-    newPostsText: string
-}
-
-type UpdateNewPostTextActionType = {
-    type: typeof UPDATE_NEW_POST_TEXT,
-    newText: string
-}
-
-type SetUserProfileType = {
-    type:typeof SET_USER_PROFILE,
-    profile:any
-}
-
-
 type ProfileReducerActionTypes = ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof updateNewPostTextActionCreator>
     | ReturnType<typeof setUserProfile>
@@ -76,45 +53,32 @@ type ProfileReducerActionTypes = ReturnType<typeof addPostActionCreator>
 
 export const profileReducer = (state: ProfileReducerType = initialState, action: ProfileReducerActionTypes): ProfileReducerType => {
     switch (action.type) {
-        case ADD_POST:
+        case 'ADD_POST':
             const newPost: PostType = {
                 id: new Date().getTime(),
                 message: state.newPostsText,
                 likesCount: 0
-            };
+            }
             return {...state, posts: [...state.posts, newPost], newPostsText: ''}
-        case UPDATE_NEW_POST_TEXT:
+        case 'UPDATE_NEW_POST_TEXT':
             return {...state, newPostsText: action.newText}
-        case SET_USER_PROFILE:
+        case 'SET_USER_PROFILE':
             return {...state, profile: action.profile}
         default:
             return state
     }
 }
 
-export const addPostActionCreator = (newPostsText: string): AddPostActionType => {
-    return {
-        type: ADD_POST,
-        newPostsText: newPostsText
-    } as const
-}
+export const addPostActionCreator = (newPostsText: string) => ({type: 'ADD_POST', newPostsText} as const)
 
-export const updateNewPostTextActionCreator = (newText: string): UpdateNewPostTextActionType => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        newText: newText
-    } as const
-}
+export const updateNewPostTextActionCreator = (newText: string) => ({type: 'UPDATE_NEW_POST_TEXT', newText} as const)
 
-export const setUserProfile = (profile: any): SetUserProfileType => {
-    return {
-        type: SET_USER_PROFILE,
-        profile: profile
-    } as const
-}
+export const setUserProfile = (profile: any) => ({type: 'SET_USER_PROFILE', profile} as const)
 
-export const getUserProfile = (userId: number) => (dispatch:Dispatch) =>{
-    usersAPI.getProfile(userId).then (responce => {
-        dispatch(setUserProfile(responce.data))
-    })
+
+export const getUserProfile = (userId: number) => (dispatch: Dispatch) => {
+    usersAPI.getProfile(userId)
+        .then(responce => {
+            dispatch(setUserProfile(responce.data))
+        })
 }

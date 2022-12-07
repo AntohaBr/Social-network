@@ -1,9 +1,9 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import messageReducer from "./MessageReducer";
 import {profileReducer} from "./ProfileReducer";
 import {usersReducer} from "./Users-Reducer";
 import {authReducer} from "./Auth-Reducer";
 import thunkMiddleware from "redux-thunk";
+import {messageReducer} from "./MessageReducer";
 
 
 const rootReducer = combineReducers({

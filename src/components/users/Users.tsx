@@ -28,9 +28,9 @@ export const Users = (props: UsersType) => {
                     {pages.map(p => {
                         return (
                             <span
-                                  className = {props.currentPage === p && styles.selectedPage} onClick={() => {
-                                props.onPageChanged(p)
-                            }}>{p}</span>
+                                className={props.currentPage === p && styles.selectedPage}
+                                onClick={() => {props.onPageChanged(p)}}
+                            >{p}</span>
                         )
                     })}
                 </div>
@@ -44,11 +44,11 @@ export const Users = (props: UsersType) => {
 </div>
 <div>
     {u.followed ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-props.unFollow(u.id)
-
-    }}>UnFollow</button>
+            props.unFollow(u.id)
+        }}>UnFollow</button>
         : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-        props.follow(u.id)}}>
+            props.follow(u.id)
+        }}>
             Follow</button>}
 </div>
                 </span>

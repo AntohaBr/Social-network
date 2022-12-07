@@ -11,7 +11,7 @@ import ProfileContainer from "./components/profile/ProfileContainer";
 import HeaderContainer from "./components/header/HeaderContainer";
 
 
-const App = () => {
+export const App = () => {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
@@ -29,7 +29,5 @@ const App = () => {
                 {/*</div>*/}
             </div>
         </BrowserRouter>
-    );
+    )
 }
-
-export default App;

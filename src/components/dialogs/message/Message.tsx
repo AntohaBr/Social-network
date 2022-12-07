@@ -5,8 +5,7 @@ type messagePropsType={
     messages:string
 }
 
-const Message = (props: messagePropsType) => {
+export const Message = (props: messagePropsType) => {
     return <div className={s.message}>{props.messages} </div>
 }
 
-export default Message;
