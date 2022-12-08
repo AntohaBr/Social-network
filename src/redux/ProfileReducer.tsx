@@ -12,32 +12,6 @@ const initialState = {
 }
 
 
-export type ProfileType = {
-    userId: number
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    fullName: string
-    contacts: ContactsType
-    photos: PhotosType
-}
-
-type ContactsType = {
-    github: string
-    vk: string
-    facebook: string
-    instagram: string
-    twitter: string
-    website: string
-    youtube: string
-    mainLink: string
-}
-
-type PhotosType = {
-    small: string
-    large: string
-}
-
-
 const profilePage = {
     posts: [] as PostType[],
     newPostsText: '',
@@ -46,9 +20,9 @@ const profilePage = {
 
 type ProfileReducerType = typeof profilePage
 
-type ProfileReducerActionTypes = ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof updateNewPostTextActionCreator>
-    | ReturnType<typeof setUserProfile>
+type ProfileReducerActionTypes = ReturnType<typeof addPostAC>
+    | ReturnType<typeof updateNewPostTextAC>
+    | ReturnType<typeof setUserProfileAC>
 
 
 export const profileReducer = (state: ProfileReducerType = initialState, action: ProfileReducerActionTypes): ProfileReducerType => {
@@ -69,16 +43,14 @@ export const profileReducer = (state: ProfileReducerType = initialState, action:
     }
 }
 
-export const addPostActionCreator = (newPostsText: string) => ({type: 'ADD_POST', newPostsText} as const)
-
-export const updateNewPostTextActionCreator = (newText: string) => ({type: 'UPDATE_NEW_POST_TEXT', newText} as const)
-
-export const setUserProfile = (profile: any) => ({type: 'SET_USER_PROFILE', profile} as const)
+export const addPostAC = (newPostsText: string) => ({type: 'ADD_POST', newPostsText} as const)
+export const updateNewPostTextAC = (newText: string) => ({type: 'UPDATE_NEW_POST_TEXT', newText} as const)
+export const setUserProfileAC = (profile: any) => ({type: 'SET_USER_PROFILE', profile} as const)
 
 
 export const getUserProfile = (userId: number) => (dispatch: Dispatch) => {
     usersAPI.getProfile(userId)
-        .then(responce => {
-            dispatch(setUserProfile(responce.data))
+        .then(res => {
+            dispatch(setUserProfileAC(res.data))
         })
 }

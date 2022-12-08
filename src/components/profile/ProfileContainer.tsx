@@ -1,9 +1,10 @@
 import React from 'react';
-import Profile from "./Profile";
-import {connect} from "react-redux";
-import {getUserProfile} from "../../redux/ProfileReducer";
-import {RouteComponentProps, withRouter} from "react-router";
-import {AppStateType} from "../../redux/Redux-store";
+import {connect} from 'react-redux';
+import {getUserProfile} from '../../redux/ProfileReducer';
+import {RouteComponentProps, withRouter} from 'react-router';
+import {AppStateType} from '../../redux/Redux-store';
+import {Profile} from './Profile';
+import {usersAPI} from "../../api/api";
 
 
 type MapStateToPropsType = {
@@ -28,7 +29,10 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
         if (!userId){
             userId = 2
         }
-        this.props.getUserProfile(userId)
+        usersAPI.getProfile(userId)
+            .then((res) =>{
+                this.props.getUserProfile(res.data.data.userId)
+            })
     }
 
     render() {

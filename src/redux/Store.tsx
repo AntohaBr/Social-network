@@ -64,7 +64,7 @@
 //     getState: () => RootStateType
 //     dispatch: (action: ActionTypes | StateTypes) => void
 //     _callSubscriber: (state: RootStateType) => void
-// }
+// // }
 
 // export let store: StoreType = {
     // _state: {

@@ -1,23 +1,25 @@
 import React from 'react';
-import styles from "./Users.module.css";
-import userPhoto from "../../assets/images/user.jpg";
-import {NavLink} from "react-router-dom";
-import {UserType} from "../../redux/Users-Reducer";
+import s from './Users.module.css';
+import userPhoto from '../../assets/images/user.jpg';
+import {NavLink} from 'react-router-dom';
+import {ResponseItemsType} from '../../api/api';
+import {FollowingInProgressType} from "../../redux/Users-reducer";
 
-type UsersType = {
-    totalUsersCount: number
+
+type UsersPropsType = {
+    totalCount: number
     pageSize: number
     currentPage: number
     onPageChanged: (pageNumber: number) => void
-    users: UserType[]
-    followingInProgress: []
-    follow: (id: number) => void
-    unFollow: (id: number) => void
+    users: ResponseItemsType[]
+    followingInProgress: FollowingInProgressType[]
+    follow: (userId: number) => void
+    unFollow: (userId: number) => void
 }
 
 
-export const Users = (props: UsersType) => {
-    const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+export const Users = (props: UsersPropsType) => {
+    const pagesCount = Math.ceil(props.totalCount / props.pageSize)
     const pages = []
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
@@ -26,12 +28,11 @@ export const Users = (props: UsersType) => {
             <div>
                 <div>
                     {pages.map(p => {
-                        return (
-                            <span
-                                className={props.currentPage === p && styles.selectedPage}
-                                onClick={() => {props.onPageChanged(p)}}
-                            >{p}</span>
-                        )
+                        return <span className={props.currentPage === p && s.selectedPage}
+                                     onClick={() => {
+                                         props.onPageChanged(p)
+                                     }}
+                        >{p}</span>
                     })}
                 </div>
                 {
@@ -39,7 +40,7 @@ export const Users = (props: UsersType) => {
                 <span>
 <div>
     <NavLink to={'/profile/' + u.id}>
-    <img src={u.photos.small !== null ? u.photos.small : userPhoto} className={styles.userPhoto}/>
+    <img src={u.photos.small !== null ? u.photos.small : userPhoto} className={s.userPhoto}/>
     </NavLink>
 </div>
 <div>
@@ -59,7 +60,7 @@ export const Users = (props: UsersType) => {
                         </span>
                         <span>
                         <div>{'u.photos'}</div>
-                        <div>{'u.followed'}</div>
+                        <div>{u.followed}</div>
                         </span>
                         </span>
                         </div>

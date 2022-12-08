@@ -7,7 +7,6 @@ import {MyPostsType} from "./MyPostsContainer";
 type PostsType = MyPostsType
 
 
-
  const MyPosts = (props: PostsType) => {
     let postsElement = props.posts.map(p => <Post
         message={p.message}

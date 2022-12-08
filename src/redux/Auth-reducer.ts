@@ -1,4 +1,4 @@
-import {AuthMeDataType} from "../api/api";
+import {AuthMeDataType} from '../api/api';
 
 
 const initialState = {
