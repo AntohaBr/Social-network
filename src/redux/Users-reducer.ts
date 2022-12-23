@@ -1,5 +1,5 @@
-import {ResponseItemsType, usersAPI} from '../api/api';
-import {Dispatch} from 'redux';
+import {ResponseItemsType, usersAPI} from '../api/api'
+import {Dispatch} from 'redux'
 
 
 const initialState = {

@@ -1,13 +1,12 @@
-import {AuthMeDataType} from '../api/api';
-
+import {authAPI, AuthMeDataType} from '../api/api'
+import {Dispatch} from "redux";
 
 const initialState = {
     id: 1,
-    email: '' as string,
     login: '' as string,
+    email: '' as string,
     isAuth: false
 }
-
 
 type initialStateType = typeof initialState
 
@@ -28,6 +27,15 @@ export const authReducer = (state: initialStateType = initialState, action: Auth
     }
 }
 
+const setAuthUserDataAC = (data: AuthMeDataType) => ({type: 'SET_USER_DATA', data} as const)
 
-export const setAuthUserDataAC = (data: AuthMeDataType) => ({type: 'SET_USER_DATA', data} as const)
+
+export const getAuthUserDataTC = () => (dispatch: Dispatch) => {
+    authAPI.me()
+        .then(res => {
+            if (res.data.data.resultCode === 0) {
+                dispatch(setAuthUserDataAC(res.data.data.data))
+            }
+        })
+}
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {
-    follow, getUsers, setCurrentPageAC,
+    follow, FollowingInProgressType, getUsers, setCurrentPageAC,
     toggleFollowingProgressAC, unFollow,
 } from '../../redux/Users-reducer';
 import {Users} from './Users';
@@ -18,7 +18,7 @@ type MapStateToPropsType = {
     totalCount: number
     currentPage: number
     isFetching: boolean
-    followingInProgress: []
+    followingInProgress: FollowingInProgressType[]
 }
 
 type MapDispatchToPropsType = {

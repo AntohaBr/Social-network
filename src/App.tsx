@@ -9,6 +9,7 @@ import HeaderContainer from "./components/header/HeaderContainer";
 import {Navbar} from "./components/navbar/Navbar";
 import {News} from "./components/news/News";
 import {Music} from "./components/music/Music";
+import {Login} from "./components/login/Login";
 
 
 export const App = () => {
@@ -19,6 +20,7 @@ export const App = () => {
                 <Navbar/>
                 {/*<div className='app-wrapper-content'>*/}
                 <Switch>
+                    <Route path="/login" render={()=><Login/>}/>
                     <Route path="/dialogs" render={()=><DialogsContainer/>}/>
                     <Route path="/profile/:userId?" render={()=><ProfileContainer/>}/>
                     <Route path="/users" render={()=><UsersContainer/>}/>
