@@ -5,20 +5,21 @@ import {ProfileStatus} from "./ProfileStatus";
 
 type ProfileInfoType={
     profile:any
+    status: string
+    updateStatus: (status: string) => void
 }
 
 const ProfileInfo = (props:ProfileInfoType) => {
     if (!props.profile){
+
         return <Preloader/>
     }
+
     return (
         <div>
-            {/*<div>*/}
-            {/*    <img src="https://img1.fonwall.ru/o/tk/tropiki-more-plyazh-ycsf.jpg?route=mid&amp;h=750"/>*/}
-            {/*</div>*/}
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large}/>
-                {/*<ProfileStatus/>*/}
+                <ProfileStatus status={props.status}  updateStatus={props.updateStatus} />
             </div>
         </div>
     );

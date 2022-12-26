@@ -40,6 +40,7 @@ class UsersContainer extends React.Component <UsersContainerType> {
     }
 
     render() {
+
         return (
             <div>
             {this.props.isFetching ? <Preloader/> : null}

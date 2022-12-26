@@ -20,8 +20,20 @@ export const usersAPI = {
         return instance.delete<AxiosResponse<ResponseFollowType>>(`follow/${userId}`)
     },
     getProfile(userId: number) {
-        return instance.get<AxiosResponse<ResponseProfileType>>('profile/' + userId)
+        return profileAPI.getProfile(userId)
 
+    }
+}
+
+export const profileAPI = {
+    getProfile(userId: number) {
+        return instance.get<AxiosResponse<ResponseProfileType>>('profile/' + userId)
+    },
+    getStatus(userId: number) {
+        return instance.get<AxiosResponse<GetStatusResponseType>>('profile/status/' + userId)
+    },
+    updateStatus(status: string) {
+        return instance.put<AxiosResponse<UpdateStatusResponseType>>('profile/status', {status})
     }
 }
 
@@ -31,6 +43,9 @@ export const authAPI = {
     }
 }
 
+type GetStatusResponseType = {
+        status: string
+}
 
 type ResponseUserType = {
     items: ResponseItemsType[]
@@ -52,6 +67,7 @@ type ResponseFollowType = {
     messages: string[]
     data: {}
 }
+type UpdateStatusResponseType = ResponseFollowType
 
 export type ResponseAuthMeType = {
     data: AuthMeDataType
