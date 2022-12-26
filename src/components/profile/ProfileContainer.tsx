@@ -4,24 +4,23 @@ import {getStatusTC, getUserProfile, updateStatusTC} from '../../redux/ProfileRe
 import {RouteComponentProps, withRouter} from 'react-router';
 import {AppStateType} from '../../redux/Redux-store';
 import {Profile} from './Profile';
-import {profileAPI, usersAPI} from "../../api/api";
+import {ResponseProfileType} from "../../api/api";
 import {compose} from "redux";
 
 
 export type MapStateToPropsType = {
-    profile: null | any,
+    profile: ResponseProfileType | null,
     status: string
 }
 
 type  MapDispatchToPropsType = {
-    getUserProfile: (userId: number) => void
-    getStatus: (userId: number) => void
+    getUserProfile: (userId: string) => void
+    getStatus: (userId: string) => void
     updateStatus: (status: string) => void
 }
 
-type ParamsType ={
-    userId:string
-    status: string
+type ParamsType = {
+    userId: string
 }
 
 type OnProfileContainerType = MapStateToPropsType & MapDispatchToPropsType
@@ -31,31 +30,26 @@ type ProfileContainerType = RouteComponentProps<ParamsType> & OnProfileContainer
 class ProfileContainer extends React.Component<ProfileContainerType> {
     componentDidMount() {
 
-        let userId = Number(this.props.match.params.userId)
-        if (!userId && this.props.profile){
-            userId = this.props.profile.userId
+        let userId = this.props.match.params.userId
+        if (!userId) {
+            // userId = this.props.profile
         }
-        usersAPI.getProfile(userId)
-            .then((res) =>{
-                this.props.getUserProfile(res.data.data.userId)
-            })
-        profileAPI.getStatus(userId)
-            .then((res) =>{
-                this.props.getStatus(res.data.data.status)
-            })
+        this.props.getUserProfile(userId)
+        this.props.getStatus(userId)
     }
 
     render() {
 
         return (
             <div>
-                <Profile{...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>
+                <Profile{...this.props} profile={this.props.profile} status={this.props.status}
+                        updateStatus={this.props.updateStatus}/>
             </div>
         );
     }
 }
 
-const mapStateToProps = (state: AppStateType):MapStateToPropsType => {
+const MapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         profile: state.profilePage.profile,
         status: state.profilePage.status
@@ -63,6 +57,6 @@ const mapStateToProps = (state: AppStateType):MapStateToPropsType => {
 }
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getUserProfile, getStatusTC, updateStatusTC}),
+    connect(MapStateToProps, {getUserProfile, getStatusTC, updateStatusTC}),
     withRouter
-) (ProfileContainer)
+)(ProfileContainer)

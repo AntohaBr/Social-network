@@ -8,12 +8,8 @@ const initialState = {
     totalCount: 0,
     currentPage: 1,
     isFetching: false,
-    followingInProgress: [] as number[]
-}
-
-export type FollowingInProgressType = {
-    userId: number
-    isFetching:boolean
+    followingInProgress: [] as number[],
+    portionSize: 10
 }
 
 export type initialStateType = typeof initialState

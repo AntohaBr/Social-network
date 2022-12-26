@@ -1,10 +1,11 @@
 import React from 'react';
 import ProfileInfo from './profikeInfo/ProfileInfo';
 import {MyPostsContainer} from './my posts/MyPostsContainer';
+import {ResponseProfileType} from "../../api/api";
 
 
 type ProfileType={
-    profile:null
+    profile: ResponseProfileType  | null
     status : string
     updateStatus: (status: string) => void
 }

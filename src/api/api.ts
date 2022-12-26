@@ -1,4 +1,4 @@
-import axios, {AxiosResponse} from 'axios';
+import axios from 'axios';
 
 
 const instance = axios.create({
@@ -11,35 +11,36 @@ const instance = axios.create({
 
 export const usersAPI = {
     getUsers(currentPage: number, pageSize: number) {
-        return instance.get<AxiosResponse<ResponseUserType>>(`users?page=${currentPage}&count=${pageSize}`)
+        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
     },
     follow(userId: number) {
-        return instance.post<AxiosResponse<ResponseFollowType>>(`follow/${userId}`)
+        return instance.post(`follow/${userId}`)
     },
     unFollow(userId: number) {
-        return instance.delete<AxiosResponse<ResponseFollowType>>(`follow/${userId}`)
+        return instance.delete(`follow/${userId}`)
     },
-    getProfile(userId: number) {
+    getProfile(userId: string) {
+        console.log('Obsolete method. Please use profileAPI object.')
         return profileAPI.getProfile(userId)
 
     }
 }
 
 export const profileAPI = {
-    getProfile(userId: number) {
-        return instance.get<AxiosResponse<ResponseProfileType>>('profile/' + userId)
+    getProfile(userId: string) {
+        return instance.get('profile/' + userId)
     },
-    getStatus(userId: number) {
-        return instance.get<AxiosResponse<GetStatusResponseType>>('profile/status/' + userId)
+    getStatus(userId: string) {
+        return instance.get('profile/status/' + userId)
     },
     updateStatus(status: string) {
-        return instance.put<AxiosResponse<UpdateStatusResponseType>>('profile/status', {status})
+        return instance.put('profile/status', {status})
     }
 }
 
 export const authAPI = {
     me() {
-        return instance.get<AxiosResponse<ResponseAuthMeType>>(`auth/me`)
+        return instance.get(`auth/me`)
     }
 }
 
@@ -60,6 +61,12 @@ export type ResponseItemsType = {
     photos: ResponsePhotosType
     status: string
     followed: boolean
+    location: LocationType
+}
+
+type LocationType = {
+    city: string
+    country: string
 }
 
 type ResponseFollowType = {
@@ -84,12 +91,13 @@ export type AuthMeDataType = {
 }
 
 export type ResponseProfileType = {
-    userId: number
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    fullName: string
+    userId?: number | null
+    lookingForAJob?: boolean
+    lookingForAJobDescription?: string
+    fullName?: string
     contacts: ResponseContactsType
-    photos: ResponsePhotosType
+    photos?: ResponsePhotosType
+    aboutMe?: string
 }
 
 type ResponseContactsType = {
