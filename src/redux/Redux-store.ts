@@ -4,6 +4,8 @@ import {usersReducer} from "./Users-reducer";
 import {authReducer} from "./Auth-reducer";
 import thunkMiddleware from "redux-thunk";
 import {messageReducer} from "./MessageReducer";
+import {FormAction, reducer as formReducer} from "redux-form";
+
 
 
 const rootReducer = combineReducers({
@@ -11,7 +13,7 @@ const rootReducer = combineReducers({
     messagePage: messageReducer,
     usersPage: usersReducer,
     auth: authReducer,
-    // form: formReducer
+    form: formReducer
 })
 
 export type AppStateType = ReturnType<typeof rootReducer>

@@ -4,7 +4,7 @@ import {Dispatch} from 'redux'
 
 const initialState = {
     users: [] as ResponseItemsType[],
-    pageSize: 8,
+    pageSize: 30,
     totalCount: 0,
     currentPage: 1,
     isFetching: false,

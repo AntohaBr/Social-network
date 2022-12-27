@@ -1,7 +1,6 @@
 import React from 'react';
 import {
     InitialStateType, sendMessageAC,
-    updateNewMessageBodyAC,
 } from '../../redux/MessageReducer';
 import {connect} from 'react-redux';
 import {compose, Dispatch} from 'redux';
@@ -18,8 +17,7 @@ type MapStateToPropsType = {
 }
 
 type MapDispatchToPropsType = {
-    updateNewMessageBody: (body: string) => void
-    sendMessage: () => void
+    sendMessage: (newMessageBody: string) => void
 }
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
@@ -30,11 +28,8 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
-        updateNewMessageBody: (body: string) => {
-            dispatch(updateNewMessageBodyAC(body))
-        },
-        sendMessage: () => {
-            dispatch(sendMessageAC())
+        sendMessage: (newMessageBody: string) => {
+            dispatch(sendMessageAC(newMessageBody))
         }
     }
 }
