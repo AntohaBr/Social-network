@@ -4,7 +4,7 @@ import {Dispatch} from 'redux'
 
 const initialState = {
     users: [] as ResponseItemsType[],
-    pageSize: 10,
+    pageSize: 8,
     totalCount: 0,
     currentPage: 1,
     isFetching: false,
@@ -66,8 +66,8 @@ export const getUsers = (currentPage:number,pageSize:number)=>{
         usersAPI.getUsers(currentPage,pageSize)
             .then(res => {
                 dispatch(toggleIsFetchingAC(false))
-                dispatch(setUsersAC(res.data.data.items))
-                dispatch(setTotalUsersCountAC(res.data.data.totalCount))
+                dispatch(setUsersAC(res.data.items))
+                dispatch(setTotalUsersCountAC(res.data.totalCount))
             })
     }
 }
@@ -77,7 +77,7 @@ export const follow = (userId:number)=>{
         dispatch(toggleFollowingProgressAC(true,userId))
         usersAPI.follow(userId)
             .then(res => {
-                if (res.data.data.resultCode == 0) {
+                if (res.data.resultCode == 0) {
                     dispatch(followSuccessAC(userId))
                 }
                dispatch(toggleFollowingProgressAC(false, userId))
@@ -90,7 +90,7 @@ export const unFollow = (userId:number)=>{
         dispatch(toggleFollowingProgressAC(true,userId))
         usersAPI.unFollow(userId)
             .then(res => {
-                if (res.data.data.resultCode == 0) {
+                if (res.data.resultCode == 0) {
                     dispatch(unfollowSuccessAC(userId))
                 }
                 dispatch(toggleFollowingProgressAC(false, userId))

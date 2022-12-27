@@ -11,7 +11,7 @@ const instance = axios.create({
 
 export const usersAPI = {
     getUsers(currentPage: number, pageSize: number) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
+        return instance.get<ResponseUserType>(`users?page=${currentPage}&count=${pageSize}`)
     },
     follow(userId: number) {
         return instance.post(`follow/${userId}`)
@@ -40,7 +40,7 @@ export const profileAPI = {
 
 export const authAPI = {
     me() {
-        return instance.get(`auth/me`)
+        return instance.get<ResponseAuthMeType>(`auth/me`)
     }
 }
 
@@ -48,7 +48,7 @@ type GetStatusResponseType = {
         status: string
 }
 
-type ResponseUserType = {
+export type ResponseUserType = {
     items: ResponseItemsType[]
     totalCount: number
     error: string
@@ -61,13 +61,13 @@ export type ResponseItemsType = {
     photos: ResponsePhotosType
     status: string
     followed: boolean
-    location: LocationType
+    // location: LocationType
 }
 
-type LocationType = {
-    city: string
-    country: string
-}
+// type LocationType = {
+//     city: string
+//     country: string
+// }
 
 type ResponseFollowType = {
     resultCode: number
@@ -78,8 +78,8 @@ type UpdateStatusResponseType = ResponseFollowType
 
 export type ResponseAuthMeType = {
     data: AuthMeDataType
-    messages: string[]
     fieldsErrors: string[]
+    messages: string[]
     resultCode: number
 }
 
@@ -91,13 +91,13 @@ export type AuthMeDataType = {
 }
 
 export type ResponseProfileType = {
-    userId?: number | null
-    lookingForAJob?: boolean
+    userId: number | null
+    lookingForAJob: boolean
     lookingForAJobDescription?: string
-    fullName?: string
+    fullName: string
     contacts: ResponseContactsType
-    photos?: ResponsePhotosType
-    aboutMe?: string
+    photos: ResponsePhotosType
+    aboutMe: string
 }
 
 type ResponseContactsType = {

@@ -2,6 +2,8 @@ import React from 'react';
 import {ResponseItemsType} from "../../api/api";
 import {NavLink} from "react-router-dom";
 import userPhoto from '../../assets/images/user.jpg';
+import s from './Users.module.css';
+
 
 type UserPropsType = {
     user: ResponseItemsType
@@ -15,7 +17,7 @@ export const User = (props: UserPropsType) => {
     return (
         <div>
                 <span>
-                    <div>
+                    <div className={s.userPhoto}>
                         <NavLink to={'/profile/' + props.user.id}>
                         <img src={props.user.photos.small != null ? props.user.photos.small : userPhoto}
                              alt={`user's avatar`}/>
@@ -34,11 +36,11 @@ export const User = (props: UserPropsType) => {
             <span>
                         <span>
                             <div>{props.user.name}</div>
-                            <div>{props.user.status}</div>
+                            {/*<div>{props.user.status}</div>*/}
                         </span>
                             <span>
-                                <div>{props.user.location?.country}</div>
-                                <div>{props.user.location?.city}</div>
+                                {/*<div>{props.user.location?.country}</div>*/}
+                                {/*<div>{props.user.location?.city}</div>*/}
                             </span>
             </span>
         </div>

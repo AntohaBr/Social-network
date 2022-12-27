@@ -32,13 +32,13 @@ export const Users = (props: UsersPropsType) => {
                         />)
                     }
                 </div>
-                <div>
-                    <Paginator portionSize={props.portionSize}
-                               totalCount={props.totalCount}
-                               pageSize={props.pageSize}
-                               currentPage={props.currentPage}
-                               onPageChanged={props.onPageChanged}/>
-                </div>
+                {/*<div>*/}
+                {/*    <Paginator portionSize={props.portionSize}*/}
+                {/*               totalCount={props.totalCount}*/}
+                {/*               pageSize={props.pageSize}*/}
+                {/*               currentPage={props.currentPage}*/}
+                {/*               onPageChanged={props.onPageChanged}/>*/}
+                {/*</div>*/}
             </div>
         )
     }

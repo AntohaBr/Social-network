@@ -1,5 +1,6 @@
-import {authAPI, AuthMeDataType} from '../api/api'
-import {Dispatch} from "redux";
+import {authAPI, ResponseAuthMeType} from '../api/api'
+import {Dispatch} from 'redux';
+
 
 const initialState = {
     id: 1,
@@ -7,11 +8,6 @@ const initialState = {
     email: '' as string,
     isAuth: false
 }
-
-type initialStateType = typeof initialState
-
-type AuthReducerActionType =
-    ReturnType<typeof setAuthUserDataAC>
 
 
 export const authReducer = (state: initialStateType = initialState, action: AuthReducerActionType): initialStateType => {
@@ -27,15 +23,21 @@ export const authReducer = (state: initialStateType = initialState, action: Auth
     }
 }
 
-const setAuthUserDataAC = (data: AuthMeDataType) => ({type: 'SET_USER_DATA', data} as const)
+
+const setAuthUserDataAC = (data: ResponseAuthMeType) => ({type: 'SET_USER_DATA', data} as const)
 
 
 export const getAuthUserDataTC = () => (dispatch: Dispatch) => {
     authAPI.me()
         .then(res => {
-            if (res.data.data.resultCode === 0) {
-                dispatch(setAuthUserDataAC(res.data.data.data))
+            if (res.data.resultCode === 0) {
+                dispatch(setAuthUserDataAC(res.data))
             }
         })
 }
 
+
+type initialStateType = typeof initialState
+
+type AuthReducerActionType =
+    ReturnType<typeof setAuthUserDataAC>
