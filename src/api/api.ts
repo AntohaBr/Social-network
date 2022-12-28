@@ -41,6 +41,12 @@ export const profileAPI = {
 export const authAPI = {
     me() {
         return instance.get<ResponseAuthMeType>(`auth/me`)
+    },
+    login(loginData:RequestAuthLoginType) {
+        return instance.post<ResponseAuthLoginType>(`auth/login`, loginData)
+    },
+    logOut() {
+        return instance.delete(`auth/login`)
     }
 }
 
@@ -61,7 +67,6 @@ export type ResponseItemsType = {
     photos: ResponsePhotosType
     status: string
     followed: boolean
-    // location: LocationType
 }
 
 // type LocationType = {
@@ -114,4 +119,19 @@ type ResponseContactsType = {
 type ResponsePhotosType = {
     small: string
     large: string
+}
+
+export type RequestAuthLoginType = {
+    email: string
+    password: string
+    rememberMe: boolean
+    captcha?: boolean
+}
+
+type ResponseAuthLoginType = {
+    resultCode: number
+    messages: string[]
+    data: {
+        userId: number
+    }
 }

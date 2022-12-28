@@ -1,4 +1,4 @@
-import {authAPI, ResponseAuthMeType} from '../api/api'
+import {authAPI, RequestAuthLoginType, ResponseAuthMeType} from '../api/api'
 import {Dispatch} from 'redux';
 
 
@@ -15,7 +15,7 @@ export const authReducer = (state: initialStateType = initialState, action: Auth
         case 'SET_USER_DATA':
             return {
                 ...state,
-                ...action.data,
+                ...action.payload,
                 isAuth: true
             }
         default:
@@ -24,7 +24,7 @@ export const authReducer = (state: initialStateType = initialState, action: Auth
 }
 
 
-const setAuthUserDataAC = (data: ResponseAuthMeType) => ({type: 'SET_USER_DATA', data} as const)
+const setAuthUserDataAC = (payload: ResponseAuthMeType) => ({type: 'SET_USER_DATA', payload} as const)
 
 
 export const getAuthUserDataTC = () => (dispatch: Dispatch) => {
@@ -32,6 +32,15 @@ export const getAuthUserDataTC = () => (dispatch: Dispatch) => {
         .then(res => {
             if (res.data.resultCode === 0) {
                 dispatch(setAuthUserDataAC(res.data))
+            }
+        })
+}
+
+export const LoginTC = (loginData:RequestAuthLoginType) => (dispatch: Dispatch) => {
+    authAPI.login(loginData)
+        .then(res => {
+            if (res.data.resultCode === 0) {
+                dispatch(getAuthUserDataTC())
             }
         })
 }
