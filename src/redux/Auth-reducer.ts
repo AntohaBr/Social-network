@@ -1,5 +1,6 @@
 import {authAPI} from '../api/api'
 import {Dispatch} from 'redux'
+import {stopSubmit} from "redux-form";
 
 
 const initialState = {
@@ -50,6 +51,10 @@ export const logOutTC = () => (dispatch: Dispatch) => {
         .then(res =>{
             if (res.data.resultCode === 0) {
                 dispatch(setAuthUserDataAC(null,null,null,false))
+            }
+            else {
+                let message = res.data.messages.length > 0 ? res.data.messages[0] : 'Common error'
+                dispatch(stopSubmit('login',{_error: message }))
             }
         })
 }
