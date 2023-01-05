@@ -1,5 +1,6 @@
 import {Dispatch} from 'redux'
 
+
 const initialState = {
     initialized: false
 }
@@ -19,7 +20,7 @@ export const appReducer = (state: initialStateType = initialState, action: AuthR
 const setInitializedAC = () => ({type: 'SET_INITIALIZED'} as const)
 
 export const initializeAppTC = () => (dispatch: Dispatch) => {
-     dispatch(setInitializedAC())
+    dispatch(setInitializedAC())
 
 }
 
