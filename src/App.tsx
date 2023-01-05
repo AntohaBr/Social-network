@@ -7,9 +7,9 @@ import HeaderContainer from "./components/header/HeaderContainer";
 import {Navbar} from "./components/navbar/Navbar";
 import {News} from "./components/news/News";
 import {Music} from "./components/music/Music";
-import {Login} from "./components/login/Login";
 import DialogsContainer from "./components/dialogs/DialogsContainer";
 import ProfileContainer from "./components/profile/ProfileContainer";
+import Login from "./components/login/Login";
 
 
 export const App = () => {

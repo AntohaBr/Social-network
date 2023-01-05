@@ -1,6 +1,6 @@
 .header {
     grid-area: h;
-    background-color: chartreuse;
+    background-color: #ddff00;
 }
 
 .header img {
@@ -11,6 +11,6 @@
     float: right;
 }
 
-.loginBlock a {
-    color: wheat;
-}
+/*.loginBlock a {*/
+/*    color: #0015ff;*/
+/*}*/

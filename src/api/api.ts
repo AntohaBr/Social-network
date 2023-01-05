@@ -40,10 +40,10 @@ export const profileAPI = {
 
 export const authAPI = {
     me() {
-        return instance.get<ResponseAuthMeType>(`auth/me`)
+        return instance.get(`auth/me`)
     },
-    login(loginData:RequestAuthLoginType) {
-        return instance.post<ResponseAuthLoginType>(`auth/login`, loginData)
+    login(email: string, password: string, rememberMe: boolean) {
+        return instance.post(`auth/login`, {email, password, rememberMe})
     },
     logOut() {
         return instance.delete(`auth/login`)
@@ -128,7 +128,7 @@ export type RequestAuthLoginType = {
     captcha?: boolean
 }
 
-type ResponseAuthLoginType = {
+export type ResponseAuthLoginType = {
     resultCode: number
     messages: string[]
     data: {

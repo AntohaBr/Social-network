@@ -1,50 +1,58 @@
-import {authAPI, RequestAuthLoginType, ResponseAuthMeType} from '../api/api'
-import {Dispatch} from 'redux';
+import {authAPI} from '../api/api'
+import {Dispatch} from 'redux'
 
 
 const initialState = {
-    id: 1,
-    login: '' as string,
-    email: '' as string,
-    isAuth: false
+    email: null as string | null,
+    login: null as string | null,
+    id: null as string | null,
+    isAuth: false as boolean
 }
 
 
 export const authReducer = (state: initialStateType = initialState, action: AuthReducerActionType): initialStateType => {
     switch (action.type) {
         case 'SET_USER_DATA':
-            return {
-                ...state,
-                ...action.payload,
-                isAuth: true
-            }
+            return {...state,
+                ...action.payload}
         default:
             return state
     }
 }
 
 
-const setAuthUserDataAC = (payload: ResponseAuthMeType) => ({type: 'SET_USER_DATA', payload} as const)
+const setAuthUserDataAC = (email: string | null, login: string | null, id: string | null, isAuth: boolean) =>
+    ({type: 'SET_USER_DATA', payload: {email, login, id, isAuth}} as const)
 
 
 export const getAuthUserDataTC = () => (dispatch: Dispatch) => {
     authAPI.me()
         .then(res => {
             if (res.data.resultCode === 0) {
-                dispatch(setAuthUserDataAC(res.data))
+                const {email, login, id} = res.data
+                dispatch(setAuthUserDataAC(email, login, id, true))
             }
         })
 }
 
-export const LoginTC = (loginData:RequestAuthLoginType) => (dispatch: Dispatch) => {
-    authAPI.login(loginData)
+export const loginTC = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
+    authAPI.login(email, password, rememberMe)
         .then(res => {
             if (res.data.resultCode === 0) {
+                // @ts-ignore
                 dispatch(getAuthUserDataTC())
             }
         })
 }
 
+export const logOutTC = () => (dispatch: Dispatch) => {
+    authAPI.logOut()
+        .then(res =>{
+            if (res.data.resultCode === 0) {
+                dispatch(setAuthUserDataAC(null,null,null,false))
+            }
+        })
+}
 
 type initialStateType = typeof initialState
 
