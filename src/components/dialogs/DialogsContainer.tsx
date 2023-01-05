@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     InitialStateType, sendMessageAC,
-} from '../../redux/MessageReducer';
+} from '../../redux/Message-reducer';
 import {connect} from 'react-redux';
 import {compose, Dispatch} from 'redux';
 import {Dialogs} from './Dialogs';

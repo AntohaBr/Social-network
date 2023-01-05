@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {getStatusTC, getUserProfile, updateStatusTC} from '../../redux/ProfileReducer';
+import {getStatusTC, getUserProfile, updateStatusTC} from '../../redux/Profile-reducer';
 import {RouteComponentProps, withRouter} from 'react-router';
 import {AppStateType} from '../../redux/Redux-store';
 import {Profile} from './Profile';
