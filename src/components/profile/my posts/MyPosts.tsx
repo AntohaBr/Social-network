@@ -11,7 +11,7 @@ import {maxLengthCreator, required} from "../../../utils/Validators/Validators";
 type PostsType = MyPostsType
 
 
- export const MyPosts = (props: PostsType) => {
+ export const MyPosts = React.memo( (props: PostsType) => {
 
     const postsElement = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
 
@@ -28,7 +28,7 @@ type PostsType = MyPostsType
             </div>
         </div>
     );
-};
+});
 
 
 type NewPostsFormType = {
