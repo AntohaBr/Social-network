@@ -1,21 +1,21 @@
-import React from 'react';
-import './App.css';
-import {BrowserRouter, Route, Switch} from "react-router-dom";
-import Settings from "./components/settings/Settings";
-import UsersContainer from "./components/users/UsersContainer";
-import HeaderContainer from "./components/header/HeaderContainer";
-import {Navbar} from "./components/navbar/Navbar";
-import {News} from "./components/news/News";
-import {Music} from "./components/music/Music";
-import DialogsContainer from "./components/dialogs/DialogsContainer";
-import ProfileContainer from "./components/profile/ProfileContainer";
-import Login from "./components/login/Login";
-import {connect} from "react-redux";
-import {compose} from "redux";
-import {withRouter} from "react-router";
-import {initializeAppTC} from "./redux/App-reducer";
-import {AppStateType} from "./redux/Redux-store";
-import {Preloader} from "./components/common/Preloader/Preloader";
+import React from 'react'
+import './App.css'
+import {BrowserRouter, Route, Switch} from "react-router-dom"
+import Settings from "./components/settings/Settings"
+import UsersContainer from "./components/users/UsersContainer"
+import HeaderContainer from "./components/header/HeaderContainer"
+import {Navbar} from "./components/navbar/Navbar"
+import {News} from "./components/news/News"
+import {Music} from "./components/music/Music"
+import DialogsContainer from "./components/dialogs/DialogsContainer"
+import ProfileContainer from "./components/profile/ProfileContainer"
+import Login from "./components/login/Login"
+import {connect} from "react-redux"
+import {compose} from "redux"
+import {withRouter} from "react-router"
+import {initializeAppTC} from "./redux/App-reducer"
+import {AppStateType} from "./redux/Redux-store"
+import {Preloader} from "./components/common/Preloader/Preloader"
 
 
 class App extends React.Component<PropsType> {
