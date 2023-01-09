@@ -18,26 +18,10 @@ const initialState = {
     newMessageBody: ''
 }
 
-//types
-export type MessagesType = {
-    id: number
-    message: string
-}
-
-export type DialogsType = {
-    id: number
-    name: string
-}
-
-export type InitialStateType = typeof initialState
-
-export type MessageReducerActionType= ReturnType<typeof sendMessageAC>
-
-
 //reducers
 export const messageReducer = (state: InitialStateType = initialState, action: MessageReducerActionType): InitialStateType => {
     switch (action.type) {
-        case 'SEND_MESSAGE':
+        case 'message/SEND_MESSAGE':
             let body = action.newMessageBody
             return {...state,messages:[...state.messages,{id: 7, message: body}]}
         default:
@@ -45,8 +29,9 @@ export const messageReducer = (state: InitialStateType = initialState, action: M
     }
 }
 
-
 //actions
-export const sendMessageAC = (newMessageBody:string) => ({type: 'SEND_MESSAGE', newMessageBody} as const)
+export const sendMessageAC = (newMessageBody:string) => ({type: 'message/SEND_MESSAGE', newMessageBody} as const)
 
-
+//types
+export type InitialStateType = typeof initialState
+export type MessageReducerActionType= ReturnType<typeof sendMessageAC>

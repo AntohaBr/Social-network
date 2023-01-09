@@ -1,5 +1,6 @@
-import {addPostAC, deletePostAC, initialStateType, profileReducer} from "./Profile-reducer";
-import {ResponseProfileType} from "../api/api";
+import {addPostAC, deletePostAC, initialStateType, profileReducer} from './Profile-reducer'
+import {ResponseProfileType} from '../api/api'
+
 
 let startState: initialStateType
 

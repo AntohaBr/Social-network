@@ -1,6 +1,6 @@
 import {authAPI} from '../api/api'
 import {Dispatch} from 'redux'
-import {stopSubmit} from "redux-form";
+import {stopSubmit} from 'redux-form'
 
 
 const initialState = {
@@ -11,9 +11,10 @@ const initialState = {
 }
 
 
+//reducers
 export const authReducer = (state: initialStateType = initialState, action: AuthReducerActionType): initialStateType => {
     switch (action.type) {
-        case 'SET_USER_DATA':
+        case 'auth/SET_USER_DATA':
             return {...state,
                 ...action.payload}
         default:
@@ -22,44 +23,41 @@ export const authReducer = (state: initialStateType = initialState, action: Auth
 }
 
 
+//actions
 export const setAuthUserDataAC = (email: string | null, login: string | null, id: string | null, isAuth: boolean) =>
-    ({type: 'SET_USER_DATA', payload: {email, login, id, isAuth}} as const)
+    ({type: 'auth/SET_USER_DATA', payload: {email, login, id, isAuth}} as const)
 
 
-export const getAuthUserDataTC = () => (dispatch: Dispatch) => {
-    authAPI.me()
-        .then(res => {
+//thanks
+export const getAuthUserDataTC = () => async (dispatch: Dispatch) => {
+    const res = await authAPI.me()
             if (res.data.resultCode === 0) {
                 const {email, login, id} = res.data
                 dispatch(setAuthUserDataAC(email, login, id, true))
-            }
-        })
+        }
 }
 
-export const loginTC = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
-    authAPI.login(email, password, rememberMe)
-        .then(res => {
+export const loginTC = (email: string, password: string, rememberMe: boolean) => async (dispatch: Dispatch) => {
+    const res = await authAPI.login(email, password, rememberMe)
             if (res.data.resultCode === 0) {
                 // @ts-ignore
                 dispatch(getAuthUserDataTC())
-            }
-        })
+        }
 }
 
-export const logOutTC = () => (dispatch: Dispatch) => {
-    authAPI.logOut()
-        .then(res =>{
+export const logOutTC = () => async (dispatch: Dispatch) => {
+    const res = await authAPI.logOut()
             if (res.data.resultCode === 0) {
                 dispatch(setAuthUserDataAC(null,null,null,false))
             }
             else {
                 let message = res.data.messages.length > 0 ? res.data.messages[0] : 'Common error'
                 dispatch(stopSubmit('login',{_error: message }))
-            }
-        })
+        }
 }
 
-type initialStateType = typeof initialState
 
+//types
+type initialStateType = typeof initialState
 type AuthReducerActionType =
     ReturnType<typeof setAuthUserDataAC>

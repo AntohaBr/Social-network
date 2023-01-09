@@ -1,14 +1,15 @@
 import {Dispatch} from 'redux'
-import {getAuthUserDataTC} from "./Auth-reducer";
 
 
 const initialState = {
     initialized: false
 }
 
+
+//reducers
 export const appReducer = (state: initialStateType = initialState, action: AuthReducerActionType): initialStateType => {
     switch (action.type) {
-        case 'SET_INITIALIZED':
+        case 'app/SET_INITIALIZED':
             return {
                 ...state,
                 initialized: true
@@ -18,8 +19,12 @@ export const appReducer = (state: initialStateType = initialState, action: AuthR
     }
 }
 
-const setInitializedAC = () => ({type: 'SET_INITIALIZED'} as const)
 
+//actions
+const setInitializedAC = () => ({type: 'app/SET_INITIALIZED'} as const)
+
+
+//thanks
 export const initializeAppTC = () => (dispatch: Dispatch) => {
     // @ts-ignore
     // dispatch(getAuthUserDataTC())
@@ -27,7 +32,8 @@ export const initializeAppTC = () => (dispatch: Dispatch) => {
 
 }
 
-type initialStateType = typeof initialState
 
+//types
+type initialStateType = typeof initialState
 type AuthReducerActionType =
     ReturnType<typeof setInitializedAC>
