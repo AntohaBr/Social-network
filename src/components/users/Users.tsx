@@ -1,8 +1,8 @@
-import React from 'react';
-import s from './Users.module.css';
-import {ResponseItemsType} from '../../api/api';
-import {User} from "./User";
-import {Paginator} from "../common/Paginator/Paginator";
+import React from 'react'
+import s from './Users.module.css'
+import {ResponseItemsType} from '../../api/api'
+import {User} from './User'
+import {Paginator} from '../common/Paginator/Paginator'
 
 
 type UsersPropsType = {
@@ -19,7 +19,6 @@ type UsersPropsType = {
 
 
 export const Users = (props: UsersPropsType) => {
-
         return (
             <div>
                 <div>

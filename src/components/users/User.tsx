@@ -1,8 +1,8 @@
-import React from 'react';
-import {ResponseItemsType} from "../../api/api";
-import {NavLink} from "react-router-dom";
-import userPhoto from '../../assets/images/Foto.png';
-import s from './Users.module.css';
+import React from 'react'
+import {ResponseItemsType} from '../../api/api'
+import {NavLink} from 'react-router-dom'
+import userPhoto from '../../assets/images/Foto.png'
+import s from './Users.module.css'
 
 
 type UserPropsType = {
@@ -38,10 +38,6 @@ export const User = (props: UserPropsType) => {
                             <div>{props.user.name}</div>
                             <div>{props.user.status}</div>
                         </span>
-                            <span>
-                                {/*<div>{props.user.location?.country}</div>*/}
-                                {/*<div>{props.user.location?.city}</div>*/}
-                            </span>
             </span>
         </div>
     )

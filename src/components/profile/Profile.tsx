@@ -1,7 +1,7 @@
-import React from 'react';
-import ProfileInfo from './profikeInfo/ProfileInfo';
-import {MyPostsContainer} from './my posts/MyPostsContainer';
-import {ResponseProfileType} from "../../api/api";
+import React from 'react'
+import {MyPostsContainer} from './my posts/MyPostsContainer'
+import {ResponseProfileType} from '../../api/api'
+import {ProfileInfo} from './profikeInfo/ProfileInfo'
 
 
 type ProfileType={
@@ -12,10 +12,9 @@ type ProfileType={
 
 
 export const Profile = (props:ProfileType) => {
-
     return (
         <div>
-            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus} />
+            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
             <MyPostsContainer/>
         </div>
     )

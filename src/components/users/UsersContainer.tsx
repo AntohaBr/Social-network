@@ -1,22 +1,22 @@
-import React from 'react';
-import {connect} from 'react-redux';
+import React from 'react'
+import {connect} from 'react-redux'
 import {
     follow, requestUsers, setCurrentPageAC,
     toggleFollowingProgressAC, unFollow,
-} from '../../redux/Users-reducer';
-import {Users} from './Users';
-import {Preloader} from '../common/Preloader/Preloader';
-import {AppStateType} from '../../redux/Redux-store';
-import {ResponseItemsType} from '../../api/api';
-import {compose} from "redux";
-import {WithAuthRedirect} from "../../hok/WithAuthRedirect";
+} from '../../redux/Users-reducer'
+import {Users} from './Users'
+import {Preloader} from '../common/Preloader/Preloader'
+import {AppStateType} from '../../redux/Redux-store'
+import {ResponseItemsType} from '../../api/api'
+import {compose} from 'redux'
+import {WithAuthRedirect} from '../../hok/WithAuthRedirect'
 import {
     getCurrentPage,
     getFollowingInProgress,
     getIsFetching,
     getPageSize, getPortionSize,
     getTotalCount, getUser,
-} from "../../redux/Users-selectors";
+} from '../../redux/Users-selectors'
 
 
 export type UsersContainerType = MapStateToPropsType & MapDispatchToPropsType
@@ -40,11 +40,13 @@ type MapDispatchToPropsType = {
 
 class UsersContainer extends React.Component <UsersContainerType> {
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        const {currentPage,pageSize} = this.props
+        this.props.getUsers(currentPage, pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.getUsers(pageNumber, this.props.pageSize)
+        const {pageSize} = this.props
+        this.props.getUsers(pageNumber, pageSize)
     }
 
     render() {
