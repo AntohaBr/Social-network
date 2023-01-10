@@ -10,11 +10,11 @@ import {Music} from "./components/music/Music"
 import DialogsContainer from "./components/dialogs/DialogsContainer"
 import ProfileContainer from "./components/profile/ProfileContainer"
 import Login from "./components/login/Login"
-import {connect} from "react-redux"
+import {connect, Provider} from "react-redux"
 import {compose} from "redux"
 import {withRouter} from "react-router"
 import {initializeAppTC} from "./redux/App-reducer"
-import {AppStateType} from "./redux/Redux-store"
+import {AppStateType, store} from "./redux/Redux-store"
 import {Preloader} from "./components/common/Preloader/Preloader"
 
 
@@ -67,7 +67,17 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     }
 }
 
-export default compose<React.ComponentType>(
-    connect(mapStateToProps, {initializeAppTC}),
-    withRouter
-)(App)
+const AppContainer = compose<React.ComponentType>(
+    withRouter,
+    connect(mapStateToProps, {initializeAppTC}))(App)
+
+const ProjectApp = () => {
+  return (
+      <BrowserRouter>
+        <Provider store={store}>
+            <AppContainer/>
+        </Provider>
+    </BrowserRouter>
+)}
+
+export default ProjectApp
