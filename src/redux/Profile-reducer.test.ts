@@ -1,5 +1,5 @@
-import {addPostAC, deletePostAC, initialStateType, profileReducer} from './Profile-reducer'
-import {ResponseProfileType} from '../api/api'
+import {addPostAC, deletePostAC, initialStateType, profileReducer, ResponseProfileType} from './Profile-reducer'
+
 
 
 let startState: initialStateType
@@ -13,7 +13,7 @@ beforeEach (() => {
             {id: 4, message: 'Dada', likesCount: 10}
         ],
         newPostsText: '',
-        profile: {} as ResponseProfileType | null,
+        profile: null as ResponseProfileType | null,
         status: '',
         postId: 1 as number
     }

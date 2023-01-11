@@ -1,5 +1,6 @@
 import {Dispatch} from 'redux'
-import {profileAPI, ResponseProfileType, usersAPI} from '../api/api'
+import {profileAPI, usersAPI} from "../api/api";
+
 
 
 const initialState = {
@@ -7,8 +8,8 @@ const initialState = {
         {id: 1, message: 'Hi, how a you?', likesCount: 12},
         {id: 2, message: 'It`s my first post', likesCount: 10}
     ],
-    newPostsText: '',
-    profile: {} as ResponseProfileType | null,
+    newPostsText: '' as string,
+    profile: null as ResponseProfileType | null,
     status: '',
     postId: 1 as number
 }
@@ -30,6 +31,8 @@ export const profileReducer = (state: initialStateType = initialState, action: P
             return {...state, status: action.status}
         case 'profile/DELETE_POST':
             return {...state, posts: state.posts.filter(p => p.id !== action.postId)}
+        case 'profile/SAVE_PHOTO':
+            return {...state, profile: {...state.profile, photos: action.photos}}
         default:
             return state
     }
@@ -41,6 +44,7 @@ export const addPostAC = (newPostsText: string) => ({type: 'profile/ADD_POST', n
 export const setUserProfileAC = (profile: ResponseProfileType | null) => ({type: 'profile/SET_USER_PROFILE', profile} as const)
 export const setStatusAC = (status: string) => ({type: 'profile/SET_STATUS', status} as const)
 export const deletePostAC = (postId:number) => ({type: 'profile/DELETE_POST', postId} as const)
+export const savePhotoAC = (photos: any) => ({type: 'profile/SAVE_PHOTO', photos} as const)
 
 
 //thanks
@@ -49,16 +53,23 @@ export const getUserProfile = (userId: string) => async (dispatch: Dispatch) => 
             dispatch(setUserProfileAC(res.data))
 }
 
-export const getStatusTC = (userId: string) => async (dispatch: Dispatch) => {
+export const getStatus = (userId: string) => async (dispatch: Dispatch) => {
    const res = await profileAPI.getStatus(userId)
             dispatch(setStatusAC(res.data))
 }
 
-export const updateStatusTC = (status: string) => async  (dispatch: Dispatch) => {
+export const updateStatus = (status: string) => async  (dispatch: Dispatch) => {
     const res = await profileAPI.updateStatus(status)
             if (res.data.data.resultCode === 0) {
                 dispatch(setStatusAC(status))
         }
+}
+
+export const savePhoto = (photos: any) => async  (dispatch: Dispatch) => {
+    const res = await profileAPI.savePhoto(photos)
+    if (res.data.data.resultCode === 0) {
+        dispatch(savePhotoAC(res.data.photos))
+    }
 }
 
 
@@ -68,9 +79,32 @@ type ProfileReducerActionTypes = ReturnType<typeof addPostAC>
     | ReturnType<typeof setUserProfileAC>
     | ReturnType<typeof setStatusAC>
     | ReturnType<typeof deletePostAC>
+    | ReturnType<typeof savePhotoAC>
 
 export type PostType = {
     id: number,
     message: string,
     likesCount: number
+}
+
+export type ResponseProfileType = {
+    aboutMe?: string
+    userId?: number
+    lookingForAJob?: boolean
+    lookingForAJobDescription?: string
+    fullName?: string
+    contacts?: {
+        github: string
+        vk: string
+        facebook: string
+        instagram: string
+        twitter: string
+        website: string
+        youtube: string
+        mainLink: string
+    }
+    photos?: {
+        small: string
+        large: string
+    }
 }

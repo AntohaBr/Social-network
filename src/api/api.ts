@@ -35,6 +35,13 @@ export const profileAPI = {
     },
     updateStatus(status: string) {
         return instance.put('profile/status', {status})
+    },
+    savePhoto(photos: any) {
+        const formData = new FormData()
+        formData.append('Image', photos)
+        return instance.put('profile/photo', formData, {
+            headers: {'Content-Type': 'multipart/form-data'}
+        })
     }
 }
 
@@ -95,7 +102,7 @@ export type AuthMeDataType = {
     isAuth?: boolean
 }
 
-export type ResponseProfileType = {
+type ResponseProfileType = {
     userId: number | null
     lookingForAJob: boolean
     lookingForAJobDescription?: string
@@ -116,7 +123,7 @@ type ResponseContactsType = {
     mainLink: string
 }
 
-type ResponsePhotosType = {
+export type ResponsePhotosType = {
     small: string
     large: string
 }
