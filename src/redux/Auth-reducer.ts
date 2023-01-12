@@ -29,7 +29,7 @@ export const setAuthUserDataAC = (email: string | null, login: string | null, id
 
 
 //thanks
-export const getAuthUserDataTC = () => async (dispatch: Dispatch) => {
+export const getAuthUserData = () => async (dispatch: Dispatch) => {
     const res = await authAPI.me()
             if (res.data.resultCode === 0) {
                 const {email, login, id} = res.data
@@ -37,23 +37,22 @@ export const getAuthUserDataTC = () => async (dispatch: Dispatch) => {
         }
 }
 
-export const loginTC = (email: string, password: string, rememberMe: boolean) => async (dispatch: Dispatch) => {
+export const login = (email: string, password: string, rememberMe: boolean) => async (dispatch: Dispatch<any>) => {
     const res = await authAPI.login(email, password, rememberMe)
             if (res.data.resultCode === 0) {
-                // @ts-ignore
-                dispatch(getAuthUserDataTC())
+                dispatch(getAuthUserData())
         }
+            else {
+                const message = res.data.messages.length > 0 ? res.data.messages[0] : 'Common error'
+                dispatch(stopSubmit('login',{_error: message }))
+            }
 }
 
-export const logOutTC = () => async (dispatch: Dispatch) => {
+export const logOut = () => async (dispatch: Dispatch) => {
     const res = await authAPI.logOut()
             if (res.data.resultCode === 0) {
                 dispatch(setAuthUserDataAC(null,null,null,false))
             }
-            else {
-                let message = res.data.messages.length > 0 ? res.data.messages[0] : 'Common error'
-                dispatch(stopSubmit('login',{_error: message }))
-        }
 }
 
 

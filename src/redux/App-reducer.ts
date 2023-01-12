@@ -1,4 +1,5 @@
 import {Dispatch} from 'redux'
+import {authAPI} from '../api/api'
 
 
 const initialState = {
@@ -25,11 +26,9 @@ const setInitializedAC = () => ({type: 'app/SET_INITIALIZED'} as const)
 
 
 //thanks
-export const initializeAppTC = () => (dispatch: Dispatch) => {
-    // @ts-ignore
-    // dispatch(getAuthUserDataTC())
+export const initializeAppTC = () => async (dispatch: Dispatch) => {
+    const res = await authAPI.me()
     dispatch(setInitializedAC())
-
 }
 
 

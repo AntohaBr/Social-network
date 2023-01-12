@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {AppStateType} from '../../redux/Redux-store'
 import {Header} from './Header'
-import {logOutTC} from "../../redux/Auth-reducer";
+import {logOut} from "../../redux/Auth-reducer";
 import {RouteComponentProps, withRouter} from "react-router";
 import {compose} from "redux";
 
@@ -39,6 +39,6 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 }
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {logOutTC}),
+    connect(mapStateToProps, {logOut}),
     withRouter
 )(HeaderContainer)

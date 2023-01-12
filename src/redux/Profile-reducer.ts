@@ -1,6 +1,6 @@
 import {Dispatch} from 'redux'
-import {profileAPI, usersAPI} from "../api/api";
-
+import {profileAPI} from '../api/api'
+import {AppStateType} from "./Redux-store";
 
 
 const initialState = {
@@ -25,7 +25,7 @@ export const profileReducer = (state: initialStateType = initialState, action: P
                 likesCount: 0
             }
             return {...state, posts: [...state.posts, newPost], newPostsText: ''}
-        case 'profile/SET_USER_PROFILE':
+        case 'profile/SET_PROFILE':
             return {...state, profile: action.profile}
         case 'profile/SET_STATUS':
             return {...state, status: action.status}
@@ -41,34 +41,42 @@ export const profileReducer = (state: initialStateType = initialState, action: P
 
 //actions
 export const addPostAC = (newPostsText: string) => ({type: 'profile/ADD_POST', newPostsText} as const)
-export const setUserProfileAC = (profile: ResponseProfileType | null) => ({type: 'profile/SET_USER_PROFILE', profile} as const)
+export const setProfile = (profile: ResponseProfileType) => ({type: 'profile/SET_PROFILE', profile} as const)
 export const setStatusAC = (status: string) => ({type: 'profile/SET_STATUS', status} as const)
-export const deletePostAC = (postId:number) => ({type: 'profile/DELETE_POST', postId} as const)
+export const deletePostAC = (postId: number) => ({type: 'profile/DELETE_POST', postId} as const)
 export const savePhotoAC = (photos: any) => ({type: 'profile/SAVE_PHOTO', photos} as const)
 
 
 //thanks
-export const getUserProfile = (userId: string) => async (dispatch: Dispatch) => {
-    const res = await usersAPI.getProfile(userId)
-            dispatch(setUserProfileAC(res.data))
+export const getProfile = (userId: string | null) => async (dispatch: Dispatch) => {
+    const res = await profileAPI.getProfile(userId)
+    dispatch(setProfile(res.data))
 }
 
 export const getStatus = (userId: string) => async (dispatch: Dispatch) => {
-   const res = await profileAPI.getStatus(userId)
-            dispatch(setStatusAC(res.data))
+    const res = await profileAPI.getStatus(userId)
+    dispatch(setStatusAC(res.data))
 }
 
-export const updateStatus = (status: string) => async  (dispatch: Dispatch) => {
+export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
     const res = await profileAPI.updateStatus(status)
-            if (res.data.data.resultCode === 0) {
-                dispatch(setStatusAC(status))
-        }
+    if (res.data.data.resultCode === 0) {
+        dispatch(setStatusAC(status))
+    }
 }
 
-export const savePhoto = (photos: any) => async  (dispatch: Dispatch) => {
+export const savePhoto = (photos: any) => async (dispatch: Dispatch) => {
     const res = await profileAPI.savePhoto(photos)
     if (res.data.data.resultCode === 0) {
         dispatch(savePhotoAC(res.data.photos))
+    }
+}
+
+export const saveProfile = (data: any) => async (dispatch: Dispatch<any>, getState: () => AppStateType) => {
+    const userId = getState().auth.id
+    const res = await profileAPI.saveProfile(data)
+    if (res.data.data.resultCode === 0) {
+        dispatch(getProfile(userId))
     }
 }
 
@@ -76,7 +84,7 @@ export const savePhoto = (photos: any) => async  (dispatch: Dispatch) => {
 //types
 export type initialStateType = typeof initialState
 type ProfileReducerActionTypes = ReturnType<typeof addPostAC>
-    | ReturnType<typeof setUserProfileAC>
+    | ReturnType<typeof setProfile>
     | ReturnType<typeof setStatusAC>
     | ReturnType<typeof deletePostAC>
     | ReturnType<typeof savePhotoAC>
