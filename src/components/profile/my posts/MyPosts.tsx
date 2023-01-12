@@ -14,13 +14,11 @@ type MyPostsPropsType = {
 
 
  export const MyPosts = React.memo( (props: MyPostsPropsType) => {
-
     const postsElement = props.posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)
 
     const onAddPost = (values: NewPostsFormType) => {
        props.addPost(values.newPostText)
     }
-
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>

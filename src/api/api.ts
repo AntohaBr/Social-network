@@ -28,21 +28,21 @@ export const profileAPI = {
             .then(response => response.data)
     },
     getStatus(userId: string) {
-        return instance.get('profile/status/' + userId)
+        return instance.get(`profile/status/` + userId)
             .then(response => response.data)
     },
     updateStatus(status: string) {
-        return instance.put('profile/status', {status})
+        return instance.put(`profile/status`, {status})
     },
     savePhoto(photos: any) {
         const formData = new FormData()
         formData.append('Image', photos)
-        return instance.put('profile/photo', formData, {
+        return instance.put(`profile/photo`, formData, {
             headers: {'Content-Type': 'multipart/form-data'}
         })
     },
     saveProfile(data: any) {
-        return instance.put('profile', {data})
+        return instance.put(`profile`, {data})
     }
 }
 
@@ -50,13 +50,20 @@ export const authAPI = {
     getAuth() {
         return instance.get(`auth/me`)
     },
-    login(email: string, password: string, rememberMe: boolean) {
-        return instance.post(`auth/login`, {email, password, rememberMe})
+    login(email: string, password: string, rememberMe: boolean, captcha:string | null) {
+        return instance.post(`auth/login`, {email, password, rememberMe, captcha})
     },
     logOut() {
         return instance.delete(`auth/login`)
     }
 }
+
+export const securityAPI = {
+    getCaptchaURL() {
+        return instance.get(`security/get-captcha-url`)
+    }
+}
+
 
 type GetStatusResponseType = {
     status: string

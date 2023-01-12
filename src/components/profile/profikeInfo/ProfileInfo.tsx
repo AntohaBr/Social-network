@@ -2,8 +2,8 @@ import React, {ChangeEvent, useState} from 'react'
 import s from './ProfileInfo.module.css'
 import {Preloader} from '../../common/Preloader/Preloader'
 import {ProfileStatusWithHooks} from './ProfileStatusWithHooks'
-import userPhoto from "../../../assets/images/Foto.png"
-import {ProfileDataFormWithReduxForm} from "./ProfileDataForm"
+import userPhoto from '../../../assets/images/Foto.png'
+import {ProfileDataFormWithReduxForm} from './ProfileDataForm'
 import {IMainUser} from '../../../redux/Profile-reducer'
 
 
@@ -17,8 +17,8 @@ type ProfileInfoType = {
     error: string
 }
 
-export const ProfileInfo = (props: ProfileInfoType) => {
 
+export const ProfileInfo = (props: ProfileInfoType) => {
     const [editMode, setEditMode] = useState(false)
 
     if (!props.profile) {
@@ -65,6 +65,7 @@ export const ProfileInfo = (props: ProfileInfoType) => {
 }
 
 
+
 type ProfileDataPropsType = {
     profile: IMainUser | null
     status: string
@@ -73,6 +74,7 @@ type ProfileDataPropsType = {
     savePhoto: (photos: any) => void
     goToEditMode: () => void
 }
+
 
 const ProfileData = (props: ProfileDataPropsType) => {
     return (

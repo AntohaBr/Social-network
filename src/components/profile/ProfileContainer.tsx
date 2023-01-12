@@ -1,17 +1,17 @@
-import React from 'react';
-import {connect} from 'react-redux';
+import React from 'react'
+import {connect} from 'react-redux'
 import {
     getStatus,
     getProfile,
     savePhoto,
     updateStatus,
     saveProfile, IMainUser, PostType, addPost
-} from '../../redux/Profile-reducer';
-import {RouteComponentProps, withRouter} from 'react-router';
-import {AppStateType} from '../../redux/Redux-store';
-import {Profile} from './Profile';
-import {compose} from "redux";
-import {withAuthRedirect} from "../../hok/WithAuthRedirect";
+} from '../../redux/Profile-reducer'
+import {RouteComponentProps, withRouter} from 'react-router'
+import {AppStateType} from '../../redux/Redux-store'
+import {Profile} from './Profile'
+import {compose} from 'redux'
+import {withAuthRedirect} from '../../hok/WithAuthRedirect'
 
 
 export type MapStateToPropsType = {
@@ -42,7 +42,6 @@ type ProfileContainerType = RouteComponentProps<ParamsType> & OnProfileContainer
 
 
 class ProfileContainer extends React.Component<ProfileContainerType> {
-
     refreshProfile() {
         let userId = this.props.match.params.userId
         if (!userId) {
@@ -72,6 +71,7 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
         )
     }
 }
+
 
 const MapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {

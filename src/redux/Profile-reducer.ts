@@ -2,7 +2,7 @@ import {Dispatch} from 'redux'
 import {profileAPI} from '../api/api'
 import {AppStateType} from './Redux-store'
 import {stopSubmit} from 'redux-form'
-import {AxiosError} from "axios";
+import {AxiosError} from 'axios'
 
 
 const initialState = {
@@ -73,7 +73,6 @@ export const savePhoto = (photos: any) => async (dispatch: Dispatch) => {
     if (res.data.resultCode === 0) {
         dispatch(savePhotoAC(res.data.photos))
     }
-
 }
 
 export const saveProfile = (data: any) => async (dispatch: Dispatch<any>, getState: () => AppStateType) => {
