@@ -9,7 +9,6 @@ import {Preloader} from '../common/Preloader/Preloader'
 import {AppStateType} from '../../redux/Redux-store'
 import {ResponseItemsType} from '../../api/api'
 import {compose} from 'redux'
-import {WithAuthRedirect} from '../../hok/WithAuthRedirect'
 import {
     getCurrentPage,
     getFollowingInProgress,
@@ -17,6 +16,7 @@ import {
     getPageSize, getPortionSize,
     getTotalCount, getUser,
 } from '../../redux/Users-selectors'
+import {withAuthRedirect} from "../../hok/WithAuthRedirect";
 
 
 export type UsersContainerType = MapStateToPropsType & MapDispatchToPropsType
@@ -86,6 +86,6 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 
 
 export default compose<React.ComponentType>(
-    WithAuthRedirect,
+    withAuthRedirect,
     connect(mapStateToProps, {follow, unFollow, setCurrentPage, toggleFollowingProgress, requestUsers})
 )(UsersContainer)

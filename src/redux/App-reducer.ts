@@ -1,9 +1,10 @@
 import {Dispatch} from 'redux'
 import {authAPI} from '../api/api'
+import {getAuth} from "./Auth-reducer";
 
 
 const initialState = {
-    initialized: false
+    initialized: false,
 }
 
 
@@ -11,10 +12,7 @@ const initialState = {
 export const appReducer = (state: initialStateType = initialState, action: AuthReducerActionType): initialStateType => {
     switch (action.type) {
         case 'app/SET_INITIALIZED':
-            return {
-                ...state,
-                initialized: true
-            }
+            return {...state, initialized: true}
         default:
             return state
     }
@@ -22,17 +20,17 @@ export const appReducer = (state: initialStateType = initialState, action: AuthR
 
 
 //actions
-const setInitializedAC = () => ({type: 'app/SET_INITIALIZED'} as const)
+const setInitialized = () => ({type: 'app/SET_INITIALIZED'} as const)
 
 
 //thanks
-export const initializeAppTC = () => async (dispatch: Dispatch) => {
-    const res = await authAPI.me()
-    dispatch(setInitializedAC())
+export const initializeApp = () => async (dispatch: Dispatch<any>) => {
+    await dispatch(getAuth())
+    dispatch(setInitialized())
 }
 
 
 //types
 type initialStateType = typeof initialState
 type AuthReducerActionType =
-    ReturnType<typeof setInitializedAC>
+    ReturnType<typeof setInitialized>

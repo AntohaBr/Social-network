@@ -10,9 +10,9 @@ const initialState = {
     currentPage: 1,
     isFetching: false,
     followingInProgress: [] as number[],
-    portionSize: 10
+    portionSize: 10,
+    error: ''
 }
-
 
 //reducers
 export const usersReducer = (state: initialStateType = initialState, action: UsersReducerActionType): initialStateType => {

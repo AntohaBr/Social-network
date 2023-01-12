@@ -1,5 +1,4 @@
-import {addPostAC, deletePostAC, initialStateType, profileReducer, ResponseProfileType} from './Profile-reducer'
-
+import {addPost, deletePost, IMainUser, initialStateType, PostType, profileReducer} from './Profile-reducer'
 
 
 let startState: initialStateType
@@ -11,17 +10,15 @@ beforeEach (() => {
             {id: 2, message: 'It`s my first post', likesCount: 10},
             {id: 3, message: 'Yes', likesCount: 10},
             {id: 4, message: 'Dada', likesCount: 10}
-        ],
-        newPostsText: '',
-        profile: null as ResponseProfileType | null,
-        status: '',
-        postId: 1 as number
+        ] as PostType[],
+        profile: null as IMainUser | null,
+        status: ''
     }
 })
 
 
 test ('message of new post should be correct', () => {
- const action = addPostAC ('Hi friends')
+ const action = addPost ('Hi friends')
 
     const newState = profileReducer (startState,action)
 
@@ -29,7 +26,7 @@ test ('message of new post should be correct', () => {
 })
 
 test ('after deleting length of messages should be decrement',() =>{
-    const action = deletePostAC(1)
+    const action = deletePost(1)
 
     const newState = profileReducer (startState,action)
 
@@ -37,7 +34,7 @@ test ('after deleting length of messages should be decrement',() =>{
 })
 
 test ('after deleting length shouldn`t  be decrement if id is incorrect',() =>{
-    const action = deletePostAC(1000)
+    const action = deletePost(1000)
 
     const newState = profileReducer (startState,action)
 

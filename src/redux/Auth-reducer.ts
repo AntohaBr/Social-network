@@ -24,23 +24,23 @@ export const authReducer = (state: initialStateType = initialState, action: Auth
 
 
 //actions
-export const setAuthUserDataAC = (email: string | null, login: string | null, id: string | null, isAuth: boolean) =>
+export const setAuth = (email: string | null, login: string | null, id: string | null, isAuth: boolean) =>
     ({type: 'auth/SET_USER_DATA', payload: {email, login, id, isAuth}} as const)
 
 
 //thanks
-export const getAuthUserData = () => async (dispatch: Dispatch) => {
-    const res = await authAPI.me()
+export const getAuth = () => async (dispatch: Dispatch) => {
+    const res = await authAPI.getAuth()
             if (res.data.resultCode === 0) {
                 const {email, login, id} = res.data
-                dispatch(setAuthUserDataAC(email, login, id, true))
+                dispatch(setAuth(email, login, id, true))
         }
 }
 
 export const login = (email: string, password: string, rememberMe: boolean) => async (dispatch: Dispatch<any>) => {
     const res = await authAPI.login(email, password, rememberMe)
             if (res.data.resultCode === 0) {
-                dispatch(getAuthUserData())
+                dispatch(getAuth())
         }
             else {
                 const message = res.data.messages.length > 0 ? res.data.messages[0] : 'Common error'
@@ -51,7 +51,7 @@ export const login = (email: string, password: string, rememberMe: boolean) => a
 export const logOut = () => async (dispatch: Dispatch) => {
     const res = await authAPI.logOut()
             if (res.data.resultCode === 0) {
-                dispatch(setAuthUserDataAC(null,null,null,false))
+                dispatch(setAuth(null,null,null,false))
             }
 }
 
@@ -59,4 +59,4 @@ export const logOut = () => async (dispatch: Dispatch) => {
 //types
 type initialStateType = typeof initialState
 type AuthReducerActionType =
-    ReturnType<typeof setAuthUserDataAC>
+    ReturnType<typeof setAuth>

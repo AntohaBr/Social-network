@@ -13,7 +13,7 @@ import Login from "./components/login/Login"
 import {connect, Provider} from "react-redux"
 import {compose} from "redux"
 import {withRouter} from "react-router"
-import {initializeAppTC} from "./redux/App-reducer"
+import {initializeApp} from "./redux/App-reducer"
 import {AppStateType, store} from "./redux/Redux-store"
 import {Preloader} from "./components/common/Preloader/Preloader"
 
@@ -21,7 +21,7 @@ import {Preloader} from "./components/common/Preloader/Preloader"
 class App extends React.Component<PropsType> {
 
     componentDidMount() {
-        this.props.initializeAppTC()
+        this.props.initializeApp()
     }
 
     render() {
@@ -53,7 +53,7 @@ class App extends React.Component<PropsType> {
 }
 
 type MapDispatchToPropsType = {
-    initializeAppTC: () => void
+    initializeApp: () => void
 }
 type PropsType = MapDispatchToPropsType & MapStateToPropsType
 
@@ -69,7 +69,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 
 const AppContainer = compose<React.ComponentType>(
     withRouter,
-    connect(mapStateToProps, {initializeAppTC}))(App)
+    connect(mapStateToProps, {initializeApp}))(App)
 
 const ProjectApp = () => {
   return (

@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 import {login} from '../../redux/Auth-reducer'
 import {AppStateType} from '../../redux/Redux-store'
 import s from '../common/FormsControl/FormsControl.module.css'
-import {Redirect} from "react-router-dom";
+import {Redirect} from 'react-router-dom'
 
 
 type FormDataType = {
@@ -14,7 +14,6 @@ type FormDataType = {
     password: string
     rememberMe: boolean
 }
-
 
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (

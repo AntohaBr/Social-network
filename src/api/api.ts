@@ -25,9 +25,11 @@ export const usersAPI = {
 export const profileAPI = {
     getProfile(userId: string | null) {
         return instance.get(`profile/${userId}`)
+            .then(response => response.data)
     },
     getStatus(userId: string) {
         return instance.get('profile/status/' + userId)
+            .then(response => response.data)
     },
     updateStatus(status: string) {
         return instance.put('profile/status', {status})
@@ -39,13 +41,13 @@ export const profileAPI = {
             headers: {'Content-Type': 'multipart/form-data'}
         })
     },
-    saveProfile(data:any) {
+    saveProfile(data: any) {
         return instance.put('profile', {data})
     }
 }
 
 export const authAPI = {
-    me() {
+    getAuth() {
         return instance.get(`auth/me`)
     },
     login(email: string, password: string, rememberMe: boolean) {
@@ -57,7 +59,7 @@ export const authAPI = {
 }
 
 type GetStatusResponseType = {
-        status: string
+    status: string
 }
 
 export type ResponseUserType = {
