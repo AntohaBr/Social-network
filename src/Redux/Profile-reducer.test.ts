@@ -1,4 +1,4 @@
-import {addPost, deletePost, IMainUser, initialStateType, PostType, profileReducer} from './Profile-reducer'
+import {addPost, deletePost, initialStateType, PostType, profileReducer, ProfileType} from './Profile-reducer'
 
 
 let startState: initialStateType
@@ -11,7 +11,7 @@ beforeEach (() => {
             {id: 3, message: 'Yes', likesCount: 10},
             {id: 4, message: 'Dada', likesCount: 10}
         ] as PostType[],
-        profile: null as IMainUser | null,
+        profile: null as ProfileType | null,
         status: ''
     }
 })

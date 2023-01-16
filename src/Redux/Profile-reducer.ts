@@ -10,7 +10,7 @@ const initialState = {
         {id: 1, message: 'Hi, how a you?', likesCount: 12},
         {id: 2, message: 'It`s my first Post', likesCount: 10}
     ] as PostType[],
-    profile: null as IMainUser | null,
+    profile: null as ProfileType | null,
     status: '',
 }
 
@@ -32,7 +32,7 @@ export const profileReducer = (state: initialStateType = initialState, action: P
         case 'Profile/DELETE_POST':
             return {...state, posts: state.posts.filter(p => p.id !== action.id)}
         case 'Profile/SAVE_PHOTO':
-            return {...state, profile: {...state.profile, photos: action.photos}}
+            return {...state, profile: {...state.profile, photos: action.photos} as ProfileType}
         default:
             return state
     }
@@ -50,7 +50,7 @@ export const getProfile = (userId: number) => async (dispatch: Dispatch) => {
 
 }
 
-export const getStatus = (userId: string) => async (dispatch: Dispatch) => {
+export const getStatus = (userId: number) => async (dispatch: Dispatch) => {
     try {
         const res = await profileAPI.getStatus(userId)
         dispatch(setStatus(res))
@@ -68,14 +68,14 @@ export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
     }
 }
 
-export const savePhoto = (photos: any) => async (dispatch: Dispatch) => {
+export const savePhoto = (photos: string) => async (dispatch: Dispatch) => {
     const res = await profileAPI.savePhoto(photos)
     if (res.data.resultCode === 0) {
         dispatch(savePhotoAC(res.data.photos))
     }
 }
 
-export const saveProfile = (data: any) => async (dispatch: Dispatch<any>, getState: () => AppStateType) => {
+export const saveProfile = (data: ProfileType) => async (dispatch: Dispatch<any>, getState: () => AppStateType) => {
     const userId = getState().auth.id
     const res = await profileAPI.saveProfile(data)
     if (res.data.resultCode === 0) {
@@ -90,10 +90,10 @@ export const saveProfile = (data: any) => async (dispatch: Dispatch<any>, getSta
 
 //actions
 export const addPost = (newPostsText: string) => ({type: 'Profile/ADD_POST', newPostsText} as const)
-export const setProfile = (profile: IMainUser) => ({type: 'Profile/SET_PROFILE', profile} as const)
+export const setProfile = (profile: ProfileType) => ({type: 'Profile/SET_PROFILE', profile} as const)
 export const setStatus = (status: string) => ({type: 'Profile/SET_STATUS', status} as const)
 export const deletePost = (id: number) => ({type: 'Profile/DELETE_POST', id} as const)
-export const savePhotoAC = (photos: any) => ({type: 'Profile/SAVE_PHOTO', photos} as const)
+export const savePhotoAC = (photos: PhotosType) => ({type: 'Profile/SAVE_PHOTO', photos} as const)
 
 
 //types
@@ -111,24 +111,28 @@ export type PostType = {
     likesCount: number
 }
 
-export interface IMainUser {
-    aboutMe?: string
-    userId?: number
-    lookingForAJob?: boolean
-    lookingForAJobDescription?: string
-    fullName?: string
-    contacts?: {
-        github: string
-        vk: string
-        facebook: string
-        instagram: string
-        twitter: string
-        website: string
-        youtube: string
-        mainLink: string
-    }
-    photos?: {
-        small: string
-        large: string
-    }
+export type ProfileType = {
+    aboutMe: string
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: ContactsType
+    photos: PhotosType
+}
+
+export type PhotosType = {
+    small: string | null
+    large: string | null
+}
+
+export type ContactsType = {
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
 }

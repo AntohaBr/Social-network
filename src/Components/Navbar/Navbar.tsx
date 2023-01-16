@@ -1,13 +1,17 @@
 import React from 'react'
 import s from './Navbar.module.css'
 import {NavLink} from 'react-router-dom'
+import {useSelector} from "react-redux";
+import {AppStateType} from "../../Redux/Redux-store";
 
 
 export const Navbar = () => {
+    const userId = useSelector<AppStateType, number| null>(state => state.auth.id)
+    console.log(userId)
     return (
         <nav className={s.nav}>
             <div className={s.item}>
-                <NavLink to='/profile' activeClassName={s.activeLink}>Profile</NavLink>
+                <NavLink to={`/profile/${userId}`} activeClassName={s.activeLink}>Profile</NavLink>
             </div>
             <div className={s.item}>
                 <NavLink to='/dialogs' activeClassName={s.activeLink}>Messages</NavLink>

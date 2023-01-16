@@ -1,10 +1,10 @@
 import React from 'react'
-
+import s from './News.module.css'
 
 export const News = () => {
     return (
-        <div>
+        <h2 className={s.news}>
             News
-        </div>
+        </h2>
     )
 }

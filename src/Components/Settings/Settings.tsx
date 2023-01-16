@@ -1,11 +1,11 @@
 import React from 'react'
-
+import s from './Settings.module.css'
 
 export const Settings = () => {
     return (
-        <div>
+        <h2 className={s.main}>
             Settings
-        </div>
+        </h2>
     )
 }
 

@@ -15,9 +15,13 @@ const initialState = {
 //reducers
 export const authReducer = (state: initialStateType = initialState, action: AuthReducerActionType): initialStateType => {
     switch (action.type) {
-        case 'auth/SET_USER_DATA':
-            return {...state,
-                ...action.payload}
+        case 'auth/SET_USER_DATA': {
+            console.log(action)
+            return {
+                ...state,
+                ...action.payload
+            }
+        }
         case 'auth/GET_CAPTCHA_URL_SUCCESS':
             return {...state, captchaURL: action.captchaURL}
         default:
@@ -28,32 +32,31 @@ export const authReducer = (state: initialStateType = initialState, action: Auth
 
 //thanks
 export const getAuth = () => async (dispatch: Dispatch) => {
-    const res = await authAPI.getAuth()
-            if (res.data.resultCode === 0) {
-                const {email, login, id} = res.data
-                dispatch(setAuth(email, login, id, true))
-        }
+    const {data} = await authAPI.getAuth()
+    if (data.resultCode === 0) {
+        const {id, login, email} = data.data
+        dispatch(setAuth(id, login, email, true))
+    }
 }
 
-export const login = (email: string, password: string, rememberMe: boolean,captcha: string | null) => async (dispatch: Dispatch<any>) => {
+export const login = (email: string, password: string, rememberMe: boolean, captcha: string | null) => async (dispatch: Dispatch<any>) => {
     const res = await authAPI.login(email, password, rememberMe, captcha)
-            if (res.data.resultCode === 0) {
-                dispatch(getAuth())
+    if (res.data.resultCode === 0) {
+        dispatch(getAuth())
+    } else {
+        if (res.data.resultCode === 10) {
+            dispatch(getCaptchaURL())
         }
-            else {
-                if(res.data.resultCode === 10){
-                    dispatch(getCaptchaURL())
-                }
-                const message = res.data.messages.length > 0 ? res.data.messages[0] : 'Common error'
-                dispatch(stopSubmit('login',{_error: message }))
-            }
+        const message = res.data.messages.length > 0 ? res.data.messages[0] : 'Common error'
+        dispatch(stopSubmit('login', {_error: message}))
+    }
 }
 
 export const logOut = () => async (dispatch: Dispatch) => {
     const res = await authAPI.logOut()
-            if (res.data.resultCode === 0) {
-                dispatch(setAuth(null,null,null,false))
-            }
+    if (res.data.resultCode === 0) {
+        dispatch(setAuth(null, null, null, false))
+    }
 }
 
 export const getCaptchaURL = () => async (dispatch: Dispatch) => {
@@ -64,9 +67,12 @@ export const getCaptchaURL = () => async (dispatch: Dispatch) => {
 
 
 //actions
-export const setAuth = (email: string | null, login: string | null, id: number | null, isAuth: boolean) =>
+export const setAuth = (id: number | null, login: string | null, email: string | null, isAuth: boolean) =>
     ({type: 'auth/SET_USER_DATA', payload: {email, login, id, isAuth}} as const)
-export const getCaptchaURLSuccess = (captchaURL:string | null) => ({type: 'auth/GET_CAPTCHA_URL_SUCCESS', captchaURL} as const)
+export const getCaptchaURLSuccess = (captchaURL: string | null) => ({
+    type: 'auth/GET_CAPTCHA_URL_SUCCESS',
+    captchaURL
+} as const)
 
 
 //types

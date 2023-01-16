@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {ProfileType} from "../Redux/Profile-reducer";
 
 
 const instance = axios.create({
@@ -24,9 +25,9 @@ export const usersAPI = {
 
 export const profileAPI = {
     getProfile(userId: number) {
-        return instance.get(`profile/` + userId)
+        return instance.get(`profile/${userId}` )
     },
-    getStatus(userId: string) {
+    getStatus(userId: number) {
         return instance.get(`profile/status/${userId}`)
             .then(response => response.data)
     },
@@ -40,7 +41,7 @@ export const profileAPI = {
             headers: {'Content-Type': 'multipart/form-data'}
         })
     },
-    saveProfile(data: any) {
+    saveProfile(data:ProfileType) {
         return instance.put(`profile`, {data})
     }
 }
@@ -64,16 +65,6 @@ export const securityAPI = {
 }
 
 
-type GetStatusResponseType = {
-    status: string
-}
-
-export type ResponseUserType = {
-    items: ResponseItemsType[]
-    totalCount: number
-    error: string
-}
-
 export type ResponseItemsType = {
     id: number
     name: string
@@ -83,69 +74,7 @@ export type ResponseItemsType = {
     followed: boolean
 }
 
-// type LocationType = {
-//     city: string
-//     country: string
-// }
-
-type ResponseFollowType = {
-    resultCode: number
-    messages: string[]
-    data: {}
-}
-type UpdateStatusResponseType = ResponseFollowType
-
-export type ResponseAuthMeType = {
-    data: AuthMeDataType
-    fieldsErrors: string[]
-    messages: string[]
-    resultCode: number
-}
-
-export type AuthMeDataType = {
-    id: number
-    login: string
-    email: string
-    isAuth?: boolean
-}
-
-type ResponseProfileType = {
-    userId: number | null
-    lookingForAJob: boolean
-    lookingForAJobDescription?: string
-    fullName: string
-    contacts: ResponseContactsType
-    photos: ResponsePhotosType
-    aboutMe: string
-}
-
-type ResponseContactsType = {
-    github: string
-    vk: string
-    facebook: string
-    instagram: string
-    twitter: string
-    website: string
-    youtube: string
-    mainLink: string
-}
-
 export type ResponsePhotosType = {
     small: string
     large: string
-}
-
-export type RequestAuthLoginType = {
-    email: string
-    password: string
-    rememberMe: boolean
-    captcha?: boolean
-}
-
-export type ResponseAuthLoginType = {
-    resultCode: number
-    messages: string[]
-    data: {
-        userId: number
-    }
 }

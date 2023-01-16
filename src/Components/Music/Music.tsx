@@ -1,11 +1,11 @@
 import React from 'react'
-
+import s from './Music.module.css'
 
 export const Music = () => {
     return (
-        <div>
+        <h2 className={s.music}>
             Music
-        </div>
+        </h2>
     )
 }
 

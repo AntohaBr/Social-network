@@ -1,20 +1,16 @@
 import React from 'react'
-
-import {IMainUser} from '../../Redux/Profile-reducer'
+import {ProfileType} from '../../Redux/Profile-reducer'
 import {ProfileInfo} from './Profile-info/Profile-info'
 import {MyPostsContainer} from './My-posts/My-posts-container'
 
 
-
 type ProfilePropsType = {
-    addPost: (newPostText: string) => void
-    profile: IMainUser | null
+    profile: ProfileType | null
     status: string
     updateStatus: (status: string) => void
     isOwner: boolean
-    savePhoto: (photos: any) => void
-    saveProfile: (data: any) => void
-    error: string
+    savePhoto: (file: File) => void
+    saveProfile: (data: ProfileType) => void
 }
 
 
@@ -28,7 +24,6 @@ export const Profile = (props:ProfilePropsType) => {
                 updateStatus={props.updateStatus}
                 savePhoto={props.savePhoto}
                 saveProfile={props.saveProfile}
-                error={props.error}
             />
             <MyPostsContainer/>
         </div>

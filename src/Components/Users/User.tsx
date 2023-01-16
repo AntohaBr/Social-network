@@ -1,7 +1,7 @@
 import React from 'react'
 import {ResponseItemsType} from '../../Api/Api'
 import {NavLink} from 'react-router-dom'
-import userPhoto from '../../Assets/Images/Foto.png'
+import userPhoto from '../../Assets/Images/Avatar.jpg'
 import s from './Users.module.css'
 
 
