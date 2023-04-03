@@ -66,14 +66,12 @@ const Login = (props:LoginPropsType) => {
             <h2>Login</h2>
             <LoginReduxForm onSubmit={onSubmit} captchaURL={props.captchaURL}/>
         </div>
-
     )
 }
 
 const mapStateToProps = (state:AppStateType) => ({
     isAuth: state.auth.isAuth,
     captchaURL: state.auth.captchaURL
-
 })
 
 export  default connect(mapStateToProps, {login}) (Login)

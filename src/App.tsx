@@ -25,29 +25,32 @@ class App extends React.Component<PropsType> {
 
     render() {
         if (!this.props.initialized) {
+            console.log('false ', this.props.id)
             return <Preloader/>
-        }
-        return (
-            <BrowserRouter>
-                <div className='app-wrapper'>
-                    <HeaderContainer/>
-                    <Navbar/>
-                    <div className="app-wrapper-content">
-                        <Switch>
-                            <Route exact path='/' render={() => <Redirect to={'/Profile'}/>}/>
-                            <Route path='/login' render={() => <Login/>}/>
-                            <Route path='/dialogs' render={() => <DialogsContainer/>}/>
-                            <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
-                            <Route path='/users' render={() => <UsersContainer/>}/>
-                            <Route path='/news' render={() => <News/>}/>
-                            <Route path='/music' render={() => <Music/>}/>
-                            <Route path='/settings' render={() => <Settings/>}/>
-                            <Route path='*' render={() => <div>404 NOT FOUND</div>}/>
-                        </Switch>
+        } else {
+            console.log('true ', this.props.id)
+            return (
+                <BrowserRouter>
+                    <div className='app-wrapper'>
+                        <HeaderContainer/>
+                        <Navbar/>
+                        <div className="app-wrapper-content">
+                            <Switch>
+                                <Route exact path='/' render={() => <Redirect to={'/Profile'}/>}/>
+                                <Route path='/login' render={() => <Login/>}/>
+                                <Route path='/dialogs' render={() => <DialogsContainer/>}/>
+                                <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
+                                <Route path='/users' render={() => <UsersContainer/>}/>
+                                <Route path='/news' render={() => <News/>}/>
+                                <Route path='/music' render={() => <Music/>}/>
+                                <Route path='/settings' render={() => <Settings/>}/>
+                                <Route path='*' render={() => <div>404 NOT FOUND</div>}/>
+                            </Switch>
+                        </div>
                     </div>
-                </div>
-            </BrowserRouter>
-        )
+                </BrowserRouter>
+            )
+        }
     }
 }
 
@@ -59,12 +62,14 @@ type PropsType = MapDispatchToPropsType & MapStateToPropsType
 
 type MapStateToPropsType = {
     initialized: boolean
+    id: number | null
 }
 
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        initialized: state.app.initialized
+        initialized: state.app.initialized,
+        id: state.auth.id
     }
 }
 

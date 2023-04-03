@@ -40,14 +40,14 @@ export const getAuth = () => async (dispatch: Dispatch) => {
 }
 
 export const login = (email: string, password: string, rememberMe: boolean, captcha: string | null) => async (dispatch: Dispatch<any>) => {
-    const res = await authAPI.login(email, password, rememberMe, captcha)
-    if (res.data.resultCode === 0) {
+    const data = await authAPI.login(email, password, rememberMe, captcha)
+    if (data.resultCode === 0) {
         dispatch(getAuth())
     } else {
-        if (res.data.resultCode === 10) {
+        if (data.resultCode === 10) {
             dispatch(getCaptchaURL())
         }
-        const message = res.data.messages.length > 0 ? res.data.messages[0] : 'Common error'
+        const message = data.messages.length > 0 ? data.messages[0] : 'Common error'
         dispatch(stopSubmit('login', {_error: message}))
     }
 }

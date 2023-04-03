@@ -37,11 +37,16 @@ type OnProfileContainerType = MapStateToPropsType & MapDispatchToPropsType
 type ProfileContainerType = RouteComponentProps<ParamsType> & OnProfileContainerType
 
 
-class ProfileContainer extends React.Component<any, ProfileContainerType> {
+class ProfileContainer extends React.Component<ProfileContainerType> {
     refreshProfile() {
-        let userId: number | undefined = this.props.match.params.userId
+        const {history, match} = this.props
+        let userId: number | null = Number(match.params.userId)
+        console.log(this.props.authorisedUserId)
         if (!userId) {
-            userId = this.props.authorizedUserId
+            userId = this.props.authorisedUserId
+            if (!userId) {
+                return history.push('/login')
+            }
         }
         this.props.getProfile(userId)
         this.props.getStatus(userId)
