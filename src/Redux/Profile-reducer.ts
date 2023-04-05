@@ -1,6 +1,5 @@
-import {Dispatch} from 'redux'
 import {profileAPI} from '../Api/Api'
-import {AppStateType} from './Redux-store'
+import {AppThunkType} from './Redux-store'
 import {stopSubmit} from 'redux-form'
 import {AxiosError} from 'axios'
 
@@ -40,7 +39,7 @@ export const profileReducer = (state: initialStateType = initialState, action: P
 
 
 //thanks
-export const getProfile = (userId: number) => async (dispatch: Dispatch) => {
+export const getProfile = (userId: number):AppThunkType => async (dispatch) => {
     try {
         const res = await profileAPI.getProfile(userId)
         dispatch(setProfile(res.data))
@@ -50,7 +49,7 @@ export const getProfile = (userId: number) => async (dispatch: Dispatch) => {
 
 }
 
-export const getStatus = (userId: number) => async (dispatch: Dispatch) => {
+export const getStatus = (userId: number):AppThunkType => async (dispatch) => {
     try {
         const res = await profileAPI.getStatus(userId)
         dispatch(setStatus(res))
@@ -59,7 +58,7 @@ export const getStatus = (userId: number) => async (dispatch: Dispatch) => {
     }
 }
 
-export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
+export const updateStatus = (status: string):AppThunkType => async (dispatch) => {
     const res = await profileAPI.updateStatus(status)
     if (res.data.resultCode === 0) {
         dispatch(setStatus(status))
@@ -68,14 +67,14 @@ export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
     }
 }
 
-export const savePhoto = (photos: string) => async (dispatch: Dispatch) => {
+export const savePhoto = (photos: string):AppThunkType => async (dispatch) => {
     const res = await profileAPI.savePhoto(photos)
     if (res.data.resultCode === 0) {
         dispatch(savePhotoAC(res.data.photos))
     }
 }
 
-export const saveProfile = (data: ProfileType) => async (dispatch: Dispatch<any>, getState: () => AppStateType) => {
+export const saveProfile = (data: ProfileType):AppThunkType => async (dispatch, getState) => {
     const userId = getState().auth.id
     const res = await profileAPI.saveProfile(data)
     if (res.data.resultCode === 0) {
@@ -99,7 +98,7 @@ export const savePhotoAC = (photos: PhotosType) => ({type: 'Profile/SAVE_PHOTO',
 //types
 export type initialStateType = typeof initialState
 
-type ProfileReducerActionTypes = ReturnType<typeof addPost>
+export type ProfileReducerActionTypes = ReturnType<typeof addPost>
     | ReturnType<typeof setProfile>
     | ReturnType<typeof setStatus>
     | ReturnType<typeof deletePost>

@@ -1,4 +1,4 @@
-import axios  from 'axios'
+import axios from 'axios'
 import {ProfileType} from '../Redux/Profile-reducer'
 
 
@@ -13,13 +13,13 @@ const instance = axios.create({
 
 export const usersAPI = {
     getUsers(currentPage: number, pageSize: number) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
+        return instance.get<GetUsersResponseType>(`users?page=${currentPage}&count=${pageSize}`).then(res => res.data)
     },
     follow(userId: number) {
-        return instance.post<FollowUnFollowResponseType>(`follow/${userId}`).then(res => res.data)
+        return instance.post<APIResponseType>(`follow/${userId}`).then(res => res.data)
     },
     unFollow(userId: number) {
-        return instance.delete<FollowUnFollowResponseType>(`follow/${userId}`)
+        return instance.delete<APIResponseType>(`follow/${userId}`).then(res => res.data)
     }
 }
 
@@ -48,10 +48,10 @@ export const profileAPI = {
 
 export const authAPI = {
     getAuth() {
-        return instance.get(`auth/me`)
+        return instance.get<APIResponseType<MeResponseDataType>>(`auth/me`)
     },
     login(email: string, password: string, rememberMe: boolean, captcha: string | null) {
-        return instance.post<LoginResponseType>(`auth/login`, {
+        return instance.post<APIResponseType<LoginResponseDataType>>(`auth/login`, {
             email,
             password,
             rememberMe,
@@ -69,19 +69,10 @@ export const securityAPI = {
     }
 }
 
-export enum ResultCodesEnum {
+export enum ResultCodeEnum {
     Success = 0,
     Error = 1,
     CaptchaIsRequired = 10
-}
-
-export type ResponseItemsType = {
-    id: number
-    name: string
-    uniqueUrlName: string
-    photos: ResponsePhotosType
-    status: string
-    followed: boolean
 }
 
 export type ResponsePhotosType = {
@@ -89,16 +80,34 @@ export type ResponsePhotosType = {
     large: string
 }
 
-export type LoginResponseType = {
-    resultCode: ResultCodesEnum,
-    messages: string [],
-    data: {
+type LoginResponseDataType = {
         userId: number
-    }
 }
 
-export type FollowUnFollowResponseType = {
-    resultCode: ResultCodesEnum,
-    messages: string [],
-    data: {}
+type MeResponseDataType = {
+        id: number,
+        email: string,
+        login: string
+}
+
+export type APIResponseType<D = {}> = {
+    resultCode: ResultCodeEnum
+    messages: Array<string>
+    fieldsErrors: []
+    data: D
+}
+
+export type ItemsResponseType = {
+    id: number
+    name: string
+    status: string
+    uniqueUrlName: string
+    photos: ResponsePhotosType
+    followed: boolean
+}
+
+export type GetUsersResponseType<T = ItemsResponseType []> = {
+    items: T
+    totalCount: number
+    error: string
 }

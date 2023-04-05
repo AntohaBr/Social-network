@@ -1,5 +1,6 @@
 import {Dispatch} from 'redux'
 import {getAuth} from './Auth-reducer'
+import {AppThunkType} from '../Redux/Redux-store'
 
 
 const initialState = {
@@ -8,7 +9,7 @@ const initialState = {
 
 
 //reducers
-export const appReducer = (state: initialStateType = initialState, action: AuthReducerActionType): initialStateType => {
+export const appReducer = (state: initialStateType = initialState, action: AppReducerActionType): initialStateType => {
     switch (action.type) {
         case 'app/SET_INITIALIZED':
             return {...state, initialized: true}
@@ -19,7 +20,7 @@ export const appReducer = (state: initialStateType = initialState, action: AuthR
 
 
 //thanks
-export const initializeApp = () => async (dispatch: Dispatch<any>) => {
+export const initializeApp = ():AppThunkType => async (dispatch) => {
     await dispatch(getAuth())
     dispatch(setInitialized())
 }
@@ -31,5 +32,5 @@ const setInitialized = () => ({type: 'app/SET_INITIALIZED'} as const)
 
 //types
 type initialStateType = typeof initialState
-type AuthReducerActionType =
+export type AppReducerActionType =
     ReturnType<typeof setInitialized>
