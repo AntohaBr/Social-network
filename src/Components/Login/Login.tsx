@@ -1,10 +1,10 @@
 import React from 'react'
 import {InjectedFormProps, reduxForm} from 'redux-form'
 import {createField, Input} from '../Common/Forms-control/Forms-control'
-import {required} from '../../Utils/Validators/Validators'
+import {required} from 'Utils/Validators/Validators'
 import {connect} from 'react-redux'
-import {login} from '../../Redux/Auth-reducer'
-import {AppStateType} from '../../Redux/Redux-store'
+import {login} from 'Redux/Auth-reducer'
+import {AppStateType} from 'Redux/Redux-store'
 import s from '../Common/Forms-control/Forms-control.module.css'
 import {Redirect} from 'react-router-dom'
 

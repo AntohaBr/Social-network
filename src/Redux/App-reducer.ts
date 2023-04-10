@@ -1,6 +1,5 @@
-import {Dispatch} from 'redux'
 import {getAuth} from './Auth-reducer'
-import {AppThunkType} from '../Redux/Redux-store'
+import {AppThunkType} from 'Redux/Redux-store'
 
 
 const initialState = {

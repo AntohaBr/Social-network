@@ -1,12 +1,12 @@
 import React from 'react'
-import {ResponseItemsType} from '../../Api/Api'
+import {ItemsResponseType} from 'Api/Api'
 import {NavLink} from 'react-router-dom'
 import userPhoto from '../../Assets/Images/Avatar.jpg'
 import s from './Users.module.css'
 
 
 type UserPropsType = {
-    user: ResponseItemsType
+    user: ItemsResponseType
     follow: (userId: number) => void
     unFollow: (userId: number) => void
     followingInProgress: number[]
@@ -35,7 +35,7 @@ export const User = (props: UserPropsType) => {
                                       }}>Follow</button>}
                     </div>
                 </span>
-                        <span>
+            <span>
                             <div>{props.user.name}</div>
                             <div>{props.user.status}</div>
                         </span>

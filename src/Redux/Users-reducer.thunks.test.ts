@@ -1,78 +1,115 @@
-import {APIResponseType, GetUsersResponseType, ItemsResponseType, ResultCodeEnum, usersAPI} from '../Api/Api'
+import {APIResponseType, GetUsersResponseType, usersAPI} from 'Api/Api'
 import {
-    follow,
-    followSuccess,
-    requestUsers, setTotalUsersCount, setUsers,
-    toggleFollowingProgress, toggleIsFetching,
-    unFollow,
-    unfollowSuccess
-} from '../Redux/Users-reducer'
+    follow, followSuccess, requestUsers, setTotalUsersCount, setUsers, toggleFollowingProgress, toggleIsFetching,
+    unFollow, unfollowSuccess, UsersInitialStateType
+} from 'Redux/Users-reducer'
 
 
 jest.mock('../Api/Api')
-const userAPIMock = usersAPI as jest.Mocked<typeof usersAPI>
 
-const dispatchMock = jest.fn()
-const getStateMock = jest.fn()
+const usersAPIMock = usersAPI as jest.Mocked<typeof usersAPI>
 
-beforeEach( () => {
-    dispatchMock.mockClear()
-    getStateMock.mockClear()
-    userAPIMock.follow.mockClear()
-    userAPIMock.unFollow.mockClear()
-    userAPIMock.getUsers.mockClear()
-})
+// jest.mock('../Api/Api', () => {
+//     return {
+//         usersAPI: jest.mocked<typeof usersAPI>
+//     }
+// })
 
-const result1: APIResponseType = {
+enum ResultCodeEnum {
+    Success = 0,
+}
+
+const resultFollowUnFollow: APIResponseType = {
     resultCode: ResultCodeEnum.Success,
     messages: [],
     fieldsErrors: [],
     data: {}
 }
 
-const result2: GetUsersResponseType = {
+const resultRequestUsers: GetUsersResponseType = {
     items: [],
     totalCount: 1,
     error: ''
 }
 
-userAPIMock.follow.mockReturnValue(Promise.resolve(result1))
-userAPIMock.unFollow.mockReturnValue(Promise.resolve(result1))
-userAPIMock.getUsers.mockReturnValue(Promise.resolve(result2))
+let state: UsersInitialStateType
+const dispatchMock = jest.fn()
+const getStateMock = jest.fn()
 
+describe('users reducer thunk tests', () => {
+    beforeEach(() => {
+        state = {
+            users: [
+                {
+                    id: 1,
+                    name: 'Stacy',
+                    status: 'hello',
+                    uniqueUrlName: '',
+                    photos: {small: '', large: ''},
+                    followed: false
+                },
+                {
+                    id: 2,
+                    name: 'Anton',
+                    status: 'hello',
+                    uniqueUrlName: '',
+                    photos: {small: '', large: ''},
+                    followed: true
+                },
+            ],
+            pageSize: 10,
+            totalCount: 0,
+            currentPage: 1,
+            isFetching: false,
+            followingInProgress: [] as number[],
+            portionSize: 10,
+            error: ''
+        }
 
-test('success follow thunk',async () => {
-    const thunk = follow(1,(userId:any) => ({resultCode: 0}))
+        dispatchMock.mockClear()
+        getStateMock.mockClear()
+        usersAPIMock.follow.mockClear()
+        usersAPIMock.unFollow.mockClear()
+        usersAPIMock.getUsers.mockClear()
+    })
 
-    await thunk(dispatchMock, getStateMock, {})
+    test('success follow thunk', async () => {
+        usersAPI.follow = jest.fn().mockResolvedValueOnce(resultFollowUnFollow)
 
-    expect(dispatchMock).toBeCalledTimes(3)
-    expect(dispatchMock).toHaveBeenNthCalledWith(1, toggleFollowingProgress(true, 1))
-    expect(dispatchMock).toHaveBeenNthCalledWith(2, followSuccess(1))
-    expect(dispatchMock).toHaveBeenNthCalledWith(3, toggleFollowingProgress(false, 1))
-})
+        const thunk = follow(1)
 
+        await thunk(dispatchMock, getStateMock, {})
 
-test('success unFollow thunk',async () => {
-    const thunk = unFollow(1)
+        expect(dispatchMock).toBeCalledTimes(3)
+        expect(dispatchMock).toHaveBeenNthCalledWith(1, toggleFollowingProgress(true, 1))
+        expect(dispatchMock).toHaveBeenNthCalledWith(2, followSuccess(1))
+        expect(dispatchMock).toHaveBeenNthCalledWith(3, toggleFollowingProgress(false, 1))
+    })
 
-    await thunk(dispatchMock, getStateMock, {})
+    test('success unFollow thunk', async () => {
+        usersAPI.unFollow = jest.fn().mockResolvedValueOnce(resultFollowUnFollow)
 
-    expect(dispatchMock).toBeCalledTimes(3)
-    expect(dispatchMock).toHaveBeenNthCalledWith(1, toggleFollowingProgress(true, 1))
-    expect(dispatchMock).toHaveBeenNthCalledWith(2, unfollowSuccess(1))
-    expect(dispatchMock).toHaveBeenNthCalledWith(3, toggleFollowingProgress(false, 1))
-})
+        const thunk = unFollow(2)
 
+        await thunk(dispatchMock, getStateMock, {})
 
-test('success requestUsers thunk',async () => {
-    const thunk = requestUsers(1,4)
+        expect(dispatchMock).toBeCalledTimes(3)
+        expect(dispatchMock).toHaveBeenNthCalledWith(1, toggleFollowingProgress(true, 2))
+        expect(dispatchMock).toHaveBeenNthCalledWith(2, unfollowSuccess(2))
+        expect(dispatchMock).toHaveBeenNthCalledWith(3, toggleFollowingProgress(false, 2))
+    })
 
-    await thunk(dispatchMock, getStateMock, {})
+    test('success requestUsers thunk', async () => {
+        usersAPI.getUsers = jest.fn().mockResolvedValueOnce(resultRequestUsers)
 
-    expect(dispatchMock).toBeCalledTimes(4)
-    expect(dispatchMock).toHaveBeenNthCalledWith(1, toggleIsFetching(true))
-    expect(dispatchMock).toHaveBeenNthCalledWith(2, toggleIsFetching(false))
-    // expect(dispatchMock).toHaveBeenNthCalledWith(3, setUsers(false, 1))
-    // expect(dispatchMock).toHaveBeenNthCalledWith(4, setTotalUsersCount(false, 1))
+        const thunk = requestUsers(1, 2)
+
+        await thunk(dispatchMock, getStateMock, {})
+
+        expect(dispatchMock).toBeCalledTimes(4)
+        expect(dispatchMock).toHaveBeenNthCalledWith(1, toggleIsFetching(true))
+        expect(dispatchMock).toHaveBeenNthCalledWith(2, toggleIsFetching(false))
+        expect(dispatchMock).toHaveBeenNthCalledWith(3, setUsers([]))
+        expect(dispatchMock).toHaveBeenNthCalledWith(4, setTotalUsersCount(1))
+    })
 })

@@ -1,8 +1,8 @@
 import React from 'react'
 import s from './Navbar.module.css'
 import {NavLink} from 'react-router-dom'
-import {useSelector} from "react-redux";
-import {AppStateType} from "../../Redux/Redux-store";
+import {useSelector} from 'react-redux'
+import {AppStateType} from 'Redux/Redux-store'
 
 
 export const Navbar = () => {

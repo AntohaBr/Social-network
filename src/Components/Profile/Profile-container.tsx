@@ -5,13 +5,11 @@ import {
     getProfile,
     savePhoto,
     updateStatus,
-    saveProfile, PostType, addPost, ProfileType, PhotosType
-} from '../../Redux/Profile-reducer'
+    saveProfile, ProfileType} from 'Redux/Profile-reducer'
 import {RouteComponentProps, withRouter} from 'react-router'
-import {AppStateType} from '../../Redux/Redux-store'
+import {AppStateType} from 'Redux/Redux-store'
 import {Profile} from './Profile'
 import {compose} from 'redux'
-import {withAuthRedirect} from '../../HOK/With-auth-redirect'
 
 
 export type MapStateToPropsType = {

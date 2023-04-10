@@ -1,6 +1,6 @@
 import React, {ComponentType} from 'react'
 import {Redirect} from 'react-router-dom'
-import {AppStateType} from '../Redux/Redux-store'
+import {AppStateType} from 'Redux/Redux-store'
 import {connect} from 'react-redux'
 
 

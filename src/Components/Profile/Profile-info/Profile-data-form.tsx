@@ -1,6 +1,6 @@
 import React from 'react'
 import {createField, Input, Textarea} from '../../Common/Forms-control/Forms-control'
-import {ProfileType} from '../../../Redux/Profile-reducer'
+import {ProfileType} from 'Redux/Profile-reducer'
 import {InjectedFormProps, reduxForm} from 'redux-form'
 import s from '../../Common/Forms-control/Forms-control.module.css'
 

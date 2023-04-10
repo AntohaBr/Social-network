@@ -1,5 +1,5 @@
 import React from 'react'
-import {ResponseItemsType} from '../../Api/Api'
+import {ItemsResponseType} from 'Api/Api'
 import {User} from './User'
 import {Paginator} from '../Common/Paginator/Paginator'
 
@@ -9,7 +9,7 @@ type UsersPropsType = {
     pageSize: number
     currentPage: number
     onPageChanged: (pageNumber: number) => void
-    users: ResponseItemsType[]
+    users: ItemsResponseType[]
     followingInProgress: number[]
     follow: (userId: number) => void
     unFollow: (userId: number) => void

@@ -3,11 +3,11 @@ import {connect} from 'react-redux'
 import {
     follow, requestUsers, setCurrentPage,
     toggleFollowingProgress, unFollow,
-} from '../../Redux/Users-reducer'
+} from 'Redux/Users-reducer'
 import {Users} from './Users'
 import {Preloader} from '../Common/Preloader/Preloader'
-import {AppStateType} from '../../Redux/Redux-store'
-import {ResponseItemsType} from '../../Api/Api'
+import {AppStateType} from 'Redux/Redux-store'
+import {ItemsResponseType} from 'Api/Api'
 import {compose} from 'redux'
 import {
     getCurrentPage,
@@ -15,14 +15,14 @@ import {
     getIsFetching,
     getPageSize, getPortionSize,
     getTotalCount, getUser,
-} from '../../Redux/Users-selectors'
-import {withAuthRedirect} from "../../HOK/With-auth-redirect";
+} from 'Redux/Users-selectors'
+import {withAuthRedirect} from 'HOK/With-auth-redirect'
 
 
 export type UsersContainerType = MapStateToPropsType & MapDispatchToPropsType
 
 type MapStateToPropsType = {
-    users: ResponseItemsType[]
+    users: ItemsResponseType[]
     pageSize: number
     totalCount: number
     currentPage: number

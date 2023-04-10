@@ -1,12 +1,12 @@
 import React from 'react'
 import {
     InitialStateType, sendMessageAC,
-} from '../../Redux/Message-reducer'
+} from 'Redux/Message-reducer'
 import {connect} from 'react-redux'
 import {compose, Dispatch} from 'redux'
 import {Dialogs} from './Dialogs'
-import {AppStateType} from '../../Redux/Redux-store'
-import {withAuthRedirect} from '../../HOK/With-auth-redirect'
+import {AppStateType} from 'Redux/Redux-store'
+import {withAuthRedirect} from 'HOK/With-auth-redirect'
 
 
 export type DialogsType = MapStateToPropsType & MapDispatchToPropsType

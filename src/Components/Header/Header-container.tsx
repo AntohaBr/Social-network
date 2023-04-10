@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {AppStateType} from '../../Redux/Redux-store'
+import {AppStateType} from 'Redux/Redux-store'
 import {Header} from './Header'
-import {logOut} from '../../Redux/Auth-reducer'
+import {logOut} from 'Redux/Auth-reducer'
 import {RouteComponentProps, withRouter} from 'react-router'
 import {compose} from 'redux'
 

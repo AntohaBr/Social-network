@@ -25,7 +25,7 @@ export const usersAPI = {
 
 export const profileAPI = {
     getProfile(userId: number) {
-        return instance.get(`profile/${userId}`)
+        return instance.get<ProfileType>(`profile/${userId}`)
     },
     getStatus(userId: number) {
         return instance.get(`profile/status/${userId}`)
@@ -81,13 +81,13 @@ export type ResponsePhotosType = {
 }
 
 type LoginResponseDataType = {
-        userId: number
+    userId: number
 }
 
 type MeResponseDataType = {
-        id: number,
-        email: string,
-        login: string
+    id: number,
+    email: string,
+    login: string
 }
 
 export type APIResponseType<D = {}> = {

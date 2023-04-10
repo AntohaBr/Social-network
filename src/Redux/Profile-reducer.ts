@@ -2,6 +2,7 @@ import {profileAPI} from '../Api/Api'
 import {AppThunkType} from './Redux-store'
 import {stopSubmit} from 'redux-form'
 import {AxiosError} from 'axios'
+import {toggleIsFetching} from '../Redux/Users-reducer'
 
 
 const initialState = {
@@ -39,9 +40,11 @@ export const profileReducer = (state: initialStateType = initialState, action: P
 
 
 //thanks
-export const getProfile = (userId: number):AppThunkType => async (dispatch) => {
+export const getProfile = (userId: number): AppThunkType => async (dispatch) => {
+    dispatch(toggleIsFetching(true))
     try {
         const res = await profileAPI.getProfile(userId)
+        dispatch(toggleIsFetching(false))
         dispatch(setProfile(res.data))
     } catch (err) {
         const error = err as AxiosError
@@ -49,16 +52,16 @@ export const getProfile = (userId: number):AppThunkType => async (dispatch) => {
 
 }
 
-export const getStatus = (userId: number):AppThunkType => async (dispatch) => {
+export const getStatus = (userId: number): AppThunkType => async (dispatch) => {
     try {
         const res = await profileAPI.getStatus(userId)
         dispatch(setStatus(res))
-    }catch (err) {
+    } catch (err) {
         const error = err as AxiosError
     }
 }
 
-export const updateStatus = (status: string):AppThunkType => async (dispatch) => {
+export const updateStatus = (status: string): AppThunkType => async (dispatch) => {
     const res = await profileAPI.updateStatus(status)
     if (res.data.resultCode === 0) {
         dispatch(setStatus(status))
@@ -67,14 +70,14 @@ export const updateStatus = (status: string):AppThunkType => async (dispatch) =>
     }
 }
 
-export const savePhoto = (photos: string):AppThunkType => async (dispatch) => {
+export const savePhoto = (photos: string): AppThunkType => async (dispatch) => {
     const res = await profileAPI.savePhoto(photos)
     if (res.data.resultCode === 0) {
         dispatch(savePhotoAC(res.data.photos))
     }
 }
 
-export const saveProfile = (data: ProfileType):AppThunkType => async (dispatch, getState) => {
+export const saveProfile = (data: ProfileType): AppThunkType => async (dispatch, getState) => {
     const userId = getState().auth.id
     const res = await profileAPI.saveProfile(data)
     if (res.data.resultCode === 0) {
@@ -121,8 +124,8 @@ export type ProfileType = {
 }
 
 export type PhotosType = {
-    small: string | null
-    large: string | null
+    small?: string | null
+    large?: string | null
 }
 
 export type ContactsType = {

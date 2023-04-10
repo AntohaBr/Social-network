@@ -1,5 +1,5 @@
 import React from 'react'
-import {ProfileType} from '../../Redux/Profile-reducer'
+import {ProfileType} from 'Redux/Profile-reducer'
 import {ProfileInfo} from './Profile-info/Profile-info'
 import {MyPostsContainer} from './My-posts/My-posts-container'
 
