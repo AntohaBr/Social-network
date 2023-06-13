@@ -6,7 +6,7 @@ import {
 } from 'Redux/Users-reducer'
 import {Users} from './Users'
 import {Preloader} from '../Common/Preloader/Preloader'
-import {AppStateType} from 'Redux/Redux-store'
+import {AppStateType} from 'Store/Store'
 import {ItemsResponseType} from 'Api/Api'
 import {compose} from 'redux'
 import {

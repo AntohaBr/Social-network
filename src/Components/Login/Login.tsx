@@ -4,9 +4,9 @@ import {createField, Input} from '../Common/Forms-control/Forms-control'
 import {required} from 'Utils/Validators/Validators'
 import {connect} from 'react-redux'
 import {login} from 'Redux/Auth-reducer'
-import {AppStateType} from 'Redux/Redux-store'
+import {AppStateType} from 'Store/Store'
 import s from '../Common/Forms-control/Forms-control.module.css'
-import {Redirect} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 
 
 type FormDataType = {
@@ -19,6 +19,7 @@ type FormDataType = {
 
 
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props:any) => {
+
     return (
         <form  action='' onSubmit={props.handleSubmit}>
             <div>
@@ -54,12 +55,14 @@ type LoginPropsType = {
 }
 
 const Login = (props:LoginPropsType) => {
+    const navigate = useNavigate()
+
     const onSubmit = (formData:FormDataType) => {
        props.login(formData.email, formData.password, formData.rememberMe, formData.captcha)
     }
 
     if (props.isAuth) {
-        return  <Redirect to={'/Profile'}/>
+        navigate ('/Profile')
     }
     return (
         <div>

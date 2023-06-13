@@ -6,7 +6,7 @@ import s from '../../Common/Forms-control/Forms-control.module.css'
 
 
 type ProfileDataFormPropsType = {
-    profile: ProfileType | null
+    profile: ProfileType
 }
 
 

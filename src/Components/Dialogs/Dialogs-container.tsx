@@ -5,7 +5,7 @@ import {
 import {connect} from 'react-redux'
 import {compose, Dispatch} from 'redux'
 import {Dialogs} from './Dialogs'
-import {AppStateType} from 'Redux/Redux-store'
+import {AppStateType} from 'Store/Store'
 import {withAuthRedirect} from 'HOK/With-auth-redirect'
 
 

@@ -1,6 +1,6 @@
 import {authAPI, securityAPI} from 'Api/Api'
 import {stopSubmit} from 'redux-form'
-import {AppThunkType} from 'Redux/Redux-store'
+import {AppThunkType} from 'Store/Store'
 
 
 const initialState = {

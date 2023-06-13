@@ -1,31 +1,36 @@
-import React from 'react'
-import {ProfileType} from 'Redux/Profile-reducer'
+import React, {useEffect} from 'react'
+import {getProfile, getStatus} from 'Redux/Profile-reducer'
 import {ProfileInfo} from './Profile-info/Profile-info'
-import {MyPostsContainer} from './My-posts/My-posts-container'
+import {useAppDispatch, useAppSelector} from 'Utils/Hooks'
+import {useParams} from 'react-router-dom'
+import {selectAuthId, selectIsAuth} from 'Store/Selectors'
 
+export const Profile = () => {
+    let {userId} = useParams()
 
-type ProfilePropsType = {
-    profile: ProfileType | null
-    status: string
-    updateStatus: (status: string) => void
-    isOwner: boolean
-    savePhoto: (file: File) => void
-    saveProfile: (data: ProfileType) => void
-}
+    const dispatch = useAppDispatch()
+    const isAuth = useAppSelector(selectIsAuth)
+    const authorizedUserId = useAppSelector(selectAuthId)
 
+    useEffect(() => {
+        let profileId: number | null = Number(userId)
+        if (profileId) {
+            dispatch(getProfile(profileId))
+            dispatch(getStatus(profileId))
+        } else {
+            if (isAuth && authorizedUserId) {
+                dispatch(getProfile(profileId))
+                dispatch(getStatus(profileId))
+            }
+        }
+    }, [userId, isAuth, authorizedUserId])
 
-export const Profile = (props:ProfilePropsType) => {
     return (
         <div>
             <ProfileInfo
-                isOwner={props.isOwner}
-                profile={props.profile}
-                status={props.status}
-                updateStatus={props.updateStatus}
-                savePhoto={props.savePhoto}
-                saveProfile={props.saveProfile}
+                isOwner={!userId}
             />
-            <MyPostsContainer/>
+            {/*<MyPostsContainer/>*/}
         </div>
     )
 }

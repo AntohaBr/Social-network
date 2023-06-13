@@ -1,5 +1,5 @@
 import {profileAPI} from '../Api/Api'
-import {AppThunkType} from './Redux-store'
+import {AppThunkType} from 'Store/Store'
 import {stopSubmit} from 'redux-form'
 import {AxiosError} from 'axios'
 import {toggleIsFetching} from '../Redux/Users-reducer'
@@ -10,7 +10,7 @@ const initialState = {
         {id: 1, message: 'Hi, how a you?', likesCount: 12},
         {id: 2, message: 'It`s my first Post', likesCount: 10}
     ] as PostType[],
-    profile: null as ProfileType | null,
+    profile: {} as ProfileType,
     status: '',
 }
 
@@ -70,8 +70,8 @@ export const updateStatus = (status: string): AppThunkType => async (dispatch) =
     }
 }
 
-export const savePhoto = (photos: string): AppThunkType => async (dispatch) => {
-    const res = await profileAPI.savePhoto(photos)
+export const savePhoto = (file: File): AppThunkType => async (dispatch) => {
+    const res = await profileAPI.savePhoto(file)
     if (res.data.resultCode === 0) {
         dispatch(savePhotoAC(res.data.photos))
     }
@@ -95,7 +95,7 @@ export const addPost = (newPostsText: string) => ({type: 'Profile/ADD_POST', new
 export const setProfile = (profile: ProfileType) => ({type: 'Profile/SET_PROFILE', profile} as const)
 export const setStatus = (status: string) => ({type: 'Profile/SET_STATUS', status} as const)
 export const deletePost = (id: number) => ({type: 'Profile/DELETE_POST', id} as const)
-export const savePhotoAC = (photos: PhotosType) => ({type: 'Profile/SAVE_PHOTO', photos} as const)
+export const savePhotoAC = (photos: PhotosResponseType) => ({type: 'Profile/SAVE_PHOTO', photos} as const)
 
 
 //types
@@ -119,16 +119,16 @@ export type ProfileType = {
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string
-    contacts: ContactsType
-    photos: PhotosType
+    contacts: ContactsResponseType
+    photos: PhotosResponseType
 }
 
-export type PhotosType = {
-    small?: string | null
-    large?: string | null
+export type PhotosResponseType = {
+    small: string
+    large: string
 }
 
-export type ContactsType = {
+export type ContactsResponseType = {
     github: string
     vk: string
     facebook: string

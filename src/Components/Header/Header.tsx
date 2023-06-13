@@ -1,26 +1,34 @@
 import React from 'react'
 import s from './Header.module.css'
-import {NavLink} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
+import {useAppDispatch, useAppSelector} from 'Utils/Hooks'
+import {selectIsAuth, selectLogin, selectProfilePhotosSmall} from 'Store/Selectors'
+import {logOut} from 'Redux/Auth-reducer'
 
+export const Header = () => {
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate()
+    const userPhoto = useAppSelector(selectProfilePhotosSmall)
+    const isAuth = useAppSelector(selectIsAuth)
+    const login = useAppSelector(selectLogin)
 
-type HeaderPropsType = {
-    isAuth: boolean
-    login: string | null
-    logOut: () => void
-}
+    const onClickLogOutHandler = () => {
+        dispatch(logOut())
+    }
 
+    const navigateToLogin = () => {
+        navigate('/login')
+    }
 
-export const Header = (props: HeaderPropsType) => {
     return (
         <header className={s.header}>
-            <img alt='logo'
-                 src="https://i.pinimg.com/originals/b9/05/3d/b9053d873e9f69058997913e0fffca2e.png"/>
-            {props.isAuth
-                ? <div className={s.headerControl}>
-                    {props.login}
-                    <button onClick={props.logOut} className={s.button}>Log Out</button>
+            <img alt='logo' src="https://i.pinimg.com/originals/b9/05/3d/b9053d873e9f69058997913e0fffca2e.png"/>
+            {isAuth &&
+                <div className={s.headerControl}>
+                    <img alt='userPhoto' src={userPhoto} className={s.mainPhoto}/>
+                    <span className={s.userName}>{login}</span>
+                    <button onClick={onClickLogOutHandler} className={s.buttonLogOut}>Log Out</button>
                 </div>
-                : <NavLink to={'/Login'}/>
             }
         </header>
     )

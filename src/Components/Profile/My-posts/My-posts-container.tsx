@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Dispatch} from 'redux'
 import {addPost, PostType} from 'Redux/Profile-reducer'
-import {AppStateType} from 'Redux/Redux-store'
+import {AppStateType} from 'Store/Store'
 import {MyPosts} from './My-posts'
 
 

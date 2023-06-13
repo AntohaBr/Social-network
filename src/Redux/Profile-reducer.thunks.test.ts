@@ -1,6 +1,6 @@
-import {profileAPI} from '../Api/Api'
-import {toggleFollowingProgress, UsersInitialStateType} from '../Redux/Users-reducer'
-import {ContactsType, getProfile, PhotosType, ProfileType, setProfile} from '../Redux/Profile-reducer'
+import {profileAPI} from 'Api/Api'
+import {toggleFollowingProgress, UsersInitialStateType} from 'Redux/Users-reducer'
+import {getProfile, ProfileType} from 'Redux/Profile-reducer'
 
 
 jest.mock('../Api/Api')

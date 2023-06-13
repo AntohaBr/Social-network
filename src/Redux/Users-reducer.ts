@@ -1,7 +1,7 @@
 import {APIResponseType, ItemsResponseType, usersAPI} from 'Api/Api'
 import {Dispatch} from 'redux'
 import {updateObjectInArray} from 'Utils/Object-helpers'
-import {AppActionsType, AppThunkType} from 'Redux/Redux-store'
+import {AppActionsType, AppThunkType} from 'Store/Store'
 
 
 const initialState = {

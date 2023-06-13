@@ -15,14 +15,27 @@
 }
 
 .headerControl {
-    border: 1px solid #d52c53;
+    /*border: 1px solid #d52c53;*/
     width: 200px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.button {
+.userName {
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.userName,
+.buttonLogOut {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+}
+
+.buttonLogOut {
     width: 100px;
     height: 35px;
     cursor: pointer;
@@ -30,13 +43,10 @@
     border-radius: 4px;
     transition-duration: 0.4s;
     background-color: #FFF;
-    font-family: 'Roboto', sans-serif;
     font-size: 16px;
-    line-height: 28px;
-    font-weight: 500;
 }
 
-.button:hover {
+.buttonLogOut:hover {
     color: #fff;
     background-color: #34b7f1;
 }
