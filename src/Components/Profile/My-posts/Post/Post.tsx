@@ -1,23 +1,40 @@
-import React from 'react'
+import React, {FC, useState} from 'react'
 import s from './Post.module.css'
+import {useAppSelector} from 'Utils/Hooks'
+import {selectProfilePhotosSmall} from 'Store/Selectors'
+import defaultUserPhoto from 'Assets/Images/defaultUserPhoto.jpg'
 
-
-type  postType = {
+type  PostPropsType = {
     message: string,
     likesCount: number
 }
 
+export const Post: FC<PostPropsType> = ({message, likesCount}) => {
+    const userPhoto = useAppSelector(selectProfilePhotosSmall)
 
-export const Post = (props: postType) => {
+    const [like, setLike] = useState(likesCount)
+    const [putLike, setPutLike] = useState(false)
+
+    const onClickLikeHandler = () => {
+        setPutLike(!putLike)
+
+        if (putLike) {
+            setLike(like - 1)
+        } else {
+            setLike(like + 1)
+        }
+    }
+
     return (
         <div className={s.item}>
-            <img src="https://avatars.mds.yandex.net/i?id=34ea1a7ec13805662fd313a1f4f7819b-6365519-images-thumbs&n=13"/>
-            {props.message}
+            <img alt='userPhoto' src={userPhoto ? userPhoto : defaultUserPhoto}/>
+            {message}
             <div>
-                <span>like</span> {props.likesCount}
+                <button onClick={onClickLikeHandler}>
+                    <span>{like}</span>
+                </button>
             </div>
         </div>
-
     )
 }
 

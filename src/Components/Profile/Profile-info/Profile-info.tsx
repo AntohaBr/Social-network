@@ -2,7 +2,7 @@ import React, {FC, useState} from 'react'
 import s from './Profile-info.module.css'
 import {Preloader} from '../../Common/Preloader/Preloader'
 import {ProfileStatus} from 'Components/Profile/Profile-info/Profile-status/Profile-status'
-import {ProfileDataFormWithReduxForm} from './Profile-data-form'
+import {ProfileDataFormWithReduxForm} from 'Components/Profile/Profile-info/Profile-data-form/Profile-data-form'
 import {ProfileType, saveProfile} from 'Redux/Profile-reducer'
 import {useAppDispatch, useAppSelector} from 'Utils/Hooks'
 import {selectProfile} from 'Store/Selectors'
@@ -28,7 +28,6 @@ export const ProfileInfo: FC<ProfileInfoPropsType> = ({isOwner}) => {
     }
 
     const onSubmit = async (formData: ProfileType) => {
-        // await props.saveProfile(formData)
         await dispatch(saveProfile(formData))
         setEditMode(false)
     }

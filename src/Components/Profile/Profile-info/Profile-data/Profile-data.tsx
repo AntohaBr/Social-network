@@ -1,7 +1,7 @@
 import React, {FC} from 'react'
-import {Contact} from 'Components/Profile/Profile-info/Contact/Contact'
 import {useAppSelector} from 'Utils/Hooks'
 import {selectProfile} from 'Store/Selectors'
+import {Contacts} from 'Components/Profile/Profile-info/Contacts/Contacts'
 
 type ProfileDataPropsType = {
     isOwner: boolean
@@ -32,7 +32,7 @@ export const ProfileData: FC<ProfileDataPropsType> = ({isOwner, goToEditMode}) =
             </div>
             <div>
                 <b>Contacts</b>:
-                <Contact/>
+                <Contacts/>
             </div>
         </div>
     )

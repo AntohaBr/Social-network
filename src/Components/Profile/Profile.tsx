@@ -4,6 +4,7 @@ import {ProfileInfo} from './Profile-info/Profile-info'
 import {useAppDispatch, useAppSelector} from 'Utils/Hooks'
 import {useParams} from 'react-router-dom'
 import {selectAuthId, selectIsAuth} from 'Store/Selectors'
+import {MyPosts} from 'Components/Profile/My-posts/My-posts'
 
 export const Profile = () => {
     let {userId} = useParams()
@@ -30,7 +31,7 @@ export const Profile = () => {
             <ProfileInfo
                 isOwner={!userId}
             />
-            {/*<MyPostsContainer/>*/}
+            <MyPosts/>
         </div>
     )
 }

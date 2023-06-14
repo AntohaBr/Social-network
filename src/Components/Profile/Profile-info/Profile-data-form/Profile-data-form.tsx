@@ -1,19 +1,17 @@
-import React from 'react'
-import {createField, Input, Textarea} from '../../Common/Forms-control/Forms-control'
+import React, {FC} from 'react'
+import {createField, Input, Textarea} from 'Components/Common/Forms-control/Forms-control'
 import {ProfileType} from 'Redux/Profile-reducer'
 import {InjectedFormProps, reduxForm} from 'redux-form'
-import s from '../../Common/Forms-control/Forms-control.module.css'
-
+import s from 'Components/Common/Forms-control/Forms-control.module.css'
 
 type ProfileDataFormPropsType = {
     profile: ProfileType
 }
 
-
-export const ProfileDataForm: React.FC<InjectedFormProps<ProfileType, ProfileDataFormPropsType> & ProfileDataFormPropsType> =
+export const ProfileDataForm: FC<InjectedFormProps<ProfileType, ProfileDataFormPropsType> & ProfileDataFormPropsType> =
     ({handleSubmit, profile, error}) => {
         return (
-            <form action='' onSubmit={handleSubmit}>
+            <form action='Components/Profile/Profile-info/Profile-data-form/Profile-data-form' onSubmit={handleSubmit}>
                 <div>
                     <button>Save</button>
                 </div>

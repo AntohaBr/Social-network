@@ -14,6 +14,8 @@ export const selectUsersError = (state: AppStateType) => state.usersPage.error
 export const selectProfile = (state: AppStateType) => state.profilePage.profile
 export const selectProfilePhotosSmall = (state: AppStateType) => state.profilePage.profile?.photos?.small
 export const selectProfileStatus = (state: AppStateType) => state.profilePage.status
+export const selectProfilePosts = (state: AppStateType) => state.profilePage.posts
+
 
 //selectorsAuth
 export const selectIsAuth = (state: AppStateType) => state.auth.isAuth

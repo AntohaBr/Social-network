@@ -4,7 +4,7 @@ import {useAppSelector} from 'Utils/Hooks'
 import {selectProfile} from 'Store/Selectors'
 import {ContactsResponseType} from 'Redux/Profile-reducer'
 
-export const Contact = () => {
+export const Contacts = () => {
     const profile = useAppSelector(selectProfile)
 
     return (
