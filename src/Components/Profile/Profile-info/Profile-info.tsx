@@ -1,23 +1,21 @@
-import React, {ChangeEvent, FC, useState} from 'react'
+import React, {FC, useState} from 'react'
 import s from './Profile-info.module.css'
 import {Preloader} from '../../Common/Preloader/Preloader'
 import {ProfileStatus} from 'Components/Profile/Profile-info/Profile-status/Profile-status'
-import defaultUserPhoto from 'Assets/Images/defaultUserPhoto.jpg'
 import {ProfileDataFormWithReduxForm} from './Profile-data-form'
-import {ProfileType, savePhoto, saveProfile} from 'Redux/Profile-reducer'
+import {ProfileType, saveProfile} from 'Redux/Profile-reducer'
 import {useAppDispatch, useAppSelector} from 'Utils/Hooks'
-import {selectProfile, selectProfilePhotosSmall} from 'Store/Selectors'
+import {selectProfile} from 'Store/Selectors'
 import {ProfileData} from 'Components/Profile/Profile-info/Profile-data/Profile-data'
+import {ProfilePhoto} from 'Components/Profile/Profile-info/Profile-photo/Profile-photo'
 
-
-type ProfileInfoType = {
+type ProfileInfoPropsType = {
     isOwner: boolean
 }
 
-export const ProfileInfo: FC<ProfileInfoType> = ({isOwner}) => {
+export const ProfileInfo: FC<ProfileInfoPropsType> = ({isOwner}) => {
     const dispatch = useAppDispatch()
     const profile = useAppSelector(selectProfile)
-    const userPhoto = useAppSelector(selectProfilePhotosSmall)
 
     const [editMode, setEditMode] = useState(false)
 
@@ -25,17 +23,8 @@ export const ProfileInfo: FC<ProfileInfoType> = ({isOwner}) => {
         return <Preloader/>
     }
 
-    // const onPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
-    //     if (e.target.files && e.target.files.length) {
-    //         props.savePhoto(e.target.files[0])
-    //         // dispatch(savePhoto(e.target.files[0]))
-    //     }
-    // }
-
-    const onPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.currentTarget.files) {
-            dispatch(savePhoto(e.currentTarget.files[0]))
-        }
+    const goToEditModeHandler = () => {
+        setEditMode(true)
     }
 
     const onSubmit = async (formData: ProfileType) => {
@@ -47,25 +36,15 @@ export const ProfileInfo: FC<ProfileInfoType> = ({isOwner}) => {
     return (
         <div>
             <div className={s.descriptionBlock}>
-                <img src={userPhoto || defaultUserPhoto} className={s.mainPhoto}/>
-                {isOwner && <input type={'file'} onChange={onPhotoSelected}/>}
-                {/*{editMode*/}
-                {/*    ? <ProfileDataFormWithReduxForm initialValues={profile}*/}
-                {/*                                    onSubmit={onSubmit}*/}
-                {/*                                    profile={profile}*/}
-                {/*    />*/}
-                {/*    // : <ProfileData profile={profile}*/}
-                {/*    //                isOwner={isOwner}*/}
-                {/*    //                goToEditMode={() => {*/}
-                {/*    //                    setEditMode(true)*/}
-                {/*    //                }}*/}
-                {/*    // />*/}
-                {/*}*/}
-                <ProfileData isOwner={isOwner}
-                             goToEditMode={() => {
-                                 setEditMode(true)
-                             }}/>
+                <ProfilePhoto isOwner={isOwner}/>
                 <ProfileStatus/>
+                {editMode
+                    ? <ProfileDataFormWithReduxForm initialValues={profile}
+                                                    onSubmit={onSubmit}
+                                                    profile={profile}/>
+                    : <ProfileData isOwner={isOwner}
+                                   goToEditMode={goToEditModeHandler}/>
+                }
             </div>
         </div>
     )

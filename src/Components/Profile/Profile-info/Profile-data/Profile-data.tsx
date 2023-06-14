@@ -1,8 +1,7 @@
 import React, {FC} from 'react'
 import {Contact} from 'Components/Profile/Profile-info/Contact/Contact'
-import {ContactsResponseType} from 'Redux/Profile-reducer'
-import {useAppSelector} from "Utils/Hooks";
-import {selectProfile} from "Store/Selectors";
+import {useAppSelector} from 'Utils/Hooks'
+import {selectProfile} from 'Store/Selectors'
 
 type ProfileDataPropsType = {
     isOwner: boolean
@@ -33,13 +32,7 @@ export const ProfileData: FC<ProfileDataPropsType> = ({isOwner, goToEditMode}) =
             </div>
             <div>
                 <b>Contacts</b>:
-                {/*<Contact/>*/}
-            {/*    {Object.keys(profile.contacts).map(key => {*/}
-            {/*    return <Contact key={key}*/}
-            {/*                 contactTitle={key}*/}
-            {/*                 contactValue={profile.contacts[key as keyof ContactsResponseType]}/>*/}
-
-            {/*})}*/}
+                <Contact/>
             </div>
         </div>
     )
