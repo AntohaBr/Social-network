@@ -1,13 +1,12 @@
 import React from 'react'
 import s from './Navbar.module.css'
 import {NavLink} from 'react-router-dom'
-import {useSelector} from 'react-redux'
-import {AppStateType} from 'Store/Store'
-
+import {useAppSelector} from 'Utils/Hooks'
+import {selectAuthId} from 'Store/Selectors'
 
 export const Navbar = () => {
-    const userId = useSelector<AppStateType, number| null>(state => state.auth.id)
-    console.log(userId)
+    const userId =useAppSelector(selectAuthId)
+
     return (
         <nav className={s.nav}>
             <div className={s.item}>

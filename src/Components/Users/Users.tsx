@@ -1,46 +1,39 @@
-import React from 'react'
-import {ItemsResponseType} from 'Api/Api'
-import {User} from './User'
-import {Paginator} from '../Common/Paginator/Paginator'
+import React, {useEffect} from 'react'
+import {User} from 'Components/Users/User/User'
+import {Paginator, Preloader} from 'Components/Common'
+import {useAppDispatch, useAppSelector} from 'Utils/Hooks'
+import {selectUsers, selectUsersCurrentPage, selectUsersIsFetching, selectUsersPageSize} from 'Store/Selectors'
+import {getUsers} from 'Redux/Users-reducer'
 
+export const Users = () => {
+    const dispatch = useAppDispatch()
+    const users = useAppSelector(selectUsers)
+    const isFetching = useAppSelector(selectUsersIsFetching)
+    const currentPage = useAppSelector(selectUsersCurrentPage)
+    const pageSize = useAppSelector(selectUsersPageSize)
 
-type UsersPropsType = {
-    totalCount: number
-    pageSize: number
-    currentPage: number
-    onPageChanged: (pageNumber: number) => void
-    users: ItemsResponseType[]
-    followingInProgress: number[]
-    follow: (userId: number) => void
-    unFollow: (userId: number) => void
-    portionSize: number
-}
+    useEffect(() => {
+        dispatch(getUsers(currentPage, pageSize))
+    }, [])
 
-
-export const Users = (props: UsersPropsType) => {
-        return (
+    return (
+        <div>
+            {isFetching
+                ? <Preloader/>
+                : <div>
+                    {users.map(user =>
+                        <User key={user.id}
+                              user={user}
+                        />
+                    )}
+                </div>
+            }
             <div>
-                <div>
-                    {
-                        props.users.map(u => <User key={u.id}
-                                                   user={u}
-                                                   follow={props.follow}
-                                                   unFollow={props.unFollow}
-                                                   followingInProgress={props.followingInProgress}
-                        />)
-                    }
-                </div>
-                <div>
-                    <Paginator portionSize={props.portionSize}
-                               totalCount={props.totalCount}
-                               pageSize={props.pageSize}
-                               sectionSize={10}
-                               currentPage={props.currentPage}
-                               onPageChanged={props.onPageChanged}/>
-                </div>
+                <Paginator sectionSize={10}/>
             </div>
-        )
-    }
+        </div>
+    )
+}
 
 
 

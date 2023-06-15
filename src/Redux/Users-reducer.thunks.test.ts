@@ -1,6 +1,6 @@
 import {APIResponseType, GetUsersResponseType, usersAPI} from 'Api/Api'
 import {
-    follow, followSuccess, requestUsers, setTotalUsersCount, setUsers, toggleFollowingProgress, toggleIsFetching,
+    follow, followSuccess, getUsers, setTotalUsersCount, setUsers, toggleFollowingProgress, toggleIsFetching,
     unFollow, unfollowSuccess, UsersInitialStateType
 } from 'Redux/Users-reducer'
 
@@ -102,7 +102,7 @@ describe('users reducer thunk tests', () => {
     test('success requestUsers thunk', async () => {
         usersAPI.getUsers = jest.fn().mockResolvedValueOnce(resultRequestUsers)
 
-        const thunk = requestUsers(1, 2)
+        const thunk = getUsers(1, 2)
 
         await thunk(dispatchMock, getStateMock, {})
 

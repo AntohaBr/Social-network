@@ -3,7 +3,6 @@ import {Dispatch} from 'redux'
 import {updateObjectInArray} from 'Utils/Object-helpers'
 import {AppActionsType, AppThunkType} from 'Store/Store'
 
-
 const initialState = {
     users: [] as ItemsResponseType[],
     pageSize: 10,
@@ -14,7 +13,6 @@ const initialState = {
     portionSize: 10,
     error: ''
 }
-
 
 //reducers
 export const usersReducer = (state: UsersInitialStateType = initialState, action: UsersReducerActionType): UsersInitialStateType => {
@@ -43,9 +41,8 @@ export const usersReducer = (state: UsersInitialStateType = initialState, action
     }
 }
 
-
 //thanks
-export const requestUsers = (currentPage: number, pageSize: number): AppThunkType => async (dispatch) => {
+export const getUsers = (currentPage: number, pageSize: number): AppThunkType => async (dispatch) => {
     dispatch(toggleIsFetching(true))
     const res = await usersAPI.getUsers(currentPage, pageSize)
     dispatch(toggleIsFetching(false))
@@ -75,7 +72,6 @@ export const unFollow = (userId: number): AppThunkType => async (dispatch) => {
     return await followUnFollowFlow(dispatch, userId, usersAPI.unFollow.bind(usersAPI), unfollowSuccess)
 }
 
-
 //actions
 export const followSuccess = (userId: number) => ({type: 'Users/FOLLOW', userId} as const)
 export const unfollowSuccess = (userId: number) => ({type: 'Users/UNFOLLOW', userId} as const)
@@ -88,7 +84,6 @@ export const setTotalUsersCount = (totalCount: number) => ({type: 'Users/SET_TOT
 export const toggleIsFetching = (isFetching: boolean) => ({type: 'Users/TOGGLE_IS_FETCHING', isFetching} as const)
 export const toggleFollowingProgress = (isFetching: boolean, userId: number) =>
     ({type: 'Users/TOGGLE_IS_FOLLOWING_PROGRESS', isFetching, userId} as const)
-
 
 //types
 export type UsersInitialStateType = typeof initialState

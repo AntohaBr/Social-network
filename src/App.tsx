@@ -8,7 +8,7 @@ import {useAppDispatch, useAppSelector} from 'Utils/Hooks'
 import {selectInitializeApp} from 'Store/Selectors'
 import {initializeApp} from 'Redux/App-reducer'
 import {Profile} from 'Components/Profile/Profile'
-import UsersContainer from "Components/Users/Users-container";
+import {Users} from 'Components/Users/Users'
 
 export const App = () => {
     const navigate = useNavigate()
@@ -34,7 +34,7 @@ export const App = () => {
                     <Route path='/login' element={<Login/>}/>
                     {/*<Route path='/dialogs' element={<DialogsContainer/>}/>*/}
                     <Route path='/profile/:userId?' element={<Profile/>}/>
-                    {/*<Route path='/users' element={<UsersContainer/>}/>*/}
+                    <Route path='/users' element={<Users/>}/>
                     <Route path='*' element={<div>404 NOT FOUND</div>}/>
                 </Routes>
             </div>
