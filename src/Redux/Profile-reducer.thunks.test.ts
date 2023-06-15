@@ -1,4 +1,4 @@
-import {profileAPI} from 'Api/Api'
+import {profileAPI} from 'Api/Auth-api'
 import {toggleFollowingProgress, UsersInitialStateType} from 'Redux/Users-reducer'
 import {getProfile, ProfileType} from 'Redux/Profile-reducer'
 

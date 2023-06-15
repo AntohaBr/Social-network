@@ -1,4 +1,4 @@
-import {profileAPI} from '../Api/Api'
+import {profileAPI} from 'Api/Auth-api'
 import {AppThunkType} from 'Store/Store'
 import {stopSubmit} from 'redux-form'
 import {AxiosError} from 'axios'

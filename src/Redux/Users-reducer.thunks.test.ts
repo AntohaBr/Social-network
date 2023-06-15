@@ -1,4 +1,4 @@
-import {APIResponseType, GetUsersResponseType, usersAPI} from 'Api/Api'
+import {APIResponseType, GetUsersResponseType, usersAPI} from 'Api/Auth-api'
 import {
     follow, followSuccess, getUsers, setTotalUsersCount, setUsers, toggleFollowingProgress, toggleIsFetching,
     unFollow, unfollowSuccess, UsersInitialStateType

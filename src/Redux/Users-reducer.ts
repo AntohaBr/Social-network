@@ -1,4 +1,4 @@
-import {APIResponseType, ItemsResponseType, usersAPI} from 'Api/Api'
+import {APIResponseType, ItemsResponseType, usersAPI} from 'Api/Auth-api'
 import {Dispatch} from 'redux'
 import {updateObjectInArray} from 'Utils/Object-helpers'
 import {AppActionsType, AppThunkType} from 'Store/Store'

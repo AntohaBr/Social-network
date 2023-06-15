@@ -1,5 +1,5 @@
 import React, {FC} from 'react'
-import {ItemsResponseType} from 'Api/Api'
+import {ItemsResponseType} from 'Api/Auth-api'
 import {NavLink} from 'react-router-dom'
 import userPhoto from 'Assets/Images/defaultUserPhoto.jpg'
 import s from 'Components/Users/Users.module.css'
