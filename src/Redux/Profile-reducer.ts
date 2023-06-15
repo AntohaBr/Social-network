@@ -1,9 +1,8 @@
-import {profileAPI} from 'Api/Auth-api'
+import {profileAPI} from 'Api'
 import {AppThunkType} from 'Store/Store'
 import {stopSubmit} from 'redux-form'
 import {AxiosError} from 'axios'
-import {toggleIsFetching} from '../Redux/Users-reducer'
-
+import {toggleIsFetching} from 'Redux/Users-reducer'
 
 const initialState = {
     posts: [
@@ -14,7 +13,6 @@ const initialState = {
     profile: {} as ProfileType,
     status: '',
 }
-
 
 //reducers
 export const profileReducer = (state: initialStateType = initialState, action: ProfileReducerActionTypes): initialStateType => {

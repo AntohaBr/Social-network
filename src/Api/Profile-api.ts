@@ -12,7 +12,7 @@ export const profileAPI = {
     updateStatus(status: string) {
         return instance.put(`profile/status`, {status})
     },
-    savePhoto(photos: string) {
+    savePhoto(photos: any) {
         const formData = new FormData()
         formData.append('Image', photos)
         return instance.put(`profile/photo`, formData, {

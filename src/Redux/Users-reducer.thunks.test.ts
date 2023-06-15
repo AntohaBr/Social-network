@@ -1,8 +1,10 @@
-import {APIResponseType, GetUsersResponseType, usersAPI} from 'Api/Auth-api'
 import {
     follow, followSuccess, getUsers, setTotalUsersCount, setUsers, toggleFollowingProgress, toggleIsFetching,
     unFollow, unfollowSuccess, UsersInitialStateType
 } from 'Redux/Users-reducer'
+import {usersAPI} from 'Api'
+import {GetUsersResponseType} from 'Api/User-api'
+import {APIResponseType} from 'Api/Auth-api'
 
 
 jest.mock('../Api/Api')

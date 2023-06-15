@@ -17,7 +17,6 @@ export const selectProfileStatus = (state: AppStateType) => state.profilePage.st
 export const selectProfilePosts = (state: AppStateType) => state.profilePage.posts
 export const selectProfileNewPostText = (state: AppStateType) => state.profilePage.newPostText
 
-
 //selectorsAuth
 export const selectIsAuth = (state: AppStateType) => state.auth.isAuth
 export const selectLogin = (state: AppStateType) => state.auth.login

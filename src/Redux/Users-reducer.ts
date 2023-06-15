@@ -1,7 +1,8 @@
-import {APIResponseType, ItemsResponseType, usersAPI} from 'Api/Auth-api'
+import {usersAPI} from 'Api'
 import {Dispatch} from 'redux'
 import {updateObjectInArray} from 'Utils/Object-helpers'
 import {AppActionsType, AppThunkType} from 'Store/Store'
+import {APIResponseType, ItemsResponseType} from 'Api/Auth-api'
 
 const initialState = {
     users: [] as ItemsResponseType[],

@@ -1,13 +1,12 @@
 import React from 'react'
 import {InjectedFormProps, reduxForm} from 'redux-form'
-import {createField, Input} from '../Common/Forms-control/Forms-control'
+import {createField, Input} from 'Components/Common'
 import {required} from 'Utils/Validators/Validators'
 import {connect} from 'react-redux'
 import {login} from 'Redux/Auth-reducer'
 import {AppStateType} from 'Store/Store'
 import s from '../Common/Forms-control/Forms-control.module.css'
 import {useNavigate} from 'react-router-dom'
-
 
 type FormDataType = {
     email: string
@@ -16,7 +15,6 @@ type FormDataType = {
     captchaURL: null | string
     captcha: null | string
 }
-
 
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props:any) => {
 

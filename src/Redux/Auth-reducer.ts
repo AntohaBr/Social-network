@@ -1,4 +1,4 @@
-import {authAPI, securityAPI} from 'Api/Auth-api'
+import {authAPI, securityAPI} from 'Api'
 import {stopSubmit} from 'redux-form'
 import {AppThunkType} from 'Store/Store'
 
