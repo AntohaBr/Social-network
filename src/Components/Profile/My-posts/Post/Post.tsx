@@ -18,10 +18,10 @@ export const Post: FC<PostPropsType> = ({message, likesCount}) => {
     const onClickLikeHandler = () => {
         setPutLike(!putLike)
 
-        if (putLike) {
-            setLike(like - 1)
-        } else {
+        if (!putLike) {
             setLike(like + 1)
+        } else {
+            setLike(like - 1)
         }
     }
 

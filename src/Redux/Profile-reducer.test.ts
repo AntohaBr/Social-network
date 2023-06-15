@@ -11,6 +11,7 @@ beforeEach (() => {
             {id: 3, message: 'Yes', likesCount: 10},
             {id: 4, message: 'Dada', likesCount: 10}
         ] as PostType[],
+        newPostText: '',
         profile: {} as ProfileType,
         status: ''
     }

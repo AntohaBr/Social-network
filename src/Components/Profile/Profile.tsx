@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import {getProfile, getStatus} from 'Redux/Profile-reducer'
-import {ProfileInfo} from './Profile-info/Profile-info'
+import {ProfileInfo} from "Components/Profile/Profile-info"
 import {useAppDispatch, useAppSelector} from 'Utils/Hooks'
 import {useParams} from 'react-router-dom'
 import {selectAuthId, selectIsAuth} from 'Store/Selectors'

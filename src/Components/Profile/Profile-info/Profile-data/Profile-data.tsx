@@ -1,7 +1,7 @@
 import React, {FC} from 'react'
 import {useAppSelector} from 'Utils/Hooks'
 import {selectProfile} from 'Store/Selectors'
-import {Contacts} from 'Components/Profile/Profile-info/Contacts/Contacts'
+import {Contacts} from 'Components/Profile/Profile-info'
 
 type ProfileDataPropsType = {
     isOwner: boolean

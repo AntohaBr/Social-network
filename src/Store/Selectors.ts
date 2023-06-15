@@ -15,6 +15,7 @@ export const selectProfile = (state: AppStateType) => state.profilePage.profile
 export const selectProfilePhotosSmall = (state: AppStateType) => state.profilePage.profile?.photos?.small
 export const selectProfileStatus = (state: AppStateType) => state.profilePage.status
 export const selectProfilePosts = (state: AppStateType) => state.profilePage.posts
+export const selectProfileNewPostText = (state: AppStateType) => state.profilePage.newPostText
 
 
 //selectorsAuth

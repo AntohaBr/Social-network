@@ -10,6 +10,7 @@ const initialState = {
         {id: 1, message: 'Hi, how a you?', likesCount: 12},
         {id: 2, message: 'It`s my first Post', likesCount: 10}
     ] as PostType[],
+    newPostText: '',
     profile: {} as ProfileType,
     status: '',
 }

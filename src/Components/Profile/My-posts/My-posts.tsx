@@ -2,16 +2,15 @@ import React from 'react'
 import s from './My-posts.module.css'
 import {Post} from './Post/Post'
 import {Field, InjectedFormProps, reduxForm} from "redux-form"
-import {Textarea} from "../../Common/Forms-control/Forms-control"
+import {Textarea} from "Components/Common"
 import {maxLengthCreator, required} from "Utils/Validators/Validators"
 import {addPost} from 'Redux/Profile-reducer'
-import {useAppDispatch, useAppSelector} from "Utils/Hooks";
-import {selectProfilePosts} from "Store/Selectors";
+import {useAppDispatch, useAppSelector} from 'Utils/Hooks'
+import {selectProfilePosts} from 'Store/Selectors'
 
 export const MyPosts = React.memo(() => {
     const dispatch = useAppDispatch()
     const posts = useAppSelector(selectProfilePosts)
-    const postsElement = posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)
 
     const addPostHandler = (newPostsText: string) => {
         dispatch(addPost(newPostsText))
@@ -26,11 +25,13 @@ export const MyPosts = React.memo(() => {
             <h3>My posts</h3>
             <AddNewPostsFormRedux onSubmit={onAddPost}/>
             <div className={s.posts}>
-                {postsElement}
+                {posts.map(p => <Post key={p.id}
+                                      message={p.message}
+                                      likesCount={p.likesCount}/>)}
             </div>
         </div>
-    );
-});
+    )
+})
 
 
 type NewPostsFormType = {
