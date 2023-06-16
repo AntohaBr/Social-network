@@ -1,7 +1,9 @@
 import {authAPI, securityAPI} from 'Api'
 import {stopSubmit} from 'redux-form'
-import {AppThunkType} from 'Store/Store'
+import {AppThunkType, InferActionsTypes} from 'Store/Store'
 import {LoginDataType, ResultCodeEnum} from 'Api/Auth-api'
+import {appActions} from 'Redux/App-reducer'
+import {handleServerAppError, handleServerNetworkError} from 'Utils/Error-handler'
 
 const initialState = {
     email: null as string | null,
@@ -20,7 +22,7 @@ export const authReducer = (state: initialStateType = initialState, action: Auth
                 ...action.payload
             }
         }
-        case 'auth/GET_CAPTCHA_URL_SUCCESS':
+        case 'auth/GET_CAPTCHA_URL':
             return {...state, captchaURL: action.captchaURL}
         default:
             return state
@@ -29,47 +31,79 @@ export const authReducer = (state: initialStateType = initialState, action: Auth
 
 //thanks
 export const getAuthUser = (): AppThunkType => async (dispatch) => {
-    const {data} = await authAPI.getAuth()
-    if (data.resultCode === 0) {
-        const {id, login, email} = data.data
-        dispatch(setAuth(id, login, email, true))
+    dispatch(appActions.setAppStatus('loading'))
+    try {
+        const {data} = await authAPI.getAuth()
+        if (data.resultCode === ResultCodeEnum.Success) {
+            const {id, login, email} = data.data
+            dispatch(authActions.setAuthUserData(id, login, email, true))
+            dispatch(appActions.setProfileId(id))
+            dispatch(appActions.setAppStatus('success'))
+        } else {
+            handleServerAppError(data, dispatch)
+        }
+    } catch (e) {
+        handleServerNetworkError(e, dispatch)
+    } finally {
+        dispatch(appActions.setAppStatus('idle'))
     }
 }
 
 export const login = (data: LoginDataType): AppThunkType => async (dispatch) => {
+    dispatch(appActions.setAppStatus('loading'))
+    try {
         const res = await authAPI.login(data)
         if (res.resultCode === ResultCodeEnum.Success) {
             dispatch(getAuthUser())
+            dispatch(appActions.setAppStatus('success'))
         } else {
-            // if (data.resultCode === 10) {
-            //     dispatch(getCaptchaURL())
-            // }
-            // const message = data.messages.length > 0 ? data.messages[0] : 'Common error'
-            // dispatch(stopSubmit('login', {_error: message}))
+            handleServerAppError(res, dispatch)
         }
+    } catch (e) {
+        handleServerNetworkError(e, dispatch)
+    } finally {
+        dispatch(appActions.setAppStatus('idle'))
     }
+}
 
 export const logOut = (): AppThunkType => async (dispatch) => {
-    const res = await authAPI.logOut()
-    if (res.data.resultCode === 0) {
-        dispatch(setAuth(null, null, null, false))
+    dispatch(appActions.setAppStatus('loading'))
+    try {
+        const res = await authAPI.logOut()
+        if (res.resultCode === ResultCodeEnum.Success) {
+            dispatch(authActions.setAuthUserData(null, null, null, false))
+            dispatch(appActions.setAppStatus('success'))
+        } else {
+            handleServerAppError(res, dispatch)
+        }
+    } catch (e) {
+        handleServerNetworkError(e, dispatch)
+    } finally {
+        dispatch(appActions.setAppStatus('idle'))
     }
 }
 
 export const getCaptchaURL = (): AppThunkType => async (dispatch) => {
-    const res = await securityAPI.getCaptchaURL()
-    const captchaURL = res.data.url
-    dispatch(getCaptchaURLSuccess(captchaURL))
+    dispatch(appActions.setAppStatus('loading'))
+    try {
+        const res = await securityAPI.getCaptchaURL()
+        const captchaURL = res.data.url
+        dispatch(authActions.getCaptchaURL(captchaURL))
+        dispatch(appActions.setAppStatus('success'))
+    } catch (e) {
+        handleServerNetworkError(e, dispatch)
+    } finally {
+        dispatch(appActions.setAppStatus('idle'))
+    }
 }
 
 //actions
-export const setAuth = (id: number | null, login: string | null, email: string | null, isAuth: boolean) =>
-    ({type: 'auth/SET_USER_DATA', payload: {email, login, id, isAuth}} as const)
-export const getCaptchaURLSuccess = (captchaURL: string | null) => ({
-    type: 'auth/GET_CAPTCHA_URL_SUCCESS', captchaURL} as const)
+export const authActions = {
+    setAuthUserData: (id: number | null, login: string | null, email: string | null, isAuth: boolean) =>
+        ({type: 'auth/SET_USER_DATA', payload: {email, login, id, isAuth}} as const),
+    getCaptchaURL: (captchaURL: string | null) => ({type: 'auth/GET_CAPTCHA_URL', captchaURL} as const)
+}
 
 //types
 type initialStateType = typeof initialState
-export type AuthReducerActionType =
-    ReturnType<typeof setAuth> |
-    ReturnType<typeof getCaptchaURLSuccess>
+export type AuthReducerActionType = InferActionsTypes<typeof authActions>

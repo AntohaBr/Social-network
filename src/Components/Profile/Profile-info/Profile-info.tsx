@@ -4,7 +4,7 @@ import {Preloader} from 'Components/Common'
 import {ProfileType, saveProfile} from 'Redux/Profile-reducer'
 import {useAppDispatch, useAppSelector} from 'Utils/Hooks'
 import {selectProfile} from 'Store/Selectors'
-import {ProfileStatus, ProfilePhoto, ProfileData, ProfileDataFormWithReduxForm} from 'Components/Profile/Profile-info'
+import {ProfileStatus, ProfilePhoto, ProfileData, ProfileDataForm} from 'Components/Profile/Profile-info'
 
 type ProfileInfoPropsType = {
     isOwner: boolean
@@ -24,8 +24,8 @@ export const ProfileInfo: FC<ProfileInfoPropsType> = ({isOwner}) => {
         setEditMode(true)
     }
 
-    const onSubmit = async (formData: ProfileType) => {
-        await dispatch(saveProfile(formData))
+    const onSubmitData = (formData: ProfileType) => {
+        dispatch(saveProfile(formData))
         setEditMode(false)
     }
 
@@ -35,9 +35,7 @@ export const ProfileInfo: FC<ProfileInfoPropsType> = ({isOwner}) => {
                 <ProfilePhoto isOwner={isOwner}/>
                 <ProfileStatus/>
                 {editMode
-                    ? <ProfileDataFormWithReduxForm initialValues={profile}
-                                                    onSubmit={onSubmit}
-                                                    profile={profile}/>
+                    ? <ProfileDataForm onSubmitData={onSubmitData}/>
                     : <ProfileData isOwner={isOwner}
                                    goToEditMode={goToEditModeHandler}/>
                 }

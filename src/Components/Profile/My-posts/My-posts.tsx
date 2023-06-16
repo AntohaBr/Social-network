@@ -2,11 +2,11 @@ import React from 'react'
 import s from './My-posts.module.css'
 import {Post} from 'Components/Profile/My-posts'
 import {Field, InjectedFormProps, reduxForm} from "redux-form"
-import {Textarea} from "Components/Common"
 import {maxLengthCreator, required} from "Utils/Validators/Validators"
 import {addPost} from 'Redux/Profile-reducer'
 import {useAppDispatch, useAppSelector} from 'Utils/Hooks'
 import {selectProfilePosts} from 'Store/Selectors'
+import {Textarea} from 'Components/Common/Forms-control/Forms-control'
 
 export const MyPosts = React.memo(() => {
     const dispatch = useAppDispatch()

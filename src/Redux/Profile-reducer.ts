@@ -83,7 +83,7 @@ export const saveProfile = (data: ProfileType): AppThunkType => async (dispatch,
         // @ts-ignore
         dispatch(getProfile(userId))
     } else {
-        dispatch(stopSubmit('profileEdit', {_error: res.data.messages[0]}))
+        // dispatch(stopSubmit('profileEdit', {_error: res.data.messages[0]}))
         return Promise.reject(res.data.messages[0])
     }
 }

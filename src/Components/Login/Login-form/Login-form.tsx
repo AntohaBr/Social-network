@@ -4,7 +4,7 @@ import {useFormik} from 'formik'
 import {validate} from 'Utils/Validate'
 import {login} from 'Redux/Auth-reducer'
 import {LoginDataType} from 'Api/Auth-api'
-import {selectCaptchaURL} from "Store/Selectors";
+import {selectCaptchaURL} from 'Store/Selectors'
 
 export const LoginForm = () => {
     const dispatch = useAppDispatch()
@@ -62,6 +62,7 @@ export const LoginForm = () => {
                     checked={formik.values.rememberMe}
                 />
             </div>
+            {captchaURL && <img src={captchaURL} alt="captcha"/>}
             <button type="submit">Login</button>
         </form>
     )

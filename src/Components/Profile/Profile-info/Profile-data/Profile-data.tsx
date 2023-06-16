@@ -22,11 +22,9 @@ export const ProfileData: FC<ProfileDataPropsType> = ({isOwner, goToEditMode}) =
             <div>
                 <b>Looking for a job</b>: {profile?.lookingForAJob ? 'Yes' : 'No'}
             </div>
-            {profile?.lookingForAJob &&
                 <div>
                     <b>My professional skills</b>: {profile?.lookingForAJobDescription}
                 </div>
-            }
             <div>
                 <b>About me</b>: {profile?.aboutMe}
             </div>

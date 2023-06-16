@@ -11,7 +11,7 @@ export const Contacts = () => {
         <div>
             {profile.contacts && Object.keys(profile.contacts).map((key: string) => {
                 return (
-                    <div className={s.contact}>
+                    <div key={key} className={s.contact}>
                         <b>{key}</b>: {profile.contacts [key as keyof ContactsResponseType]}
                     </div>
                 )
