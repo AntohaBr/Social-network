@@ -1,7 +1,7 @@
 import {authAPI, securityAPI} from 'Api'
 import {stopSubmit} from 'redux-form'
 import {AppThunkType} from 'Store/Store'
-
+import {LoginDataType, ResultCodeEnum} from 'Api/Auth-api'
 
 const initialState = {
     email: null as string | null,
@@ -11,12 +11,10 @@ const initialState = {
     captchaURL: null as null | string
 }
 
-
 //reducers
 export const authReducer = (state: initialStateType = initialState, action: AuthReducerActionType): initialStateType => {
     switch (action.type) {
         case 'auth/SET_USER_DATA': {
-            console.log(action)
             return {
                 ...state,
                 ...action.payload
@@ -29,9 +27,8 @@ export const authReducer = (state: initialStateType = initialState, action: Auth
     }
 }
 
-
 //thanks
-export const getAuth = (): AppThunkType => async (dispatch) => {
+export const getAuthUser = (): AppThunkType => async (dispatch) => {
     const {data} = await authAPI.getAuth()
     if (data.resultCode === 0) {
         const {id, login, email} = data.data
@@ -39,17 +36,16 @@ export const getAuth = (): AppThunkType => async (dispatch) => {
     }
 }
 
-export const login = (email: string, password: string, rememberMe: boolean, captcha: string | null): AppThunkType =>
-    async (dispatch) => {
-        const data = await authAPI.login(email, password, rememberMe, captcha)
-        if (data.resultCode === 0) {
-            dispatch(getAuth())
+export const login = (data: LoginDataType): AppThunkType => async (dispatch) => {
+        const res = await authAPI.login(data)
+        if (res.resultCode === ResultCodeEnum.Success) {
+            dispatch(getAuthUser())
         } else {
-            if (data.resultCode === 10) {
-                dispatch(getCaptchaURL())
-            }
-            const message = data.messages.length > 0 ? data.messages[0] : 'Common error'
-            dispatch(stopSubmit('login', {_error: message}))
+            // if (data.resultCode === 10) {
+            //     dispatch(getCaptchaURL())
+            // }
+            // const message = data.messages.length > 0 ? data.messages[0] : 'Common error'
+            // dispatch(stopSubmit('login', {_error: message}))
         }
     }
 
@@ -66,15 +62,11 @@ export const getCaptchaURL = (): AppThunkType => async (dispatch) => {
     dispatch(getCaptchaURLSuccess(captchaURL))
 }
 
-
 //actions
 export const setAuth = (id: number | null, login: string | null, email: string | null, isAuth: boolean) =>
     ({type: 'auth/SET_USER_DATA', payload: {email, login, id, isAuth}} as const)
 export const getCaptchaURLSuccess = (captchaURL: string | null) => ({
-    type: 'auth/GET_CAPTCHA_URL_SUCCESS',
-    captchaURL
-} as const)
-
+    type: 'auth/GET_CAPTCHA_URL_SUCCESS', captchaURL} as const)
 
 //types
 type initialStateType = typeof initialState

@@ -1,15 +1,15 @@
 import {instance} from 'Api/Instans'
-import {APIResponseType, ItemsResponseType} from 'Api/Auth-api'
+import {ResponseType} from 'Api/Auth-api'
 
 export const usersAPI = {
     getUsers(currentPage: number, pageSize: number) {
         return instance.get<GetUsersResponseType>(`users?page=${currentPage}&count=${pageSize}`).then(res => res.data)
     },
     follow(userId: number) {
-        return instance.post<APIResponseType>(`follow/${userId}`).then(res => res.data)
+        return instance.post<ResponseType>(`follow/${userId}`).then(res => res.data)
     },
     unFollow(userId: number) {
-        return instance.delete<APIResponseType>(`follow/${userId}`).then(res => res.data)
+        return instance.delete<ResponseType>(`follow/${userId}`).then(res => res.data)
     }
 }
 
@@ -18,4 +18,18 @@ export type GetUsersResponseType<T = ItemsResponseType []> = {
     items: T
     totalCount: number
     error: string
+}
+
+export type ItemsResponseType = {
+    id: number
+    name: string
+    status: string
+    uniqueUrlName: string
+    photos: ResponsePhotosType
+    followed: boolean
+}
+
+export type ResponsePhotosType = {
+    small: string
+    large: string
 }

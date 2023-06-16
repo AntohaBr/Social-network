@@ -2,7 +2,8 @@ import {usersAPI} from 'Api'
 import {Dispatch} from 'redux'
 import {updateObjectInArray} from 'Utils/Object-helpers'
 import {AppActionsType, AppThunkType} from 'Store/Store'
-import {APIResponseType, ItemsResponseType} from 'Api/Auth-api'
+import {ResponseType} from 'Api/Auth-api'
+import {ItemsResponseType} from 'Api/User-api'
 
 const initialState = {
     users: [] as ItemsResponseType[],
@@ -53,7 +54,7 @@ export const getUsers = (currentPage: number, pageSize: number): AppThunkType =>
 
 export const followUnFollowFlow = async (dispatch: Dispatch,
                                          userId: number,
-                                         apiMethod: (userId: number) => Promise<APIResponseType>,
+                                         apiMethod: (userId: number) => Promise<ResponseType>,
                                          actionCreator: (userId: number) => AppActionsType) => {
     dispatch(toggleFollowingProgress(true, userId))
     const res = await apiMethod(userId)

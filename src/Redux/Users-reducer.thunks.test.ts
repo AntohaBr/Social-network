@@ -4,7 +4,7 @@ import {
 } from 'Redux/Users-reducer'
 import {usersAPI} from 'Api'
 import {GetUsersResponseType} from 'Api/User-api'
-import {APIResponseType} from 'Api/Auth-api'
+import {ResponseType} from 'Api/Auth-api'
 
 
 jest.mock('../Api/Api')
@@ -21,7 +21,7 @@ enum ResultCodeEnum {
     Success = 0,
 }
 
-const resultFollowUnFollow: APIResponseType = {
+const resultFollowUnFollow: ResponseType = {
     resultCode: ResultCodeEnum.Success,
     messages: [],
     fieldsErrors: [],

@@ -2,13 +2,13 @@ import React, {useEffect} from 'react'
 import './App.css'
 import {Navigate, Route, Routes, useNavigate} from 'react-router-dom'
 import {Navbar} from 'Components/Navbar/Navbar'
-import Login from './Components/Login/Login'
 import {Header} from 'Components/Header/Header'
 import {useAppDispatch, useAppSelector} from 'Utils/Hooks'
 import {selectInitializeApp} from 'Store/Selectors'
 import {initializeApp} from 'Redux/App-reducer'
 import {Profile} from 'Components/Profile/Profile'
 import {Users} from 'Components/Users/Users'
+import {Login} from 'Components/Login/Login'
 
 export const App = () => {
     const navigate = useNavigate()

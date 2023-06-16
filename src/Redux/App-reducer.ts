@@ -1,4 +1,4 @@
-import {getAuth} from './Auth-reducer'
+import {getAuthUser} from './Auth-reducer'
 import {AppThunkType} from 'Store/Store'
 
 const initialState = {
@@ -17,7 +17,7 @@ export const appReducer = (state: initialStateType = initialState, action: AppRe
 
 //thanks
 export const initializeApp = ():AppThunkType => async (dispatch) => {
-    await dispatch(getAuth())
+    await dispatch(getAuthUser())
     dispatch(setInitialized())
 }
 
