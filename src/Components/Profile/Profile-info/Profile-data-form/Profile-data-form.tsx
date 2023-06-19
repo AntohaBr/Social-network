@@ -1,8 +1,8 @@
 import React, {FC} from 'react'
 import {Field, Form} from 'react-final-form'
-import {useAppSelector} from 'Utils/Hooks'
+import {useAppSelector} from 'Utils'
 import {selectAuthId, selectProfile} from 'Store/Selectors'
-import {ProfileType} from "Redux/Profile-reducer";
+import {ProfileType} from 'Redux/Profile-reducer'
 
 type ProfileDataFormPropsType = {
     onSubmitData: (formData: ProfileType) => void

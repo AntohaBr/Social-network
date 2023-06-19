@@ -2,10 +2,10 @@ import React, {FC} from 'react'
 import {NavLink} from 'react-router-dom'
 import userPhoto from 'Assets/Images/defaultUserPhoto.jpg'
 import s from 'Components/Users/Users.module.css'
-import {useAppDispatch, useAppSelector} from 'Utils/Hooks'
+import {useAppDispatch, useAppSelector} from 'Utils'
 import {selectUsersFollowingInProgress} from 'Store/Selectors'
-import {follow, unFollow} from 'Redux/Users-reducer'
-import {ItemsResponseType} from 'Api/User-api'
+import {follow, unFollow} from 'Redux/Users-reducer/Users-reducer'
+import {ItemsResponseType} from 'Api/Users-api'
 
 type UserPropsType = {
     user: ItemsResponseType

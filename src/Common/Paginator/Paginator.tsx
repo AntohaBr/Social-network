@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react'
-import s from './Paginator.module.css'
-import {useAppDispatch, useAppSelector} from 'Utils/Hooks'
+import s from 'Common/Paginator/Paginator.module.css'
+import {useAppDispatch, useAppSelector} from 'Utils'
 import {
     selectUsersCurrentPage,
     selectUsersPageSize,
     selectUsersPortionSize,
     selectUsersTotalCount
 } from 'Store/Selectors'
-import {getUsers, userActions} from 'Redux/Users-reducer'
+import {getUsers, userActions} from 'Redux/Users-reducer/Users-reducer'
 
 
 type PaginatorPropsType = {

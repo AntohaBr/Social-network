@@ -1,6 +1,6 @@
 import React from 'react'
 import s from 'Components/Profile/Profile-info/Profile-info.module.css'
-import {useAppSelector} from 'Utils/Hooks'
+import {useAppSelector} from 'Utils'
 import {selectProfile} from 'Store/Selectors'
 import {ContactsResponseType} from 'Redux/Profile-reducer'
 

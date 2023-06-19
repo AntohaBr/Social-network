@@ -1,10 +1,9 @@
 import {usersAPI} from 'Api'
-import {updateObjectInArray} from 'Utils/Object-helpers'
+import {updateObjectInArray, handleServerNetworkError} from 'Utils'
 import {AppActionsType, AppDispatchType, AppThunkType, InferActionsTypes} from 'Store/Store'
 import {ResponseType, ResultCodeEnum} from 'Api/Auth-api'
-import {ItemsResponseType} from 'Api/User-api'
+import {ItemsResponseType} from 'Api/Users-api'
 import {appActions} from 'Redux/App-reducer'
-import {handleServerNetworkError} from 'Utils/Error-handler'
 
 const initialState = {
     users: [] as ItemsResponseType[],
@@ -97,7 +96,6 @@ export const userActions = {
     toggleFollowingProgress: (isFetching: boolean, userId: number) =>
         ({type: 'Users/TOGGLE_IS_FOLLOWING_PROGRESS', isFetching, userId} as const)
 }
-
 
 //types
 export type UsersInitialStateType = typeof initialState

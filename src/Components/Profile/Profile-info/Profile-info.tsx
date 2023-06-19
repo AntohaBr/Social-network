@@ -1,8 +1,8 @@
 import React, {FC, useState} from 'react'
 import s from './Profile-info.module.css'
-import {Preloader} from 'Components/Common'
+import {Preloader} from 'Common'
 import {ProfileType, saveProfile} from 'Redux/Profile-reducer'
-import {useAppDispatch, useAppSelector} from 'Utils/Hooks'
+import {useAppDispatch, useAppSelector} from 'Utils'
 import {selectProfile} from 'Store/Selectors'
 import {ProfileStatus, ProfilePhoto, ProfileData, ProfileDataForm} from 'Components/Profile/Profile-info'
 

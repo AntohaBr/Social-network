@@ -1,7 +1,6 @@
 import React from 'react'
-import {useAppDispatch, useAppSelector} from 'Utils/Hooks'
+import {useAppDispatch, useAppSelector, validate} from 'Utils'
 import {useFormik} from 'formik'
-import {validate} from 'Utils/Validate'
 import {login} from 'Redux/Auth-reducer'
 import {LoginDataType} from 'Api/Auth-api'
 import {selectCaptchaURL} from 'Store/Selectors'

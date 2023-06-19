@@ -1,6 +1,6 @@
 import {getAuthUser} from './Auth-reducer'
 import {AppThunkType, InferActionsTypes} from 'Store/Store'
-import {handleServerNetworkError} from 'Utils/Error-handler'
+import {handleServerNetworkError} from 'Utils'
 
 const initialState = {
     initialized: false,

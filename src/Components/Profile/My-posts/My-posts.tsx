@@ -4,9 +4,9 @@ import {Post} from 'Components/Profile/My-posts'
 import {Field, InjectedFormProps, reduxForm} from "redux-form"
 import {maxLengthCreator, required} from "Utils/Validators/Validators"
 import {profileActions} from 'Redux/Profile-reducer'
-import {useAppDispatch, useAppSelector} from 'Utils/Hooks'
+import {useAppDispatch, useAppSelector} from 'Utils'
 import {selectProfilePosts} from 'Store/Selectors'
-import {Textarea} from 'Components/Common/Forms-control/Forms-control'
+import {Textarea} from 'Common/Forms-control/Forms-control'
 
 export const MyPosts = React.memo(() => {
     const dispatch = useAppDispatch()

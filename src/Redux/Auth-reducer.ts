@@ -2,7 +2,7 @@ import {authAPI, securityAPI} from 'Api'
 import {AppThunkType, InferActionsTypes} from 'Store/Store'
 import {LoginDataType, ResultCodeEnum} from 'Api/Auth-api'
 import {appActions} from 'Redux/App-reducer'
-import {handleServerAppError, handleServerNetworkError} from 'Utils/Error-handler'
+import {handleServerAppError, handleServerNetworkError} from 'Utils'
 
 const initialState = {
     email: null as string | null,

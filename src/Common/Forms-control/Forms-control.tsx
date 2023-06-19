@@ -1,5 +1,5 @@
 import React from 'react'
-import s from './Forms-control.module.css'
+import s from 'Common/Forms-control/Forms-control.module.css'
 import {Field} from 'redux-form'
 
 // @ts-ignore

@@ -1,7 +1,7 @@
 import React, {FC} from 'react'
 import {maxLengthCreator, required} from "Utils/Validators/Validators";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {Textarea} from "Components/Common/Forms-control/Forms-control";
+import {Textarea} from "Common/Forms-control/Forms-control";
 import {useAppDispatch, useAppSelector} from "Utils/Hooks";
 import {selectProfileNewPostText} from "Store/Selectors";
 import {profileActions} from "Redux/Profile-reducer";

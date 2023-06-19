@@ -1,6 +1,6 @@
 import React from 'react'
 import {useNavigate} from 'react-router-dom'
-import {useAppSelector} from 'Utils/Hooks'
+import {useAppSelector} from 'Utils'
 import {selectIsAuth} from 'Store/Selectors'
 import {LoginForm} from 'Components/Login/Login-form/Login-form'
 

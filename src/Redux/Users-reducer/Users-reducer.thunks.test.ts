@@ -1,6 +1,6 @@
-import {follow, getUsers, unFollow, userActions, UsersInitialStateType} from 'Redux/Users-reducer'
+import {follow, getUsers, unFollow, userActions, UsersInitialStateType} from 'Redux/Users-reducer/Users-reducer'
 import {usersAPI} from 'Api'
-import {GetUsersResponseType} from 'Api/User-api'
+import {GetUsersResponseType} from 'Api/Users-api'
 import {ResponseType} from 'Api/Auth-api'
 
 

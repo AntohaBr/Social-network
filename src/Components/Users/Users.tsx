@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react'
-import {User} from 'Components/Users/User/User'
-import {Paginator, Preloader} from 'Components/Common'
-import {useAppDispatch, useAppSelector} from 'Utils/Hooks'
+import {User} from 'Components/Users'
+import {Paginator, Preloader} from 'Common'
+import {useAppDispatch, useAppSelector} from 'Utils'
 import {selectUsers, selectUsersCurrentPage, selectUsersIsFetching, selectUsersPageSize} from 'Store/Selectors'
-import {getUsers} from 'Redux/Users-reducer'
+import {getUsers} from 'Redux/Users-reducer/Users-reducer'
 
 export const Users = () => {
     const dispatch = useAppDispatch()

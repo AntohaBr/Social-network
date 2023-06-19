@@ -1,6 +1,6 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux'
 import {profileReducer, ProfileReducerActionTypes} from 'Redux/Profile-reducer'
-import {usersReducer, UsersReducerActionType} from 'Redux/Users-reducer'
+import {usersReducer, UsersReducerActionType} from 'Redux/Users-reducer/Users-reducer'
 import {authReducer, AuthReducerActionType} from 'Redux/Auth-reducer'
 import thunkMiddleware, {ThunkAction, ThunkDispatch} from 'redux-thunk'
 import {messageReducer, MessageReducerActionType} from 'Redux/Message-reducer'

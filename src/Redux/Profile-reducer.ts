@@ -1,7 +1,7 @@
 import {profileAPI} from 'Api'
 import {AppThunkType, InferActionsTypes} from 'Store/Store'
 import {appActions} from 'Redux/App-reducer'
-import {handleServerNetworkError} from 'Utils/Error-handler'
+import {handleServerNetworkError} from 'Utils'
 import {ResultCodeEnum} from 'Api/Auth-api'
 
 const initialState = {

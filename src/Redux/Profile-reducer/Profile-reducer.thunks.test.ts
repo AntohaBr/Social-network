@@ -1,5 +1,5 @@
 import {profileAPI} from 'Api'
-import {userActions, UsersInitialStateType} from 'Redux/Users-reducer'
+import {userActions, UsersInitialStateType} from 'Redux/Users-reducer/Users-reducer'
 import {getProfile, ProfileType} from 'Redux/Profile-reducer'
 
 

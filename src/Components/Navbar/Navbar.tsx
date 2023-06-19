@@ -1,7 +1,7 @@
 import React from 'react'
 import s from './Navbar.module.css'
 import {NavLink} from 'react-router-dom'
-import {useAppSelector} from 'Utils/Hooks'
+import {useAppSelector} from 'Utils'
 import {selectAuthId} from 'Store/Selectors'
 
 export const Navbar = () => {

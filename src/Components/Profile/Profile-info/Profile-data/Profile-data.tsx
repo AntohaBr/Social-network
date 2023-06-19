@@ -1,5 +1,5 @@
 import React, {FC} from 'react'
-import {useAppSelector} from 'Utils/Hooks'
+import {useAppSelector} from 'Utils'
 import {selectProfile} from 'Store/Selectors'
 import {Contacts} from 'Components/Profile/Profile-info'
 

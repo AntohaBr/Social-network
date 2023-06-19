@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 import {compose, Dispatch} from 'redux'
 import {Dialogs} from './Dialogs'
 import {AppStateType} from 'Store/Store'
-import {withAuthRedirect} from 'HOK/With-auth-redirect'
+import {withAuthRedirect} from 'Utils/With-auth-redirect'
 
 
 export type DialogsType = MapStateToPropsType & MapDispatchToPropsType

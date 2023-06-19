@@ -1,7 +1,7 @@
 import React from 'react'
 import s from './Header.module.css'
 import {useNavigate} from 'react-router-dom'
-import {useAppDispatch, useAppSelector} from 'Utils/Hooks'
+import {useAppDispatch, useAppSelector} from 'Utils'
 import {selectAuthId, selectIsAuth, selectLogin, selectProfile, selectProfilePhotosSmall} from 'Store/Selectors'
 import {logOut} from 'Redux/Auth-reducer'
 import defaultUserPhoto from 'Assets/Images/defaultUserPhoto.jpg'

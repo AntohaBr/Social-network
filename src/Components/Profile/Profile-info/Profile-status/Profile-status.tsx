@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useEffect, useState} from 'react'
-import {useAppDispatch, useAppSelector} from 'Utils/Hooks'
+import {useAppDispatch, useAppSelector} from 'Utils'
 import {selectProfileStatus} from 'Store/Selectors'
 import {updateStatus} from 'Redux/Profile-reducer'
 
