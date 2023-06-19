@@ -4,7 +4,7 @@ import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Textarea} from "Components/Common/Forms-control/Forms-control";
 import {useAppDispatch, useAppSelector} from "Utils/Hooks";
 import {selectProfileNewPostText} from "Store/Selectors";
-import {addPost} from "Redux/Profile-reducer";
+import {profileActions} from "Redux/Profile-reducer";
 
 type NewPostsFormType = {
     newPostText: string

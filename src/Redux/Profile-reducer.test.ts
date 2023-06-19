@@ -1,4 +1,4 @@
-import {addPost, deletePost, initialStateType, PostType, profileReducer, ProfileType} from './Profile-reducer'
+import {initialStateType, PostType, profileActions, profileReducer, ProfileType} from './Profile-reducer'
 
 
 let startState: initialStateType
@@ -19,7 +19,7 @@ beforeEach (() => {
 
 
 test ('Message of new Post should be correct', () => {
- const action = addPost ('Hi friends')
+ const action = profileActions.addPost ('Hi friends')
 
     const newState = profileReducer (startState,action)
 
@@ -27,7 +27,7 @@ test ('Message of new Post should be correct', () => {
 })
 
 test ('after deleting length of messages should be decrement',() =>{
-    const action = deletePost(1)
+    const action = profileActions.deletePost(1)
 
     const newState = profileReducer (startState,action)
 
@@ -35,7 +35,7 @@ test ('after deleting length of messages should be decrement',() =>{
 })
 
 test ('after deleting length shouldn`t  be decrement if id is incorrect',() =>{
-    const action = deletePost(1000)
+    const action = profileActions.deletePost(1000)
 
     const newState = profileReducer (startState,action)
 

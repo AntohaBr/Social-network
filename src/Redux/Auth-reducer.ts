@@ -1,5 +1,4 @@
 import {authAPI, securityAPI} from 'Api'
-import {stopSubmit} from 'redux-form'
 import {AppThunkType, InferActionsTypes} from 'Store/Store'
 import {LoginDataType, ResultCodeEnum} from 'Api/Auth-api'
 import {appActions} from 'Redux/App-reducer'

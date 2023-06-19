@@ -1,8 +1,11 @@
 import {profileAPI} from 'Api'
-import {AppThunkType} from 'Store/Store'
+import {AppThunkType, InferActionsTypes} from 'Store/Store'
 import {stopSubmit} from 'redux-form'
 import {AxiosError} from 'axios'
 import {toggleIsFetching} from 'Redux/Users-reducer'
+import {appActions} from "Redux/App-reducer";
+import {handleServerNetworkError} from "Utils/Error-handler";
+import {ResultCodeEnum} from "Api/Auth-api";
 
 const initialState = {
     posts: [
@@ -37,74 +40,92 @@ export const profileReducer = (state: initialStateType = initialState, action: P
     }
 }
 
-
 //thanks
-export const getProfile = (userId: number): AppThunkType => async (dispatch) => {
-    dispatch(toggleIsFetching(true))
+export const getProfile = (profileId: number): AppThunkType => async (dispatch) => {
+    dispatch(appActions.setAppStatus('loading'))
     try {
-        const res = await profileAPI.getProfile(userId)
-        dispatch(toggleIsFetching(false))
-        dispatch(setProfile(res.data))
-    } catch (err) {
-        const error = err as AxiosError
+        const res = await profileAPI.getProfile(profileId)
+        dispatch(profileActions.setProfile(res))
+        dispatch(appActions.setAppStatus('success'))
+    } catch (e) {
+        handleServerNetworkError(e, dispatch)
+    } finally {
+        dispatch(appActions.setAppStatus('idle'))
     }
-
 }
 
-export const getStatus = (userId: number): AppThunkType => async (dispatch) => {
+export const getStatus = (profileId: number): AppThunkType => async (dispatch) => {
+    dispatch(appActions.setAppStatus('loading'))
     try {
-        const res = await profileAPI.getStatus(userId)
-        dispatch(setStatus(res))
-    } catch (err) {
-        const error = err as AxiosError
+        const res = await profileAPI.getStatus(profileId)
+        dispatch(profileActions.setStatus(res))
+        dispatch(appActions.setAppStatus('success'))
+    } catch (e) {
+        handleServerNetworkError(e, dispatch)
+    } finally {
+        dispatch(appActions.setAppStatus('idle'))
     }
 }
 
 export const updateStatus = (status: string): AppThunkType => async (dispatch) => {
-    const res = await profileAPI.updateStatus(status)
-    if (res.data.resultCode === 0) {
-        dispatch(setStatus(status))
-    } else if (res.data.resultCode === 1) {
-        alert(res.data.messages[0])
+    dispatch(appActions.setAppStatus('loading'))
+    try {
+        const res = await profileAPI.updateStatus(status)
+        if (res.resultCode === ResultCodeEnum.Success) {
+            dispatch(profileActions.setStatus(status))
+            dispatch(appActions.setAppStatus('success'))
+        }
+    } catch (e) {
+        handleServerNetworkError(e, dispatch)
+    } finally {
+        dispatch(appActions.setAppStatus('idle'))
     }
 }
 
 export const savePhoto = (file: File): AppThunkType => async (dispatch) => {
-    const res = await profileAPI.savePhoto(file)
-    if (res.data.resultCode === 0) {
-        dispatch(savePhotoAC(res.data.photos))
+    dispatch(appActions.setAppStatus('loading'))
+    try {
+        const res = await profileAPI.savePhoto(file)
+        if (res.resultCode === ResultCodeEnum.Success) {
+            dispatch(profileActions.savePhotoAC(res.data.photos))
+            dispatch(appActions.setAppStatus('success'))
+        }
+    } catch (e) {
+        handleServerNetworkError(e, dispatch)
+    } finally {
+        dispatch(appActions.setAppStatus('idle'))
     }
 }
 
 export const saveProfile = (data: ProfileType): AppThunkType => async (dispatch, getState) => {
-    const userId = getState().auth.id
-    const res = await profileAPI.saveProfile(data)
-    if (res.data.resultCode === 0) {
-        // @ts-ignore
-        dispatch(getProfile(userId))
-    } else {
-        // dispatch(stopSubmit('profileEdit', {_error: res.data.messages[0]}))
-        return Promise.reject(res.data.messages[0])
+    dispatch(appActions.setAppStatus('loading'))
+    const profileId = getState().auth.id
+    try {
+        const res = await profileAPI.saveProfile(data)
+        if (res.resultCode === ResultCodeEnum.Success && profileId) {
+            dispatch(getProfile(profileId))
+        }
+    } catch (e) {
+        handleServerNetworkError(e, dispatch)
+    } finally {
+        dispatch(appActions.setAppStatus('idle'))
     }
 }
 
 
 //actions
-export const addPost = (newPostsText: string) => ({type: 'Profile/ADD_POST', newPostsText} as const)
-export const setProfile = (profile: ProfileType) => ({type: 'Profile/SET_PROFILE', profile} as const)
-export const setStatus = (status: string) => ({type: 'Profile/SET_STATUS', status} as const)
-export const deletePost = (id: number) => ({type: 'Profile/DELETE_POST', id} as const)
-export const savePhotoAC = (photos: PhotosResponseType) => ({type: 'Profile/SAVE_PHOTO', photos} as const)
-
+export const profileActions = {
+    addPost: (newPostsText: string) => ({type: 'Profile/ADD_POST', newPostsText} as const),
+    setProfile: (profile: ProfileType) => ({type: 'Profile/SET_PROFILE', profile} as const),
+    setStatus: (status: string) => ({type: 'Profile/SET_STATUS', status} as const),
+    deletePost: (id: number) => ({type: 'Profile/DELETE_POST', id} as const),
+    savePhotoAC: (photos: PhotosResponseType) => ({type: 'Profile/SAVE_PHOTO', photos} as const)
+}
 
 //types
 export type initialStateType = typeof initialState
 
-export type ProfileReducerActionTypes = ReturnType<typeof addPost>
-    | ReturnType<typeof setProfile>
-    | ReturnType<typeof setStatus>
-    | ReturnType<typeof deletePost>
-    | ReturnType<typeof savePhotoAC>
+export type ProfileReducerActionTypes = InferActionsTypes<typeof profileActions>
 
 export type PostType = {
     id: number,
