@@ -1,5 +1,5 @@
 import {profileAPI} from 'Api'
-import {toggleFollowingProgress, UsersInitialStateType} from 'Redux/Users-reducer'
+import {userActions, UsersInitialStateType} from 'Redux/Users-reducer'
 import {getProfile, ProfileType} from 'Redux/Profile-reducer'
 
 
@@ -76,8 +76,8 @@ describe('profile reducer thunk tests', () => {
         await thunk(dispatchMock, getStateMock, {})
 
         expect(dispatchMock).toBeCalledTimes(3)
-        expect(dispatchMock).toHaveBeenNthCalledWith(1, toggleFollowingProgress(true, 1))
-        expect(dispatchMock).toHaveBeenNthCalledWith(2, toggleFollowingProgress(false, 1))
+        expect(dispatchMock).toHaveBeenNthCalledWith(1, userActions.toggleFollowingProgress(true, 1))
+        expect(dispatchMock).toHaveBeenNthCalledWith(2, userActions.toggleFollowingProgress(false, 1))
         // expect(dispatchMock).toHaveBeenNthCalledWith(3, setProfile({
         //     aboutMe: 'my life',
         //     userId: 1,

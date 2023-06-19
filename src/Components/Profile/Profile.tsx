@@ -14,14 +14,14 @@ export const Profile = () => {
     const authorizedUserId = useAppSelector(selectAuthId)
 
     useEffect(() => {
-        let profileId: number | null = Number(userId)
+        const profileId: number | null = Number(userId)
         if (profileId) {
             dispatch(getProfile(profileId))
             dispatch(getStatus(profileId))
         } else {
             if (isAuth && authorizedUserId) {
-                dispatch(getProfile(profileId))
-                dispatch(getStatus(profileId))
+                dispatch(getProfile(authorizedUserId))
+                dispatch(getStatus(authorizedUserId))
             }
         }
     }, [userId, isAuth, authorizedUserId])

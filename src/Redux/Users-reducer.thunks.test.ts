@@ -1,7 +1,4 @@
-import {
-    follow, followSuccess, getUsers, setTotalUsersCount, setUsers, toggleFollowingProgress, toggleIsFetching,
-    unFollow, unfollowSuccess, UsersInitialStateType
-} from 'Redux/Users-reducer'
+import {follow, getUsers, unFollow, userActions, UsersInitialStateType} from 'Redux/Users-reducer'
 import {usersAPI} from 'Api'
 import {GetUsersResponseType} from 'Api/User-api'
 import {ResponseType} from 'Api/Auth-api'
@@ -83,9 +80,9 @@ describe('users reducer thunk tests', () => {
         await thunk(dispatchMock, getStateMock, {})
 
         expect(dispatchMock).toBeCalledTimes(3)
-        expect(dispatchMock).toHaveBeenNthCalledWith(1, toggleFollowingProgress(true, 1))
-        expect(dispatchMock).toHaveBeenNthCalledWith(2, followSuccess(1))
-        expect(dispatchMock).toHaveBeenNthCalledWith(3, toggleFollowingProgress(false, 1))
+        expect(dispatchMock).toHaveBeenNthCalledWith(1, userActions.toggleFollowingProgress(true, 1))
+        expect(dispatchMock).toHaveBeenNthCalledWith(2, userActions.followSuccess(1))
+        expect(dispatchMock).toHaveBeenNthCalledWith(3, userActions.toggleFollowingProgress(false, 1))
     })
 
     test('success unFollow thunk', async () => {
@@ -96,9 +93,9 @@ describe('users reducer thunk tests', () => {
         await thunk(dispatchMock, getStateMock, {})
 
         expect(dispatchMock).toBeCalledTimes(3)
-        expect(dispatchMock).toHaveBeenNthCalledWith(1, toggleFollowingProgress(true, 2))
-        expect(dispatchMock).toHaveBeenNthCalledWith(2, unfollowSuccess(2))
-        expect(dispatchMock).toHaveBeenNthCalledWith(3, toggleFollowingProgress(false, 2))
+        expect(dispatchMock).toHaveBeenNthCalledWith(1, userActions.toggleFollowingProgress(true, 2))
+        expect(dispatchMock).toHaveBeenNthCalledWith(2, userActions.unfollowSuccess(2))
+        expect(dispatchMock).toHaveBeenNthCalledWith(3, userActions.toggleFollowingProgress(false, 2))
     })
 
     test('success requestUsers thunk', async () => {
@@ -109,9 +106,9 @@ describe('users reducer thunk tests', () => {
         await thunk(dispatchMock, getStateMock, {})
 
         expect(dispatchMock).toBeCalledTimes(4)
-        expect(dispatchMock).toHaveBeenNthCalledWith(1, toggleIsFetching(true))
-        expect(dispatchMock).toHaveBeenNthCalledWith(2, toggleIsFetching(false))
-        expect(dispatchMock).toHaveBeenNthCalledWith(3, setUsers([]))
-        expect(dispatchMock).toHaveBeenNthCalledWith(4, setTotalUsersCount(1))
+        expect(dispatchMock).toHaveBeenNthCalledWith(1, userActions.toggleIsFetching(true))
+        expect(dispatchMock).toHaveBeenNthCalledWith(2, userActions.toggleIsFetching(false))
+        expect(dispatchMock).toHaveBeenNthCalledWith(3, userActions.setUsers([]))
+        expect(dispatchMock).toHaveBeenNthCalledWith(4, userActions.setTotalUsersCount(1))
     })
 })

@@ -7,7 +7,7 @@ import {
     selectUsersPortionSize,
     selectUsersTotalCount
 } from 'Store/Selectors'
-import {getUsers, setCurrentPage} from 'Redux/Users-reducer'
+import {getUsers, userActions} from 'Redux/Users-reducer'
 
 
 type PaginatorPropsType = {
@@ -40,7 +40,7 @@ export const Paginator = (props: PaginatorPropsType) => {
     }, [currentPage])
 
     const onPageChanged = (pageNumber: number) => {
-        dispatch(setCurrentPage(pageNumber))
+        dispatch(userActions.setCurrentPage(pageNumber))
         dispatch(getUsers(pageNumber, pageSize))
     }
 

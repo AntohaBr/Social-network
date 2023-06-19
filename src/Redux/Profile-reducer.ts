@@ -1,11 +1,8 @@
 import {profileAPI} from 'Api'
 import {AppThunkType, InferActionsTypes} from 'Store/Store'
-import {stopSubmit} from 'redux-form'
-import {AxiosError} from 'axios'
-import {toggleIsFetching} from 'Redux/Users-reducer'
-import {appActions} from "Redux/App-reducer";
-import {handleServerNetworkError} from "Utils/Error-handler";
-import {ResultCodeEnum} from "Api/Auth-api";
+import {appActions} from 'Redux/App-reducer'
+import {handleServerNetworkError} from 'Utils/Error-handler'
+import {ResultCodeEnum} from 'Api/Auth-api'
 
 const initialState = {
     posts: [
