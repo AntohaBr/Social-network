@@ -4,7 +4,7 @@ import reportWebVitals from './reportWebVitals'
 import {HashRouter} from 'react-router-dom'
 import {Provider} from 'react-redux'
 import {store} from 'Store/Store'
-import {App} from 'App'
+import {App} from 'App/App'
 
     ReactDOM.render(
         <HashRouter>
