@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useEffect, useState} from 'react'
 import {useAppDispatch, useAppSelector} from 'Utils'
 import {selectProfileStatus} from 'Store/Selectors'
-import {updateStatus} from 'Redux/Profile-reducer'
+import {updateStatus} from 'Redux/Profile-reducer/Profile-reducer'
 
 export const ProfileStatus = () => {
     const dispatch = useAppDispatch()

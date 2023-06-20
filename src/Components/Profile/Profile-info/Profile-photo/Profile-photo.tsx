@@ -3,7 +3,7 @@ import defaultUserPhoto from 'Assets/Images/defaultUserPhoto.jpg'
 import s from 'Components/Profile/Profile-info/Profile-info.module.css'
 import {useAppDispatch, useAppSelector} from 'Utils'
 import {selectProfilePhotosSmall} from 'Store/Selectors'
-import {savePhoto} from 'Redux/Profile-reducer'
+import {savePhoto} from 'Redux/Profile-reducer/Profile-reducer'
 
 type ProfilePhotoPropsType = {
     isOwner: boolean

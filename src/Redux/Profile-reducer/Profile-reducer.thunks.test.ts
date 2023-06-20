@@ -1,6 +1,6 @@
 import {profileAPI} from 'Api'
 import {userActions, UsersInitialStateType} from 'Redux/Users-reducer/Users-reducer'
-import {getProfile, ProfileType} from 'Redux/Profile-reducer'
+import {getProfile, ProfileType} from 'Redux/Profile-reducer/Profile-reducer'
 
 
 jest.mock('../Api/Api')

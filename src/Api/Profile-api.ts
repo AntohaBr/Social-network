@@ -1,5 +1,5 @@
 import {instance} from 'Api/Instans'
-import {ProfileType} from 'Redux/Profile-reducer'
+import {ProfileType} from 'Redux/Profile-reducer/Profile-reducer'
 
 export const profileAPI = {
     getProfile(profileId: number) {

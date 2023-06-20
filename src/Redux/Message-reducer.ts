@@ -1,40 +1,51 @@
+import {InferActionsTypes} from 'Store/Store'
+
 const initialState = {
     dialogs: [
-        {id: 1, name: 'Anton'},
-        {id: 2, name: 'Igor'},
-        {id: 3, name: 'Sasha'},
-        {id: 4, name: 'Lena'},
-        {id: 5, name: 'Masha'},
-        {id: 6, name: 'Ira'}
+        {dialogId: 1, nameUser: 'Anton'},
+        {dialogId: 2, nameUser: 'Igor'},
+        {dialogId: 3, nameUser: 'Sasha'},
+        {dialogId: 4, nameUser: 'Lena'},
+        {dialogId: 5, nameUser: 'Masha'},
+        {dialogId: 6, nameUser: 'Ira'}
     ],
     messages: [
-        {id: 1, message: 'Hi'},
-        {id: 2, message: 'Ha Ha'},
-        {id: 3, message: 'Yo'},
-        {id: 4, message: 'Yo'},
-        {id: 5, message: 'Yo'},
-        {id: 6, message: 'Yo'}
+        {messageId: 1, message: 'Hi'},
+        {messageId: 2, message: 'Ha Ha'},
+        {messageId: 3, message: 'Yo'},
+        {messageId: 4, message: 'Yo'},
+        {messageId: 5, message: 'Yo'},
+        {messageId: 6, message: 'Yo'}
     ],
-    newMessageBody: ''
+    newMessageText: ''
 }
-
 
 //reducers
 export const messageReducer = (state: InitialStateType = initialState, action: MessageReducerActionType): InitialStateType => {
     switch (action.type) {
-        case 'Message/SEND_MESSAGE':
-            let body = action.newMessageBody
-            return {...state,messages:[...state.messages,{id: 7, message: body}]}
+        case 'message/SEND_MESSAGE':
+            const newMessage: MessageType = {
+                messageId: new Date().getTime(),
+                message: state.newMessageText
+            }
+            return {...state, messages: [...state.messages, newMessage], newMessageText: ''}
+        case 'message/UPDATED_MESSAGE_TEXT':
+            return {...state, newMessageText: action.updatedMessageText}
         default:
             return state
     }
 }
 
-
 //actions
-export const sendMessageAC = (newMessageBody:string) => ({type: 'Message/SEND_MESSAGE', newMessageBody} as const)
-
+export const messageActions = {
+    sendMessage: () => ({type: 'message/SEND_MESSAGE'} as const),
+    updateNewMessage: (updatedMessageText: string) => ({type: 'message/UPDATED_MESSAGE_TEXT', updatedMessageText} as const)
+}
 
 //types
 export type InitialStateType = typeof initialState
-export type MessageReducerActionType= ReturnType<typeof sendMessageAC>
+export type MessageReducerActionType = InferActionsTypes<typeof messageActions>
+export type MessageType = {
+    messageId: number,
+    message: string
+}

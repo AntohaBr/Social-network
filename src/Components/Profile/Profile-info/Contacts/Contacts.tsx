@@ -2,7 +2,7 @@ import React from 'react'
 import s from 'Components/Profile/Profile-info/Profile-info.module.css'
 import {useAppSelector} from 'Utils'
 import {selectProfile} from 'Store/Selectors'
-import {ContactsResponseType} from 'Redux/Profile-reducer'
+import {ContactsResponseType} from 'Redux/Profile-reducer/Profile-reducer'
 
 export const Contacts = () => {
     const profile = useAppSelector(selectProfile)

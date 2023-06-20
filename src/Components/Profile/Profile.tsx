@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {getProfile, getStatus} from 'Redux/Profile-reducer'
+import {getProfile, getStatus} from 'Redux/Profile-reducer/Profile-reducer'
 import {ProfileInfo} from "Components/Profile/Profile-info"
 import {useAppDispatch, useAppSelector} from 'Utils'
 import {useParams} from 'react-router-dom'

@@ -1,4 +1,4 @@
-import {initialStateType, PostType, profileActions, profileReducer, ProfileType} from 'Redux/Profile-reducer'
+import {initialStateType, PostType, profileActions, profileReducer, ProfileType} from 'Redux/Profile-reducer/Profile-reducer'
 
 
 let startState: initialStateType
