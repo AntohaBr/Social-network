@@ -2,12 +2,12 @@ import React, {useEffect} from 'react'
 import {getProfile, getStatus} from 'Redux/Profile-reducer/Profile-reducer'
 import {ProfileInfo, MyPosts} from "Components/Profile"
 import {useAppDispatch, useAppSelector} from 'Utils'
-import {useParams} from 'react-router-dom'
+import {Navigate, useParams} from 'react-router-dom'
 import {selectAuthId, selectIsAuth} from 'Store/Selectors'
+import {PATH} from 'Constants/Routing-constants'
 
 export const Profile = () => {
     let {userId} = useParams()
-
     const dispatch = useAppDispatch()
     const isAuth = useAppSelector(selectIsAuth)
     const authorizedUserId = useAppSelector(selectAuthId)
@@ -25,11 +25,13 @@ export const Profile = () => {
         }
     }, [userId, isAuth, authorizedUserId])
 
+    if (!isAuth) {
+        return <Navigate to={PATH.LOGIN}/>
+    }
+
     return (
         <div>
-            <ProfileInfo
-                isOwner={!userId}
-            />
+            <ProfileInfo isOwner={!userId}/>
             <MyPosts/>
         </div>
     )

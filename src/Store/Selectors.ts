@@ -8,14 +8,12 @@ export const selectUsersCurrentPage = (state: AppStateType) => state.usersPage.c
 export const selectUsersIsFetching = (state: AppStateType) => state.usersPage.isFetching
 export const selectUsersFollowingInProgress = (state: AppStateType) => state.usersPage.followingInProgress
 export const selectUsersPortionSize = (state: AppStateType) => state.usersPage.portionSize
-export const selectUsersError = (state: AppStateType) => state.usersPage.error
 
 //selectorsProfile
 export const selectProfile = (state: AppStateType) => state.profilePage.profile
 export const selectProfilePhotosSmall = (state: AppStateType) => state.profilePage.profile?.photos?.small
 export const selectProfileStatus = (state: AppStateType) => state.profilePage.status
 export const selectProfilePosts = (state: AppStateType) => state.profilePage.posts
-export const selectProfileNewPostText = (state: AppStateType) => state.profilePage.newPostText
 
 //selectorsAuth
 export const selectIsAuth = (state: AppStateType) => state.auth.isAuth
@@ -25,6 +23,7 @@ export const selectCaptchaURL = (state: AppStateType) => state.auth.captchaURL
 
 //selectorsApp
 export const selectInitializeApp = (state: AppStateType) => state.app.initialized
+export const selectStatusApp = (state: AppStateType) => state.app.status
 
 //selectorsMessage
 export const selectMessages = (state: AppStateType) => state.messagePage.messages

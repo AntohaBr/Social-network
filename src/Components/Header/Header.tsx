@@ -5,6 +5,7 @@ import {useAppDispatch, useAppSelector} from 'Utils'
 import {selectAuthId, selectIsAuth, selectLogin, selectProfile, selectProfilePhotosSmall} from 'Store/Selectors'
 import {logOut} from 'Redux/Auth-reducer'
 import defaultUserPhoto from 'Assets/Images/defaultUserPhoto.jpg'
+import {PATH} from 'Constants/Routing-constants'
 
 export const Header = () => {
     const dispatch = useAppDispatch()
@@ -17,11 +18,11 @@ export const Header = () => {
     const isMyProfile = loginId === profile.userId
 
     const onClickLogOutHandler = () => {
-        dispatch(logOut())
+        dispatch(logOut(navigateToLogin))
     }
 
     const navigateToLogin = () => {
-        navigate('/login')
+        navigate(PATH.LOGIN)
     }
 
     return (

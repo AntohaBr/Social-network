@@ -60,7 +60,7 @@ export const Paginator = (props: PaginatorPropsType) => {
             {pages
                 .filter(page => page >= leftPortionPageNumber && page <= rightPortionPageNumber)
                 .map(page => {
-                    return <span className={currentPage === page ? s.selected : ''}
+                    return <span key={page} className={currentPage === page ? s.selected : ''}
                                  onClick={() => onPageChanged(page)}>{page}</span>
                 })}
             {portionCount > portionNumber &&

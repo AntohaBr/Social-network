@@ -65,12 +65,13 @@ export const login = (data: LoginDataType): AppThunkType => async (dispatch) => 
     }
 }
 
-export const logOut = (): AppThunkType => async (dispatch) => {
+export const logOut = (cb?: () => void): AppThunkType => async (dispatch) => {
     dispatch(appActions.setAppStatus('loading'))
     try {
         const res = await authAPI.logOut()
         if (res.resultCode === ResultCodeEnum.Success) {
             dispatch(authActions.setAuthUserData(null, null, null, false))
+            cb && cb()
             dispatch(appActions.setAppStatus('success'))
         } else {
             handleServerAppError(res, dispatch)

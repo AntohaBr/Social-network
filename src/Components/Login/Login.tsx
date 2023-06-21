@@ -1,17 +1,16 @@
 import React from 'react'
-import {useNavigate} from 'react-router-dom'
+import {LoginForm} from 'Components/Login'
+import {PATH} from 'Constants/Routing-constants'
+import {Navigate, useNavigate} from 'react-router-dom'
 import {useAppSelector} from 'Utils'
 import {selectIsAuth} from 'Store/Selectors'
-import {LoginForm} from 'Components/Login'
 
 export const Login = () => {
-    const navigate = useNavigate()
     const isAuth = useAppSelector(selectIsAuth)
 
     if (isAuth) {
-        navigate('/Profile')
+        return <Navigate to={PATH.PROFILE}/>
     }
-
     return (
         <div>
             <h1>Login</h1>
