@@ -7,12 +7,12 @@ type DialogItemPropsType = {
     nameUser: string
 }
 
-export const DialogItem: FC<DialogItemPropsType> = ({dialogId,nameUser}) => {
-    let dialogPath = '/Dialogs/' + dialogId
-    return (
-        <div className={s.dialog + ' ' + s.active}>
-            <NavLink to={dialogPath}>{nameUser}</NavLink>
-        </div>
-    )
-}
-
+export const DialogItem: FC<DialogItemPropsType> = React.memo(({dialogId, nameUser}) => {
+        let dialogPath = '/Dialogs/' + dialogId
+        return (
+            <div className={s.dialog + ' ' + s.active}>
+                <NavLink to={dialogPath}>{nameUser}</NavLink>
+            </div>
+        )
+    }
+)
