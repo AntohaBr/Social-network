@@ -1,10 +1,10 @@
 import {Navigate, Route, Routes} from 'react-router-dom'
 import {Login} from 'Components/Login'
 import {Profile} from 'Components/Profile'
-import {Users} from 'Components/Users/Users'
+import {Users} from 'Components/Users'
 import React from 'react'
 import {PATH} from 'Constants/Routing-constants'
-import {Dialogs} from 'Components/Dialogs/Dialogs'
+import {Dialogs} from 'Components/Dialogs'
 
 export const PagesRoutes = () => {
     return (

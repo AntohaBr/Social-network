@@ -1,10 +1,9 @@
 import React from 'react'
 import s from './Dialogs.module.css'
-import {Message} from './Message/Message'
-import {DialogItem} from './Dalog-item/Dialogs-item'
 import {useAppSelector} from 'Utils'
 import {selectDialogs, selectMessages} from 'Store/Selectors'
-import {MessageForm} from 'Components/Dialogs/Message-form/Message-form'
+import {DialogItem, Message, MessageForm} from 'Components/Dialogs'
+
 
 export const Dialogs = () => {
     const messages = useAppSelector(selectMessages)

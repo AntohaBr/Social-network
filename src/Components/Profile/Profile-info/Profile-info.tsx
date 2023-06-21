@@ -4,7 +4,7 @@ import {Preloader} from 'Common'
 import {ProfileType, saveProfile} from 'Redux/Profile-reducer/Profile-reducer'
 import {useAppDispatch, useAppSelector} from 'Utils'
 import {selectProfile} from 'Store/Selectors'
-import {ProfileStatus, ProfilePhoto, ProfileData, ProfileDataForm} from 'Components/Profile/Profile-info'
+import {ProfileStatus, ProfilePhoto, ProfileData, ProfileDataForm} from 'Components/Profile'
 
 type ProfileInfoPropsType = {
     isOwner: boolean

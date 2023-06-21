@@ -6,8 +6,8 @@ import {ResultCodeEnum} from 'Api/Auth-api'
 
 const initialState = {
     posts: [
-        {id: 1, message: 'Hi, how a you?', likesCount: 12},
-        {id: 2, message: 'It`s my first Post', likesCount: 10}
+        {postId: 1, message: 'Hi, how a you?', likesCount: 12},
+        {postId: 2, message: 'It`s my first Post', likesCount: 10}
     ] as PostType[],
     newPostText: '',
     profile: {} as ProfileType,
@@ -17,20 +17,22 @@ const initialState = {
 //reducers
 export const profileReducer = (state: initialStateType = initialState, action: ProfileReducerActionTypes): initialStateType => {
     switch (action.type) {
-        case 'Profile/ADD_POST':
+        case 'profile/ADD_POST':
             const newPost: PostType = {
-                id: new Date().getTime(),
-                message: action.newPostsText,
+                postId: new Date().getTime(),
+                message: state.newPostText,
                 likesCount: 0
             }
-            return {...state, posts: [...state.posts, newPost]}
-        case 'Profile/SET_PROFILE':
+            return {...state, posts: [newPost, ...state.posts], newPostText: ''}
+        case 'profile/SET_PROFILE':
             return {...state, profile: action.profile}
-        case 'Profile/SET_STATUS':
+        case 'profile/UPDATE_NEW_POST_TEXT':
+            return {...state, newPostText: action.updatedPostText}
+        case 'profile/SET_STATUS':
             return {...state, status: action.status}
-        case 'Profile/DELETE_POST':
-            return {...state, posts: state.posts.filter(p => p.id !== action.id)}
-        case 'Profile/SAVE_PHOTO':
+        case 'profile/DELETE_POST':
+            return {...state, posts: state.posts.filter(p => p.postId !== action.postId)}
+        case 'profile/SAVE_PHOTO':
             return {...state, profile: {...state.profile, photos: action.photos} as ProfileType}
         default:
             return state
@@ -112,11 +114,12 @@ export const saveProfile = (data: ProfileType): AppThunkType => async (dispatch,
 
 //actions
 export const profileActions = {
-    addPost: (newPostsText: string) => ({type: 'Profile/ADD_POST', newPostsText} as const),
-    setProfile: (profile: ProfileType) => ({type: 'Profile/SET_PROFILE', profile} as const),
-    setStatus: (status: string) => ({type: 'Profile/SET_STATUS', status} as const),
-    deletePost: (id: number) => ({type: 'Profile/DELETE_POST', id} as const),
-    savePhotoAC: (photos: PhotosResponseType) => ({type: 'Profile/SAVE_PHOTO', photos} as const)
+    addPost: (newPostText: string) => ({type: 'profile/ADD_POST', newPostText} as const),
+    updateNewPostText: (updatedPostText: string) => ({type: 'profile/UPDATE_NEW_POST_TEXT', updatedPostText} as const),
+    setProfile: (profile: ProfileType) => ({type: 'profile/SET_PROFILE', profile} as const),
+    setStatus: (status: string) => ({type: 'profile/SET_STATUS', status} as const),
+    deletePost: (postId: number) => ({type: 'profile/DELETE_POST', postId} as const),
+    savePhotoAC: (photos: PhotosResponseType) => ({type: 'profile/SAVE_PHOTO', photos} as const)
 }
 
 //types
@@ -125,7 +128,7 @@ export type initialStateType = typeof initialState
 export type ProfileReducerActionTypes = InferActionsTypes<typeof profileActions>
 
 export type PostType = {
-    id: number,
+    postId: number,
     message: string,
     likesCount: number
 }

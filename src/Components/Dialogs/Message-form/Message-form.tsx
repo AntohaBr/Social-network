@@ -20,7 +20,7 @@ export const MessageForm = () => {
         setMessage('')
     }
 
-    const onMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const onMessageChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setMessage(e.currentTarget.value)
         dispatch(messageActions.updateNewMessage(e.currentTarget.value))
     }
@@ -38,11 +38,11 @@ export const MessageForm = () => {
                         {...register('message', {
                             required: {
                                 value: true,
-                                message: 'Write something)',
+                                message: 'Write something',
                             }
                         })}
                         value={message}
-                        onChange={onMessageChange}
+                        onChange={onMessageChangeHandler}
                     />
                 </div>
                 {errors.message && <div> {Object.values(errors).map((e, idx) => {

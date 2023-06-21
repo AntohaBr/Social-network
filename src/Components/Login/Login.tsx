@@ -2,7 +2,7 @@ import React from 'react'
 import {useNavigate} from 'react-router-dom'
 import {useAppSelector} from 'Utils'
 import {selectIsAuth} from 'Store/Selectors'
-import {LoginForm} from 'Components/Login/Login-form/Login-form'
+import {LoginForm} from 'Components/Login'
 
 export const Login = () => {
     const navigate = useNavigate()

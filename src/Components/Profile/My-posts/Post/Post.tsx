@@ -1,6 +1,6 @@
 import React, {FC, useState} from 'react'
 import s from './Post.module.css'
-import {useAppSelector} from 'Utils/Hooks'
+import {useAppSelector} from 'Utils'
 import {selectProfilePhotosSmall} from 'Store/Selectors'
 import defaultUserPhoto from 'Assets/Images/defaultUserPhoto.jpg'
 

@@ -29,8 +29,8 @@ export const messageReducer = (state: InitialStateType = initialState, action: M
                 message: state.newMessageText
             }
             return {...state, messages: [...state.messages, newMessage], newMessageText: ''}
-        case 'message/UPDATED_MESSAGE_TEXT':
-            return {...state, newMessageText: action.updatedMessageText}
+        case 'message/UPDATE_MESSAGE_TEXT':
+            return {...state, newMessageText: action.updateMessageText}
         default:
             return state
     }
@@ -39,7 +39,7 @@ export const messageReducer = (state: InitialStateType = initialState, action: M
 //actions
 export const messageActions = {
     sendMessage: () => ({type: 'message/SEND_MESSAGE'} as const),
-    updateNewMessage: (updatedMessageText: string) => ({type: 'message/UPDATED_MESSAGE_TEXT', updatedMessageText} as const)
+    updateNewMessage: (updateMessageText: string) => ({type: 'message/UPDATE_MESSAGE_TEXT', updateMessageText} as const)
 }
 
 //types

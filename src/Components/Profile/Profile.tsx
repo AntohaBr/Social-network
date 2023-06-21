@@ -1,10 +1,9 @@
 import React, {useEffect} from 'react'
 import {getProfile, getStatus} from 'Redux/Profile-reducer/Profile-reducer'
-import {ProfileInfo} from "Components/Profile/Profile-info"
+import {ProfileInfo, MyPosts} from "Components/Profile"
 import {useAppDispatch, useAppSelector} from 'Utils'
 import {useParams} from 'react-router-dom'
 import {selectAuthId, selectIsAuth} from 'Store/Selectors'
-import {MyPosts} from 'Components/Profile/My-posts'
 
 export const Profile = () => {
     let {userId} = useParams()

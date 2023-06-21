@@ -6,10 +6,10 @@ let startState: initialStateType
 beforeEach (() => {
     startState = {
         posts: [
-            {id: 1, message: 'Hi, how a you?', likesCount: 12},
-            {id: 2, message: 'It`s my first Post', likesCount: 10},
-            {id: 3, message: 'Yes', likesCount: 10},
-            {id: 4, message: 'Dada', likesCount: 10}
+            {postId: 1, message: 'Hi, how a you?', likesCount: 12},
+            {postId: 2, message: 'It`s my first Post', likesCount: 10},
+            {postId: 3, message: 'Yes', likesCount: 10},
+            {postId: 4, message: 'Dada', likesCount: 10}
         ] as PostType[],
         newPostText: '',
         profile: {} as ProfileType,
@@ -19,7 +19,7 @@ beforeEach (() => {
 
 
 test ('Message of new Post should be correct', () => {
- const action = profileActions.addPost ('Hi friends')
+ const action = profileActions.updateNewPostText('Hi friends')
 
     const newState = profileReducer (startState,action)
 
