@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, MouseEvent} from 'react'
 import {useAppDispatch, useAppSelector, validate} from 'Utils'
 import {useFormik} from 'formik'
 import {login} from 'Redux/Auth-reducer'
@@ -6,9 +6,29 @@ import {LoginDataType} from 'Api/Auth-api'
 import {selectCaptchaURL} from 'Store/Selectors'
 import s from 'Components/Login/Login-form/Login-form.module.scss'
 
+interface state {
+    password: string;
+    showPassword: boolean;
+}
+
 export const LoginForm = () => {
     const dispatch = useAppDispatch()
     const captchaURL = useAppSelector(selectCaptchaURL)
+
+
+    const [showPassword, setShowPassword] = useState<state>({
+        password: '',
+        showPassword: false,
+
+    })
+
+    const onClickHandlerShowPassword = () => {
+        setShowPassword({...showPassword, showPassword: !showPassword.showPassword});
+    }
+
+    const onMouseDownHandler = (event: MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+    }
 
     const formik = useFormik({
             initialValues: {
@@ -45,11 +65,12 @@ export const LoginForm = () => {
                     className={s.loginForm_input}
                     id='password'
                     name='password'
-                    type='password'
                     placeholder={'Password'}
                     onChange={formik.handleChange}
+                    type={showPassword.showPassword ? 'password' : 'text'}
                     value={formik.values.password}
                 />
+                <button onClick={onClickHandlerShowPassword}   onMouseDown={onMouseDownHandler}>Go</button>
                 {formik.errors.password ?
                     <div className={s.loginForm_error}>{formik.errors.password}</div> : null}
             </div>
