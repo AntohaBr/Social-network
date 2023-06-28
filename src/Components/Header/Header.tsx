@@ -2,7 +2,14 @@ import React from 'react'
 import s from './Header.module.css'
 import {useNavigate} from 'react-router-dom'
 import {useAppDispatch, useAppSelector} from 'Utils'
-import {selectAuthId, selectIsAuth, selectLogin, selectProfile, selectProfilePhotosSmall} from 'Store/Selectors'
+import {
+    selectAuthId,
+    selectInitializeApp,
+    selectIsAuth,
+    selectLogin,
+    selectProfile,
+    selectProfilePhotosSmall
+} from 'Store/Selectors'
 import {logOut} from 'Redux/Auth-reducer'
 import defaultUserPhoto from 'Assets/Images/defaultUserPhoto.jpg'
 import {PATH} from 'Constants/Routing-constants'
@@ -26,17 +33,22 @@ export const Header = () => {
     }
 
     return (
-        <header className={s.header}>
-            <img alt='logo' src="https://i.pinimg.com/originals/b9/05/3d/b9053d873e9f69058997913e0fffca2e.png"/>
+        <div>
             {isAuth &&
-                <div className={s.headerControl}>
-                    {isMyProfile &&
-                        <img alt='userPhoto' src={userPhoto ? userPhoto : defaultUserPhoto} className={s.mainPhoto}/>
+                <header className={s.header}>
+                    <img alt='logo' src="https://i.pinimg.com/originals/b9/05/3d/b9053d873e9f69058997913e0fffca2e.png"/>
+                    {isAuth &&
+                        <div className={s.headerControl}>
+                            {isMyProfile &&
+                                <img alt='userPhoto' src={userPhoto ? userPhoto : defaultUserPhoto}
+                                     className={s.mainPhoto}/>
+                            }
+                            <span className={s.userName}>{login}</span>
+                            <button onClick={onClickLogOutHandler} className={s.buttonLogOut}>Log Out</button>
+                        </div>
                     }
-                    <span className={s.userName}>{login}</span>
-                    <button onClick={onClickLogOutHandler} className={s.buttonLogOut}>Log Out</button>
-                </div>
+                </header>
             }
-        </header>
+        </div>
     )
 }

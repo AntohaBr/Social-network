@@ -1,0 +1,8 @@
+@import '../../Common/Styles/Mixins';
+
+.loginPage_wrapper {
+  background-image: url("https://www.radiustheme.com/demo/wordpress/themes/cirkle/wp-content/themes/cirkle/assets/img/hero_1.jpg");
+  @include container();
+  background-size: cover;
+  @include flex(row, center, center, nowrap);
+}

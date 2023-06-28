@@ -4,6 +4,7 @@ import {PATH} from 'Constants/Routing-constants'
 import {Navigate} from 'react-router-dom'
 import {useAppSelector} from 'Utils'
 import {selectIsAuth} from 'Store/Selectors'
+import s from './Login.module.scss'
 
 export const Login = () => {
     const isAuth = useAppSelector(selectIsAuth)
@@ -12,8 +13,7 @@ export const Login = () => {
         return <Navigate to={PATH.PROFILE}/>
     }
     return (
-        <div>
-            <h1>Login</h1>
+        <div className={s.loginPage_wrapper}>
             <LoginForm/>
         </div>
     )
