@@ -3,8 +3,10 @@ import {useAppDispatch, useAppSelector, validate} from 'Utils'
 import {useFormik} from 'formik'
 import {login} from 'Redux/Auth-reducer'
 import {LoginDataType} from 'Api/Auth-api'
-import {selectCaptchaURL} from 'Store/Selectors'
+import {selectCaptcha} from 'Store/Selectors'
 import s from 'Components/Login/Login-form/Login-form.module.scss'
+import {Eye} from "Common/Svg-icon/Eye";
+import {EyeSlash} from "Common/Svg-icon/Eye-slash";
 
 interface state {
     password: string;
@@ -13,7 +15,7 @@ interface state {
 
 export const LoginForm = () => {
     const dispatch = useAppDispatch()
-    const captchaURL = useAppSelector(selectCaptchaURL)
+    const captchaURL = useAppSelector(selectCaptcha)
 
 
     const [showPassword, setShowPassword] = useState<state>({
@@ -70,7 +72,9 @@ export const LoginForm = () => {
                     type={showPassword.showPassword ? 'password' : 'text'}
                     value={formik.values.password}
                 />
-                <button onClick={onClickHandlerShowPassword}   onMouseDown={onMouseDownHandler}>Go</button>
+                <button onClick={onClickHandlerShowPassword} onMouseDown={onMouseDownHandler} className={s.loginForm_button_eye}>
+                    {showPassword.showPassword ? <EyeSlash/> : <Eye/>}
+                </button>
                 {formik.errors.password ?
                     <div className={s.loginForm_error}>{formik.errors.password}</div> : null}
             </div>

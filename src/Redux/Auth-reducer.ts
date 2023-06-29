@@ -9,7 +9,7 @@ const initialState = {
     login: null as string | null,
     id: null as number | null,
     isAuth: false as boolean,
-    captchaURL: null as null | string
+    captcha: null as string | null
 }
 
 //reducers
@@ -21,8 +21,8 @@ export const authReducer = (state: initialStateType = initialState, action: Auth
                 ...action.payload
             }
         }
-        case 'auth/GET_CAPTCHA_URL':
-            return {...state, captchaURL: action.captchaURL}
+        case 'auth/GET_CAPTCHA':
+            return {...state, captcha: action.captchaUrl}
         default:
             return state
     }
@@ -87,7 +87,7 @@ export const getCaptchaURL = (): AppThunkType => async (dispatch) => {
     dispatch(appActions.setAppStatus('loading'))
     try {
         const res = await securityAPI.getCaptchaURL()
-        const captchaURL = res.data.url
+        const captchaURL = res.url
         dispatch(authActions.getCaptchaURL(captchaURL))
         dispatch(appActions.setAppStatus('success'))
     } catch (e) {
@@ -101,7 +101,7 @@ export const getCaptchaURL = (): AppThunkType => async (dispatch) => {
 export const authActions = {
     setAuthUserData: (id: number | null, login: string | null, email: string | null, isAuth: boolean) =>
         ({type: 'auth/SET_USER_DATA', payload: {email, login, id, isAuth}} as const),
-    getCaptchaURL: (captchaURL: string | null) => ({type: 'auth/GET_CAPTCHA_URL', captchaURL} as const)
+    getCaptchaURL: (captchaUrl: string) => ({type: 'auth/GET_CAPTCHA', captchaUrl} as const)
 }
 
 //types

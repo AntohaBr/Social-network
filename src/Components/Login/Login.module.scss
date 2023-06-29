@@ -1,8 +1,27 @@
 @import '../../Common/Styles/Mixins';
+@import '../../Common/Styles/Variables';
 
 .loginPage_wrapper {
   background-image: url("https://www.radiustheme.com/demo/wordpress/themes/cirkle/wp-content/themes/cirkle/assets/img/hero_1.jpg");
   @include container();
   background-size: cover;
   @include flex(row, center, center, nowrap);
+
+  .loginPage_pane {
+    background-color: $formColor;
+    min-width: 300px;
+    border-radius: 15px;
+    padding: 50px 60px;
+    box-shadow: 0 19px 73px 0 rgba(0, 0, 0, .17);
+
+
+    .loginPage_test_pane {
+      border: 1px solid #2305ff;
+
+    }
+  }
+
+
+
+
 }

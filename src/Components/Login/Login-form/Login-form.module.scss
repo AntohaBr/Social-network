@@ -2,11 +2,11 @@
 @import '../../../Common/Styles/Variables';
 
 .loginForm_wrapper {
-  background-color: $formColor;
-  min-width: 300px;
-  border-radius: 15px;
-  padding: 50px 60px;
-  box-shadow: 0 19px 73px 0 rgba(0, 0, 0, .17);
+  //background-color: $formColor;
+  //min-width: 300px;
+  //border-radius: 15px;
+  //padding: 50px 60px;
+  //box-shadow: 0 19px 73px 0 rgba(0, 0, 0, .17);
 
   .loginForm_title_block {
     @include flex(row, center, center, nowrap);
@@ -32,6 +32,7 @@
   .loginForm_group {
     margin-bottom: 10px;
     height: 50px;
+    position: relative;
 
     :active, :hover, :focus {
       outline: 0;
@@ -46,6 +47,15 @@
       border-bottom: 1px solid #eaeaea;
       width: 100%;
       line-height: 1.5;
+    }
+
+    .loginForm_button_eye {
+      border: none;
+      cursor: pointer;
+      background: none;
+      margin: 0;
+      padding: 0;
+      @include position(absolute, 0px, 0px, 16px, 300px);
     }
 
     .loginForm_error {
