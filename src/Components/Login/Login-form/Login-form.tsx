@@ -5,8 +5,7 @@ import {login} from 'Redux/Auth-reducer'
 import {LoginDataType} from 'Api/Auth-api'
 import {selectCaptcha} from 'Store/Selectors'
 import s from 'Components/Login/Login-form/Login-form.module.scss'
-import {Eye} from "Common/Svg-icon/Eye";
-import {EyeSlash} from "Common/Svg-icon/Eye-slash";
+import {Eye, EyeSlash} from 'Common'
 
 interface state {
     password: string;
@@ -45,7 +44,7 @@ export const LoginForm = () => {
         },
     )
     return (
-        <form onSubmit={formik.handleSubmit} className={s.loginForm_wrapper}>
+        <form onSubmit={formik.handleSubmit}>
             <div className={s.loginForm_title_block}>
                 <h3 className={s.loginForm_pane_title}>Sing In Your Account</h3>
             </div>

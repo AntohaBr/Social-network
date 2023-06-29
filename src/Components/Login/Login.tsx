@@ -18,7 +18,7 @@ export const Login = () => {
     }
 
     const onClickCopyPasswordHandler = () => {
-    setCopyPassword('Copied')
+        setCopyPassword('Copied')
         navigator.clipboard.writeText('free')
     }
 
@@ -31,16 +31,20 @@ export const Login = () => {
             <div className={s.loginPage_pane}>
                 <LoginForm/>
                 <div className={s.loginPage_test_pane}>
-                    <h4>Test Email and Password</h4>
-                    <div>
-                        <span>Email:</span>
-                        <span>free@samuraijs.com</span>
-                        <button onClick={onClickCopyEmailHandler}>{copyEmail}</button>
-                    </div>
-                    <div>
-                        <span>Password:</span>
-                        <span>free</span>
-                        <button onClick={onClickCopyPasswordHandler}>{copyPassword}</button>
+                    <h4 className={s.loginPage_test_pane_title}>Test Email and Password</h4>
+                    <div className={s.loginPage_test_pane_text}>
+                        <div className={s.loginPage_test_block}>
+                            <div className={s.loginPage_copy_text_title}>Email:</div>
+                            <span className={s.loginPage_copy_text}>free@samuraijs.com</span>
+                            <button onClick={onClickCopyEmailHandler}
+                                    className={s.loginPage_button_copy}>{copyEmail}</button>
+                        </div>
+                        <div className={s.loginPage_test_block}>
+                            <div className={s.loginPage_copy_text_title}>Password:</div>
+                            <span className={s.loginPage_copy_text}>free</span>
+                            <button onClick={onClickCopyPasswordHandler}
+                                    className={s.loginPage_button_copy}>{copyPassword}</button>
+                        </div>
                     </div>
                 </div>
             </div>

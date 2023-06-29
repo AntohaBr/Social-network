@@ -16,12 +16,41 @@
 
 
     .loginPage_test_pane {
+      @include flex(column, center, center, nowrap);
       border: 1px solid #2305ff;
+      margin-top: 30px;
+      border-radius: 15px;
 
+      .loginPage_test_pane_title {
+        @include text($textFontFamily, 14px, 400);
+      }
+
+      .loginPage_test_pane_text {
+
+        .loginPage_test_block {
+          @include size(280px, 30px);
+          @include flex(row, space-between, center, nowrap);
+
+          .loginPage_copy_text_title {
+            @include text($textFontFamily, 14px, 500);
+            width: 70px;
+          }
+
+          .loginPage_copy_text {
+            @include text($textFontFamily, 14px, 400);
+            width: 150px;
+          }
+
+          .loginPage_button_copy {
+            @include text($textFontFamily, 14px, 400);
+            @include size(60px, 20px);
+            cursor: pointer;
+            border: 1px solid $buttonColor;
+            border-radius: 4px;
+            background: none;
+          }
+        }
+      }
     }
   }
-
-
-
-
 }
