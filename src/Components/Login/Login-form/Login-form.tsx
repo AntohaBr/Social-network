@@ -68,11 +68,11 @@ export const LoginForm = () => {
                     name='password'
                     placeholder={'Password'}
                     onChange={formik.handleChange}
-                    type={showPassword.showPassword ? 'password' : 'text'}
+                    type={!showPassword.showPassword ? 'password' : 'text'}
                     value={formik.values.password}
                 />
                 <button onClick={onClickHandlerShowPassword} onMouseDown={onMouseDownHandler} className={s.loginForm_button_eye}>
-                    {showPassword.showPassword ? <EyeSlash/> : <Eye/>}
+                    {!showPassword.showPassword ? <EyeSlash/> : <Eye/>}
                 </button>
                 {formik.errors.password ?
                     <div className={s.loginForm_error}>{formik.errors.password}</div> : null}
