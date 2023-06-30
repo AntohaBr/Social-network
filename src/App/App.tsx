@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import 'App/App.css'
 import {useNavigate} from 'react-router-dom'
-import {Navbar, Header} from 'Components'
+import {Navbar, Header, Notification} from 'Components'
 import {useAppDispatch, useAppSelector} from 'Utils'
 import {selectInitializeApp, selectStatusApp} from 'Store/Selectors'
 import {initializeApp} from 'Redux/App-reducer'
@@ -27,6 +27,7 @@ export const App = () => {
         <div className='app-wrapper'>
             <Header/>
             <Navbar/>
+            <Notification/>
             <div className="app-wrapper-content">
                 {status === 'loading' && <Preloader/>}
                 <PagesRoutes/>

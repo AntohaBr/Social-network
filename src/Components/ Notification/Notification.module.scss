@@ -1,0 +1,24 @@
+@import '../../Common/Styles/Mixins';
+@import '../../Common/Styles/Variables';
+
+.notification_wrapper_error, .notification_wrapper_success {
+  padding: 5px 5px 5px 50px;
+  background-repeat: no-repeat;
+  //background-position: 10px center;
+  border-radius: 2px;
+  @include size(280px, 30px);
+  position: absolute;
+
+}
+
+.notification_wrapper_success {
+  color: #4F8A10;
+  background-color: #DFF2BF;
+  //background-image: url('../../../assets/image/Success.png');
+}
+
+.notification_wrapper_error {
+  color: #D8000C;
+  background-color: #FFBABA;
+  //background-image: url('src/Assets/Images/Error.png');
+}
