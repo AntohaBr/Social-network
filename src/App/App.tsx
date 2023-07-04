@@ -25,13 +25,11 @@ export const App = () => {
 
     return (
         <div className='app-wrapper'>
-            <Header/>
             <Navbar/>
+            <Header/>
             <Notification/>
-            <div className="app-wrapper-content">
-                {status === 'loading' && <Preloader/>}
-                <PagesRoutes/>
-            </div>
+            {status === 'loading' && <Preloader/>}
+            <PagesRoutes/>
         </div>
     )
 }

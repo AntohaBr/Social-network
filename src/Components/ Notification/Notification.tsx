@@ -3,6 +3,8 @@ import {useAppDispatch, useAppSelector} from 'Utils'
 import {selectErrorApp} from 'Store/Selectors'
 import {appActions} from 'Redux/App-reducer'
 import s from './Notification.module.scss'
+import Error from '../../Assets/Images/Error.png'
+import Success from '../../Assets/Images/Success.png'
 
 export const Notification = () => {
     const dispatch = useAppDispatch()
@@ -12,21 +14,21 @@ export const Notification = () => {
         dispatch(appActions.setAppError(null))
     }
 
-    // useEffect(() => {
-    //     const timer = setInterval(() => {
-    //         onClickHandlerCloseMessage()
-    //     }, 5000);
-    //     return () => clearInterval(timer);
-    // })
+    useEffect(() => {
+        const timer = setInterval(() => {
+            onClickHandlerCloseMessage()
+        }, 5000);
+        return () => clearInterval(timer);
+    })
 
     return (
-        <div className={errorMessage ? s.notification_wrapper_error : s.notification_wrapper_success}>
+        <div className={s.notification_wrapper_notification}>
             {errorMessage &&
-                <p onClick={onClickHandlerCloseMessage}>{errorMessage}</p>
+                <div className={s.notification_wrapper_error}>
+                    <img alt='error' src={Error}/>
+                    <span onClick={onClickHandlerCloseMessage} className={s.notification_wrapper_text}>{errorMessage}</span>
+                </div>
             }
-            {/*{successMessage &&*/}
-            {/*    <p onClick={onClickHandlerCloseMessage}>{successMessage}</p>*/}
-            {/*}*/}
         </div>
     )
 }
