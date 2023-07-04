@@ -55,6 +55,7 @@ export const login = (data: LoginDataType): AppThunkType => async (dispatch) => 
         if (res.resultCode === ResultCodeEnum.Success) {
             dispatch(getAuthUser())
             dispatch(appActions.setAppStatus('success'))
+            dispatch(appActions.setAppSuccessMessage('Login completed successfully'))
         } else {
             handleServerAppError(res, dispatch)
         }
@@ -73,6 +74,7 @@ export const logOut = (cb?: () => void): AppThunkType => async (dispatch) => {
             dispatch(authActions.setAuthUserData(null, null, null, false))
             cb && cb()
             dispatch(appActions.setAppStatus('success'))
+            dispatch(appActions.setAppSuccessMessage('Logout completed successfully'))
         } else {
             handleServerAppError(res, dispatch)
         }

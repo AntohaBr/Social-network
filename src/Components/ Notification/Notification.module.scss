@@ -4,25 +4,33 @@
 .notification_wrapper_notification {
   position: absolute;
   left: 20px;
-  bottom: 4px;
+  bottom: 15px;
   min-width: 300px;
 
-
-  .notification_wrapper_error {
+  .notification_wrapper_error_block, .notification_wrapper_success_block {
     @include flex(row, flex-start, center, wrap);
-    padding: 5px 10px 5px;
     border-radius: 10px;
-    background-color: #FFBABA;
+    padding: 5px 10px 5px;
 
-    .notification_wrapper_text {
-      color: #D8000C;
+    .notification_wrapper_error_text, .notification_wrapper_success_text {
       @include text($textFontFamily, 15px, 500);
       padding-left: 10px;
     }
+
+    .notification_wrapper_error_text {
+      color: #D8000C;
+    }
+
+    .notification_wrapper_success_text {
+      color: #4F8A10;
+    }
   }
 
-  .notification_wrapper_success {
-    color: #4F8A10;
+  .notification_wrapper_error_block {
+    background-color: #FFBABA;
+  }
+
+  .notification_wrapper_success_block {
     background-color: #DFF2BF;
   }
 }

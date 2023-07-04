@@ -25,6 +25,7 @@ export const selectCaptcha = (state: AppStateType) => state.auth.captcha
 export const selectInitializeApp = (state: AppStateType) => state.app.initialized
 export const selectStatusApp = (state: AppStateType) => state.app.status
 export const selectErrorApp = (state: AppStateType) => state.app.error
+export const selectSuccessMessageApp = (state: AppStateType) => state.app.successMessage
 
 //selectorsMessage
 export const selectMessages = (state: AppStateType) => state.messagePage.messages
