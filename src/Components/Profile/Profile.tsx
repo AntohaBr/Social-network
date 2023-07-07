@@ -5,6 +5,7 @@ import {useAppDispatch, useAppSelector} from 'Utils'
 import {Navigate, useParams} from 'react-router-dom'
 import {selectAuthId, selectIsAuth} from 'Store/Selectors'
 import {PATH} from 'Constants/Routing-constants'
+import s from './Profile.module.scss'
 
 export const Profile = () => {
     let {userId} = useParams()
@@ -30,7 +31,7 @@ export const Profile = () => {
     }
 
     return (
-        <div>
+        <div className={s.profile}>
             <ProfileInfo isOwner={!userId}/>
             <MyPosts/>
         </div>

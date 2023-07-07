@@ -1,5 +1,5 @@
 import React from 'react'
-import s from './Header.module.css'
+import s from 'Components/Header/Header.module.scss'
 import {useNavigate} from 'react-router-dom'
 import {useAppDispatch, useAppSelector} from 'Utils'
 import {

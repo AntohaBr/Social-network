@@ -1,5 +1,5 @@
 import React from 'react'
-import s from './Navbar.module.css'
+import s from 'Components/Navbar/Navbar.module.scss'
 import {NavLink} from 'react-router-dom'
 import {useAppSelector} from 'Utils'
 import {selectAuthId, selectIsAuth} from 'Store/Selectors'
