@@ -9,7 +9,7 @@ const initialState = {
     login: null as string | null,
     id: null as number | null,
     isAuth: false as boolean,
-    captcha: null as string | null
+    captchaUrl: null as string | null
 }
 
 //reducers
@@ -22,7 +22,7 @@ export const authReducer = (state: initialStateType = initialState, action: Auth
             }
         }
         case 'auth/GET_CAPTCHA':
-            return {...state, captcha: action.captchaUrl}
+            return {...state, captchaUrl: action.captchaUrl}
         default:
             return state
     }
@@ -57,6 +57,7 @@ export const login = (data: LoginDataType): AppThunkType => async (dispatch) => 
             dispatch(appActions.setAppStatus('success'))
             dispatch(appActions.setAppSuccessMessage('Login completed successfully'))
         } else {
+            dispatch(getCaptchaURL())
             handleServerAppError(res, dispatch)
         }
     } catch (e) {
@@ -89,8 +90,8 @@ export const getCaptchaURL = (): AppThunkType => async (dispatch) => {
     dispatch(appActions.setAppStatus('loading'))
     try {
         const res = await securityAPI.getCaptchaURL()
-        const captchaURL = res.url
-        dispatch(authActions.getCaptchaURL(captchaURL))
+        const captchaUrl = res.url
+        dispatch(authActions.getCaptchaURL(captchaUrl))
         dispatch(appActions.setAppStatus('success'))
     } catch (e) {
         handleServerNetworkError(e, dispatch)

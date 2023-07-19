@@ -1,95 +1,118 @@
 @import '../../../Common/Styles/Mixins.scss';
 @import '../../../Common/Styles/Variables';
 
-  .loginForm_title_block {
-    @include flex(row, center, center, nowrap);
+.loginForm_title_block {
+  @include flex(row, center, center, nowrap);
 
-    .loginForm_pane_title {
-      margin-bottom: 30px;
-      position: relative;
-      padding-bottom: 20px;
-      @include text($textFontFamily, 24px, 500);
-
-      &::after {
-        content: '';
-        @include size(50px, 3px);
-        background-color: #2d5be3;
-        border-radius: 4px;
-        @include position(absolute, 35px, 0, 0, 80px);
-      }
-    }
-  }
-
-  .loginForm_group {
-    margin-bottom: 10px;
-    height: 50px;
+  .loginForm_pane_title {
+    margin-bottom: 30px;
     position: relative;
+    padding-bottom: 20px;
+    @include text($textFontFamily, 24px, 500);
 
-    :active, :hover, :focus {
-      outline: 0;
-      outline-offset: 0;
-    }
-
-    .loginForm_input {
-      @include text($textFontFamily, 1rem, 400);
-      border: none;
-      border-radius: 0;
-      padding: 5px 10px;
-      border-bottom: 1px solid #eaeaea;
-      width: 100%;
-      line-height: 1.5;
-    }
-
-    .loginForm_button_eye {
-      border: none;
-      cursor: pointer;
-      background: none;
-      margin: 0;
-      padding: 0;
-      @include position(absolute, 0px, 0px, 16px, 285px);
-    }
-
-    .loginForm_error {
-      @include text($textFontFamily, 15px, 400);
-      color: red;
+    &::after {
+      content: '';
+      @include size(50px, 3px);
+      background-color: #2d5be3;
+      border-radius: 4px;
+      @include position(absolute, 35px, 0, 0, 80px);
     }
   }
+}
 
-  .loginForm_checkbox {
-    margin-top: 35px;
-    position: relative;
+.loginForm_group {
+  margin-bottom: 10px;
+  height: 50px;
+  position: relative;
 
-    .loginForm_check {
-      @include size(20px, 20px);
-      margin-left: 0;
-      cursor: pointer;
-      opacity: 0.7;
-    }
-
-    .loginForm_label {
-      @include position(absolute, 4px, 0, 0, 35px);
-      @include text($textFontFamily, 15px, 400);
-      cursor: pointer;
-      opacity: 0.7;
-    }
+  :active, :hover, :focus {
+    outline: 0;
+    outline-offset: 0;
   }
 
-  .loginForm_button_login {
-    margin-top: 30px;
-    cursor: pointer;
-    padding: 12px 50px;
-    @include size(auto, auto);
-    @include text($textFontFamily, 14px, 500);
-    box-shadow: 0 10px 18px 0 rgba(0, 0, 0, .17);
+  .loginForm_input {
+    @include text($textFontFamily, 1rem, 400);
     border: none;
-    border-radius: 4px;
-    color: #fff;
-    background-color: $buttonColor;
-
-    &:hover {
-      color: #fff;
-      background-color: #34b7f1;
-    }
+    border-radius: 0;
+    padding: 5px 10px;
+    border-bottom: 1px solid #eaeaea;
+    width: 100%;
+    line-height: 1.5;
   }
+
+  .loginForm_button_eye {
+    border: none;
+    cursor: pointer;
+    background: none;
+    margin: 0;
+    padding: 0;
+    @include position(absolute, 0px, 0px, 16px, 285px);
+  }
+
+  .loginForm_error {
+    @include text($textFontFamily, 15px, 400);
+    color: red;
+  }
+}
+
+.loginForm_checkbox {
+  margin-top: 35px;
+  position: relative;
+
+  .loginForm_check {
+    @include size(20px, 20px);
+    margin-left: 0;
+    cursor: pointer;
+    opacity: 0.7;
+  }
+
+  .loginForm_label {
+    @include position(absolute, 4px, 0, 0, 35px);
+    @include text($textFontFamily, 15px, 400);
+    cursor: pointer;
+    opacity: 0.7;
+  }
+}
+
+.loginForm_captcha_block {
+  margin-top: 15px;
+  max-width: 300px;
+
+  .loginForm_captcha_img {
+    margin: 15px 0;
+    box-shadow: 0 10px 18px 0 rgb(64, 64, 66);
+  }
+
+  .loginForm_captcha_input {
+    @include text($textFontFamily, 1rem, 400);
+    border: none;
+    padding: 5px 10px;
+    width: 100%;
+    line-height: 1;
+    box-shadow: 0 10px 18px 0 rgb(64, 64, 66);
+    max-width: 180px;
+    outline: 0;
+    outline-offset: 0;
+  }
+}
+
+
+.loginForm_button_login {
+  margin-top: 30px;
+  cursor: pointer;
+  padding: 12px 50px;
+  @include size(auto, auto);
+  @include text($textFontFamily, 14px, 500);
+  box-shadow: 0 10px 18px 0 rgba(0, 0, 0, .17);
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  background-color: $buttonColor;
+
+  &:hover {
+    color: #fff;
+    background-color: #34b7f1;
+  }
+}
 
 

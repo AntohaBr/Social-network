@@ -19,7 +19,7 @@ export const selectProfilePosts = (state: AppStateType) => state.profilePage.pos
 export const selectIsAuth = (state: AppStateType) => state.auth.isAuth
 export const selectLogin = (state: AppStateType) => state.auth.login
 export const selectAuthId = (state: AppStateType) => state.auth.id
-export const selectCaptcha = (state: AppStateType) => state.auth.captcha
+export const selectCaptcha = (state: AppStateType) => state.auth.captchaUrl
 
 //selectorsApp
 export const selectInitializeApp = (state: AppStateType) => state.app.initialized

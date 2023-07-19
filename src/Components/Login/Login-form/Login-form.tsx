@@ -14,7 +14,7 @@ interface state {
 
 export const LoginForm = () => {
     const dispatch = useAppDispatch()
-    const captchaURL = useAppSelector(selectCaptcha)
+    const captchaUrl = useAppSelector(selectCaptcha)
 
 
     const [showPassword, setShowPassword] = useState<state>({
@@ -36,6 +36,7 @@ export const LoginForm = () => {
                 email: '',
                 password: '',
                 rememberMe: false,
+                captcha: '',
             },
             validate: validate,
             onSubmit: (values: LoginDataType) => {
@@ -88,7 +89,18 @@ export const LoginForm = () => {
                 />
                 <label htmlFor="rememberMe" className={s.loginForm_label}>Remember me</label>
             </div>
-            {captchaURL && <img src={captchaURL} alt="captcha"/>}
+            {captchaUrl &&
+                <div className={s.loginForm_captcha_block}>
+                    <img src={captchaUrl} alt="captcha" className={s.loginForm_captcha_img}/>
+                        <input
+                            className={s.loginForm_captcha_input}
+                            id='Symbols from image'
+                            name='captcha'
+                            onChange={formik.handleChange}
+                            value={formik.values.captcha}
+                        />
+                </div>
+            }
             <div className={s.loginForm_title_block}>
                 <button type="submit" className={s.loginForm_button_login}>Login</button>
             </div>
