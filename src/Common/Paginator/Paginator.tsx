@@ -4,7 +4,7 @@ import {useAppDispatch, useAppSelector} from 'Utils'
 import {
     selectUsersCurrentPage,
     selectUsersPageSize,
-    selectUsersPortionSize,
+    selectUsersPortionSize, selectUsersFilter,
     selectUsersTotalCount
 } from 'Store/Selectors'
 import {getUsers, userActions} from 'Redux/Users-reducer/Users-reducer'
@@ -20,6 +20,7 @@ export const Paginator = (props: PaginatorPropsType) => {
     const totalCount = useAppSelector(selectUsersTotalCount)
     const currentPage = useAppSelector(selectUsersCurrentPage)
     const portionSize = useAppSelector(selectUsersPortionSize)
+    const filter = useAppSelector(selectUsersFilter)
 
     const pagesCount = Math.ceil(totalCount / pageSize)
     const pages = []
@@ -41,7 +42,7 @@ export const Paginator = (props: PaginatorPropsType) => {
 
     const onPageChanged = (pageNumber: number) => {
         dispatch(userActions.setCurrentPage(pageNumber))
-        dispatch(getUsers(pageNumber, pageSize))
+        dispatch(getUsers(pageNumber, pageSize, filter))
     }
 
     const onClickPrevPortionNumberHandler = () => {

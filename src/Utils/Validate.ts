@@ -2,6 +2,7 @@ type validateType = {
     email?: string
     password?: string
     rememberMe?: boolean
+    term?: string
 }
 
 export const validate = (values: validateType) => {

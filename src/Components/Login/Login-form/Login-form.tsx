@@ -20,7 +20,6 @@ export const LoginForm = () => {
     const [showPassword, setShowPassword] = useState<state>({
         password: '',
         showPassword: false,
-
     })
 
     const onClickHandlerShowPassword = () => {

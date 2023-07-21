@@ -8,6 +8,7 @@ export const selectUsersCurrentPage = (state: AppStateType) => state.usersPage.c
 export const selectUsersIsFetching = (state: AppStateType) => state.usersPage.isFetching
 export const selectUsersFollowingInProgress = (state: AppStateType) => state.usersPage.followingInProgress
 export const selectUsersPortionSize = (state: AppStateType) => state.usersPage.portionSize
+export const selectUsersFilter = (state: AppStateType) => state.usersPage.filter
 
 //selectorsProfile
 export const selectProfile = (state: AppStateType) => state.profilePage.profile

@@ -1,9 +1,11 @@
 import {instance} from 'Api/Instans'
 import {ResponseType} from 'Api/Auth-api'
+import {FilterType} from 'Redux/Users-reducer/Users-reducer'
 
 export const usersAPI = {
-    getUsers(currentPage: number, pageSize: number) {
-        return instance.get<GetUsersResponseType>(`users?page=${currentPage}&count=${pageSize}`).then(res => res.data)
+    getUsers(currentPage: number, pageSize: number, term: string, friend: null | boolean = null) {
+        return instance.get<GetUsersResponseType>(`users?page=${currentPage}&count=${pageSize}&term=${term}` +
+            (friend === null ? '' : `&friend=${friend}`)).then(res => res.data)
     },
     follow(userId: number) {
         return instance.post<ResponseType>(`follow/${userId}`).then(res => res.data)

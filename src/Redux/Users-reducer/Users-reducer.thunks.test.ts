@@ -62,7 +62,11 @@ describe('users reducer thunk tests', () => {
             isFetching: false,
             followingInProgress: [] as number[],
             portionSize: 10,
-            error: ''
+            error: '',
+            filter: {
+                term: '',
+                friend: null as null | boolean
+            }
         }
 
         dispatchMock.mockClear()
@@ -101,7 +105,7 @@ describe('users reducer thunk tests', () => {
     test('success requestUsers thunk', async () => {
         usersAPI.getUsers = jest.fn().mockResolvedValueOnce(resultRequestUsers)
 
-        const thunk = getUsers(1, 2)
+        const thunk = getUsers(1, 2,{term: '', friend: null})
 
         await thunk(dispatchMock, getStateMock, {})
 
