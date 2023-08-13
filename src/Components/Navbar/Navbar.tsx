@@ -2,27 +2,27 @@ import React from 'react'
 import s from 'Components/Navbar/Navbar.module.scss'
 import {NavLink} from 'react-router-dom'
 import {useAppSelector} from 'Utils'
-import {selectAuthId, selectIsAuth} from 'Store/Selectors'
+import {selectIsAuth} from 'Store/Selectors'
+import {PATH} from 'Constants/Routing-constants'
 
 export const Navbar = () => {
     const isAuth = useAppSelector(selectIsAuth)
-    const userId = useAppSelector(selectAuthId)
 
     return (
         <div>
             {isAuth &&
                 <nav className={s.nav}>
                     <div className={s.item}>
-                        <NavLink to={`/profile/${userId}`} className={s.activeLink}>Profile</NavLink>
+                        <NavLink to={`${PATH.PROFILE}/:userId`} className={s.activeLink}>Profile</NavLink>
                     </div>
                     <div className={s.item}>
-                        <NavLink to='/dialogs' className={s.activeLink}>Messages</NavLink>
+                        <NavLink to={PATH.DIALOGS} className={s.activeLink}>Messages</NavLink>
                     </div>
                     <div className={s.item}>
-                        <NavLink to='/users' className={s.activeLink}>Users</NavLink>
+                        <NavLink to={PATH.USERS} className={s.activeLink}>Users</NavLink>
                     </div>
                     <div className={s.item}>
-                        <NavLink to='/settings' className={s.activeLink}>Settings</NavLink>
+                        <NavLink to={PATH.CHAT} className={s.activeLink}>Chat</NavLink>
                     </div>
                 </nav>
             }

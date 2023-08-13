@@ -31,3 +31,6 @@ export const selectSuccessMessageApp = (state: AppStateType) => state.app.succes
 //selectorsMessage
 export const selectMessages = (state: AppStateType) => state.messagePage.messages
 export const selectDialogs = (state: AppStateType) => state.messagePage.dialogs
+
+//selectorsChat
+export const selectChatMessages = (state: AppStateType) => state.chat.messages

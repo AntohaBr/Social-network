@@ -6,6 +6,7 @@ import thunkMiddleware, {ThunkAction, ThunkDispatch} from 'redux-thunk'
 import {messageReducer, MessageReducerActionType} from 'Redux/Message-reducer'
 import {reducer as formReducer} from 'redux-form'
 import {appReducer, AppReducerActionType} from 'Redux/App-reducer'
+import {chatReducer, ChAtReducerActionType} from 'Redux/Chat-reducer'
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
     usersPage: usersReducer,
     auth: authReducer,
     form: formReducer,
-    app: appReducer
+    app: appReducer,
+    chat: chatReducer
 })
 
 export type AppStateType = ReturnType<typeof rootReducer>
@@ -25,7 +27,8 @@ export type AppActionsType = ProfileReducerActionTypes |
     MessageReducerActionType |
     UsersReducerActionType |
     AuthReducerActionType |
-    AppReducerActionType
+    AppReducerActionType|
+    ChAtReducerActionType
 export type AppDispatchType = ThunkDispatch<AppStateType, unknown, AppActionsType>
 export type AppThunkType<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, AppActionsType>
 export type InferActionsTypes<T> = T extends { [key: string]: (...args:any[] )=> infer U} ? U : never

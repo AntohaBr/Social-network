@@ -1,5 +1,5 @@
 import {Navigate, Route, Routes} from 'react-router-dom'
-import {Login, Profile, Users, Dialogs} from 'Components'
+import {Login, Profile, Users, Dialogs, Chat} from 'Components'
 import React from 'react'
 import {PATH} from 'Constants/Routing-constants'
 
@@ -11,6 +11,7 @@ export const PagesRoutes = () => {
             <Route path={PATH.DIALOGS} element={<Dialogs/>}/>
             <Route path={`${PATH.PROFILE}/:userId`} element={<Profile/>}/>
             <Route path={PATH.USERS} element={<Users/>}/>
+            <Route path={PATH.CHAT} element={<Chat/>}/>
             <Route path='*' element={<div>404 NOT FOUND</div>}/>
         </Routes>
     )

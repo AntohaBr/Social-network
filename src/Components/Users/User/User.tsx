@@ -7,11 +7,7 @@ import {selectUsersFollowingInProgress} from 'Store/Selectors'
 import {follow, unFollow} from 'Redux/Users-reducer/Users-reducer'
 import {ItemsResponseType} from 'Api/Users-api'
 
-type UserPropsType = {
-    user: ItemsResponseType
-}
-
-export const User: FC<UserPropsType> = ({user}) => {
+export const User: FC<{user: ItemsResponseType}> = ({user}) => {
     const dispatch = useAppDispatch()
     const followingInProgress = useAppSelector(selectUsersFollowingInProgress)
 
