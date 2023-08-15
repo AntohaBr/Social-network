@@ -5,12 +5,10 @@ export const Message: FC<{ message: ChatMessageType }> = ({message}) => {
     return (
         <div>
             <img src={message.photo}/>
-            <div>
-                {message.userName}
-            </div>
-            <div>
-                {message.message}
-            </div>
+            <b>{message.userName}</b>
+            <br/>
+            {message.message}
+            <hr/>
         </div>
     )
 }

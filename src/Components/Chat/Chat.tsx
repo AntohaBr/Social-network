@@ -6,11 +6,11 @@ import {startChatMessages, stopChatMessages} from 'Redux/Chat-reducer'
 export const Chat = () => {
     const dispatch = useAppDispatch()
 
-    useEffect(() => {
+    useEffect( () => {
         dispatch(startChatMessages())
 
         return () => {
-            dispatch(stopChatMessages())
+            stopChatMessages()
         }
     }, [])
 

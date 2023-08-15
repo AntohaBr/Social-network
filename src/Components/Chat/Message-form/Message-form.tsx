@@ -3,8 +3,13 @@ import React from 'react'
 export const MessageForm = () => {
     return (
         <div>
-            <textarea/>
-            <button/>
+            <div>
+                <textarea/>
+            </div>
+            <div>
+                <button>Send</button>
+            </div>
+
         </div>
     )
 }

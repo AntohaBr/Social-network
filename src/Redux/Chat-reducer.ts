@@ -29,11 +29,11 @@ const newChatMessageHandler = (dispatch: AppDispatchType) => {
 
 export const startChatMessages = (): AppThunkType => async (dispatch) => {
     chatAPI.start()
-    chatAPI.subscribe(newChatMessageHandler(dispatch))
+    chatAPI.subscribe('messageReceived',newChatMessageHandler(dispatch))
 }
 
 export const stopChatMessages = (): AppThunkType => async (dispatch) => {
-    chatAPI.unsubscribe(newChatMessageHandler(dispatch))
+    chatAPI.subscribe('messageReceived', newChatMessageHandler(dispatch))
 }
 
 export const sendMessage = (message: string): AppThunkType => async (dispatch) => {

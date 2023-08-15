@@ -7,7 +7,7 @@ export const Messages: FC = () => {
     const messages = useAppSelector(selectChatMessages)
 
     return (
-        <div>
+        <div style={{height: '400px', overflowY: "auto"}}>
             {messages.map((message, index) =>
                 <Message key={index} message={message}/>
             )}
