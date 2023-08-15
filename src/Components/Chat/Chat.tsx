@@ -15,7 +15,7 @@ export const Chat = () => {
     }, [])
 
     return (
-        <div>
+        <div style={{marginLeft: '300px'}}>
             <Messages/>
             <MessageForm/>
         </div>
