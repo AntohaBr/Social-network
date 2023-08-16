@@ -1,5 +1,6 @@
 import {AppDispatchType, AppThunkType, InferActionsTypes} from 'Store/Store'
-import {chatAPI, ChatMessageType, StatusType} from 'Api/Chat-api'
+import {chatAPI, ChatMessageAPIType, StatusType} from 'Api/Chat-api'
+import {v1} from 'uuid'
 
 const initialState = {
     messages: [] as ChatMessageType[],
@@ -10,7 +11,11 @@ const initialState = {
 export const chatReducer = (state: ChatInitialStateType = initialState, action: ChAtReducerActionType): ChatInitialStateType => {
     switch (action.type) {
         case 'Chat/MESSAGES_RECEIVED':
-            return {...state, messages: [...state.messages, ...action.messages]}
+            return {
+                ...state, messages: [...state.messages, ...action.messages.map(m => ({...m, id: v1()}))]
+                    .filter((m, index, array) =>
+                        index >= array.length - 100)
+            }
         case 'Chat/STATUS_CHANGED':
             return {...state, status: action.status}
         default:
@@ -19,7 +24,7 @@ export const chatReducer = (state: ChatInitialStateType = initialState, action: 
 }
 
 //thanks
-let _newMessageHandler: ((messages: ChatMessageType[]) => void) | null = null
+let _newMessageHandler: ((messages: ChatMessageAPIType[]) => void) | null = null
 const newChatMessageHandler = (dispatch: AppDispatchType) => {
     if (_newMessageHandler === null) {
         _newMessageHandler = (messages) => {
@@ -56,11 +61,11 @@ export const sendMessage = (message: string): AppThunkType => async (dispatch) =
 
 //actions
 export const chatActions = {
-    messagesReceived: (messages: ChatMessageType[]) => ({type: 'Chat/MESSAGES_RECEIVED', messages} as const),
+    messagesReceived: (messages: ChatMessageAPIType[]) => ({type: 'Chat/MESSAGES_RECEIVED', messages} as const),
     statusChanged: (status: StatusType) => ({type: 'Chat/STATUS_CHANGED', status} as const)
 }
 
 //types
 export type ChatInitialStateType = typeof initialState
 export type ChAtReducerActionType = InferActionsTypes<typeof chatActions>
-
+type ChatMessageType = ChatMessageAPIType & { id: string }
