@@ -34,3 +34,4 @@ export const selectDialogs = (state: AppStateType) => state.messagePage.dialogs
 
 //selectorsChat
 export const selectChatMessages = (state: AppStateType) => state.chat.messages
+export const selectStatus = (state: AppStateType) => state.chat.status

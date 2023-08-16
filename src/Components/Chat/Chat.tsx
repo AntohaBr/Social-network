@@ -1,12 +1,14 @@
 import React, {useEffect} from 'react'
 import {Messages, MessageForm} from 'Components/Chat/'
-import {useAppDispatch} from 'Utils'
+import {useAppDispatch, useAppSelector} from 'Utils'
 import {startChatMessages, stopChatMessages} from 'Redux/Chat-reducer'
+import {selectStatus} from 'Store/Selectors'
 
 export const Chat = () => {
     const dispatch = useAppDispatch()
+    const status = useAppSelector(selectStatus)
 
-    useEffect( () => {
+    useEffect(() => {
         dispatch(startChatMessages())
 
         return () => {
@@ -16,8 +18,12 @@ export const Chat = () => {
 
     return (
         <div style={{marginLeft: '300px'}}>
-            <Messages/>
-            <MessageForm/>
+            {status === 'error' && <div>Some error occured. Please refresh page</div>}
+            <>
+                <Messages/>
+                <MessageForm/>
+            </>
+
         </div>
     )
 }

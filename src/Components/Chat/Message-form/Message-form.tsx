@@ -1,11 +1,13 @@
-import React, {ChangeEvent, TextareaHTMLAttributes, useState} from 'react'
-import {useAppDispatch} from 'Utils'
+import React, {ChangeEvent, useState} from 'react'
+import {useAppDispatch, useAppSelector} from 'Utils'
 import {sendMessage} from 'Redux/Chat-reducer'
+import {selectStatus} from 'Store/Selectors'
 
 export const MessageForm = () => {
     const [message, setMessage] = useState('')
 
     const dispatch = useAppDispatch()
+    const status = useAppSelector(selectStatus)
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setMessage(e.currentTarget.value)
@@ -37,7 +39,7 @@ export const MessageForm = () => {
                 />
             </div>
             <div>
-                <button onClick={sendMessageHandler}>Send</button>
+                <button disabled={status !== 'ready'} onClick={sendMessageHandler}>Send</button>
             </div>
         </div>
     )
