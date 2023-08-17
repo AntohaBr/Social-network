@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {FC, useState} from 'react'
 import {LoginForm} from 'Components/Login'
 import {PATH} from 'Constants/Routing-constants'
 import {Navigate} from 'react-router-dom'
@@ -6,7 +6,7 @@ import {useAppSelector} from 'Utils'
 import {selectIsAuth} from 'Store/Selectors'
 import s from './Login.module.scss'
 
-export const Login = () => {
+export const Login: FC = () => {
     const isAuth = useAppSelector(selectIsAuth)
 
     const [copyEmail, setCotyEmail] = useState('Copy')
@@ -48,7 +48,6 @@ export const Login = () => {
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }

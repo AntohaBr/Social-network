@@ -1,10 +1,9 @@
-import React from 'react'
+import React, {FC} from 'react'
 import s from 'Components/Header/Header.module.scss'
 import {useNavigate} from 'react-router-dom'
 import {useAppDispatch, useAppSelector} from 'Utils'
 import {
     selectAuthId,
-    selectInitializeApp,
     selectIsAuth,
     selectLogin,
     selectProfile,
@@ -14,7 +13,7 @@ import {logOut} from 'Redux/Auth-reducer'
 import defaultUserPhoto from 'Assets/Images/defaultUserPhoto.jpg'
 import {PATH} from 'Constants/Routing-constants'
 
-export const Header = () => {
+export const Header: FC = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const userPhoto = useAppSelector(selectProfilePhotosSmall)

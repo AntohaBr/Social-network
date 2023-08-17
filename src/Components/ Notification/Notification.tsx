@@ -3,8 +3,8 @@ import {useAppDispatch, useAppSelector} from 'Utils'
 import {selectErrorApp, selectSuccessMessageApp} from 'Store/Selectors'
 import {appActions} from 'Redux/App-reducer'
 import s from './Notification.module.scss'
-import Error from '../../Assets/Images/Error.png'
-import Success from '../../Assets/Images/Success.png'
+import Error from 'Assets/Images/Error.png'
+import Success from 'Assets/Images/Success.png'
 
 export const Notification = () => {
     const dispatch = useAppDispatch()

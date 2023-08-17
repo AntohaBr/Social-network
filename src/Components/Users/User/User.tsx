@@ -7,9 +7,11 @@ import {selectUsersFollowingInProgress} from 'Store/Selectors'
 import {follow, unFollow} from 'Redux/Users-reducer/Users-reducer'
 import {ItemsResponseType} from 'Api/Users-api'
 
-export const User: FC<{user: ItemsResponseType}> = ({user}) => {
+export const User: FC<{ user: ItemsResponseType }> = ({user}) => {
     const dispatch = useAppDispatch()
     const followingInProgress = useAppSelector(selectUsersFollowingInProgress)
+
+    const disabledButton = followingInProgress.some(id => id === user.id)
 
     const onClickUnfollowHandler = () => {
         dispatch(unFollow(user.id))
@@ -30,9 +32,9 @@ export const User: FC<{user: ItemsResponseType}> = ({user}) => {
                     </div>
                     <div>
                         {user.followed
-                            ? <button disabled={followingInProgress.some(id => id === user.id)}
+                            ? <button disabled={disabledButton}
                                       onClick={onClickUnfollowHandler}>Unfollow</button>
-                            : <button disabled={followingInProgress.some(id => id === user.id)}
+                            : <button disabled={disabledButton}
                                       onClick={onClickFollowHandler}>Follow</button>}
                     </div>
                 </span>

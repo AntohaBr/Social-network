@@ -3,6 +3,5 @@ export const PATH = {
     LOGIN: '/login',
     PROFILE: '/profile',
     USERS: '/users',
-    DIALOGS: '/dialogs',
     CHAT: '/chat'
 }

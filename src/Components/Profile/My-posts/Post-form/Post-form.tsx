@@ -1,9 +1,9 @@
-import React, {ChangeEvent, useState} from 'react'
+import React, {ChangeEvent, FC, useState} from 'react'
 import {useAppDispatch} from 'Utils'
 import {SubmitHandler, useForm} from 'react-hook-form'
 import {profileActions} from 'Redux/Profile-reducer/Profile-reducer'
 
-export const PostsForm = () => {
+export const PostsForm: FC = () => {
     const dispatch = useAppDispatch()
 
     const [post, setPost] = useState('')
