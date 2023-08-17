@@ -3,10 +3,10 @@ import {Message} from 'Components/Chat/Messages/Message/Message'
 import {useAppSelector} from 'Utils'
 import {selectChatMessages} from 'Store/Selectors'
 
+
 export const Messages: FC = () => {
     const messages = useAppSelector(selectChatMessages)
     const messagesAnchorRef = useRef<HTMLDivElement>(null)
-
 
     const [isAutoScroll, setIsAutoScroll] = useState(true)
 
@@ -28,7 +28,7 @@ export const Messages: FC = () => {
 
     return (
         <div style={{height: '400px', overflowY: "auto"}} onScroll={onScrollHandler}>
-            {messages.map((message) =>
+            {messages.map((message,index) =>
                 <Message key={message.id} message={message}/>
             )}
             <div ref={messagesAnchorRef}></div>

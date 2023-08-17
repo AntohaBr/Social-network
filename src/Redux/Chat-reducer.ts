@@ -4,7 +4,7 @@ import {v1} from 'uuid'
 
 const initialState = {
     messages: [] as ChatMessageType[],
-    status: 'pending' as StatusType
+    status: 'pending' as StatusType,
 }
 
 //reducers
@@ -34,6 +34,7 @@ const newChatMessageHandler = (dispatch: AppDispatchType) => {
     return _newMessageHandler
 }
 
+
 let _statusChangedHandler: ((status: StatusType) => void) | null = null
 const statusChangedHandler = (dispatch: AppDispatchType) => {
     if (_statusChangedHandler === null) {
@@ -62,7 +63,7 @@ export const sendMessage = (message: string): AppThunkType => async (dispatch) =
 //actions
 export const chatActions = {
     messagesReceived: (messages: ChatMessageAPIType[]) => ({type: 'Chat/MESSAGES_RECEIVED', messages} as const),
-    statusChanged: (status: StatusType) => ({type: 'Chat/STATUS_CHANGED', status} as const)
+    statusChanged: (status: StatusType) => ({type: 'Chat/STATUS_CHANGED', status} as const),
 }
 
 //types

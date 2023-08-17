@@ -23,7 +23,6 @@ export const Chat = () => {
                 <Messages/>
                 <MessageForm/>
             </>
-
         </div>
     )
 }

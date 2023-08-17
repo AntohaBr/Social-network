@@ -1,6 +1,6 @@
 let subscribers = {
     'messageReceived': [] as MessagesReceivedSubscriberType[],
-    'statusChanged': [] as StatusChangedSubscriberType[]
+    'statusChanged': [] as StatusChangedSubscriberType[],
 }
 
 let ws: WebSocket | null = null
@@ -8,11 +8,6 @@ let ws: WebSocket | null = null
 const closeWsHandler = () => {
     notifySubscribersAboutStatus('pending')
     setTimeout(createChannel, 3000)
-}
-
-let messageWSHandler = (e: MessageEvent) => {
-    const newMessages = JSON.parse(e.data)
-    subscribers['messageReceived'].forEach(s => s(newMessages))
 }
 
 let openWSHandler = () => {
@@ -30,7 +25,12 @@ const notifySubscribersAboutStatus = (status: StatusType) => {
     subscribers['statusChanged'].forEach(s => s(status))
 }
 
-let errorWSHandler = () => {
+const messageWSHandler = (e: MessageEvent) => {
+    const newMessages = JSON.parse(e.data)
+    subscribers['messageReceived'].forEach(s => s(newMessages))
+}
+
+const errorWSHandler = () => {
     notifySubscribersAboutStatus('error')
     console.error('restart page')
 }
@@ -56,7 +56,8 @@ export const chatAPI = {
         cleanUp()
         ws?.close()
     },
-    subscribe(eventName: EventsNamesType, callback: MessagesReceivedSubscriberType | StatusChangedSubscriberType) {
+    subscribe(eventName: EventsNamesType, callback: MessagesReceivedSubscriberType
+        | StatusChangedSubscriberType) {
         // @ts-ignore
         subscribers[eventName].push(callback)
         return () => {
@@ -64,7 +65,8 @@ export const chatAPI = {
             subscribers[eventName] = subscribers[eventName].filter(s => s !== callback)
         }
     },
-    unsubscribe(eventName: EventsNamesType, callback: MessagesReceivedSubscriberType | StatusChangedSubscriberType) {
+    unsubscribe(eventName: EventsNamesType, callback: MessagesReceivedSubscriberType
+        | StatusChangedSubscriberType) {
         // @ts-ignore
         subscribers[eventName] = subscribers[eventName].filter(s => s !== callback)
     },
